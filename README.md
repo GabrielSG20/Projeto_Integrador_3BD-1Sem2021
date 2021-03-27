@@ -1,6 +1,6 @@
 ## Projeto Integrador 3° Semestre Banco de Dados
 
-<img src= "https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white">
+<img src= "https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white">  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">  <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">  <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"> 
 
 <h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/logotipo/logotipo.jpg" width="100"></h1>
 
@@ -36,8 +36,12 @@
   </tr>
 </table>
 
+
 <h2>Product Backlog</h2>
-<img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/backlog.png">
+
+<img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/backlog2.png">
+
+
 
 <h2>Sprints</h2>
        <table>
@@ -50,7 +54,7 @@
               <tbody>
                      <tr>
                             <td>Sprint 1</td>
-                            <td>Wireframes, Documentação, Compreendimento do Problema e Função "Create Codelis" </td>
+                            <td>Wireframes, Documentação, Compreendimento do Problema e Função "Create Codelist" </td>
                             <td>08/03/2021 a 28/03/2021</td>
                             <td><p>Em andamento</p></td>
                      </tr>
@@ -80,7 +84,7 @@
 <h2>Pré-requisitos</h2>
 Para o funcionamento da aplicação, serão necessários:
 
-- JAVA SE 14
+- JAVA SE 8
 - MYSQL 8.0.21.0
 - MySQL Connector/J 5.1.49
 - ECLIPSE JAVA 2018 09
@@ -109,3 +113,294 @@ Para o funcionamento da aplicação, serão necessários:
               
 <h2>Funcionamento da Ferramenta</h2>
 
+<h3>Login</h3>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/login.jpg" width="1000"></h1>
+<p align="justify"> Como pré-requisito, a empresa parceira solicitou que houvessem níveis de acesso a ferramenta. Dessa forma, teremos uma tela de login que diferenciará o acesso dependendo do nível do usuário (usuário administrador e usuário comum). </p>
+<p align="justify"><b> Username: </b> o usuário deverá indicar seu username, identificação ou e-mail institucional para acesso ao menu principal.</p>
+<p align="justify"><b> Password: </b> o usuário deverá indicar senha de acesso pessoal.</p>
+<p align="justify"><b> Sign in: </b> o usuário deverá clicar neste botão para acessar o menu principal.</p>
+
+
+<h3>Menu Principal</h3>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/menu.jpg" width="1000"></h1>
+<p align="justify"> A ferramenta terá três APIs principais independentes. Portanto, o menu dará acesso a cada uma delas de acordo com a necessidade do usuário. </p>
+
+<h4><ins>Codelist</ins></h4>
+<p align="justify"><b> Descrição: </b> ferramenta para criar, alterar, salvar e deletar CodeList, usa somente input do usuário.</p>
+<p align="justify"><b> Uso: </b> clique para abrir nossa aplicação de criação, alteração e exclusão de Codelist.</p>
+
+<h4><ins>LEP (List of Effective Pages)</ins></h4>
+<p align="justify"><b> Descrição: </b>  ferramenta para criar, salvar ou deletar LEP, usa input do usuário e informações da Codelist na construção da LEP.</p>
+<p align="justify"><b> Uso: </b> clique para abrir nossa aplicação de criação, alteração e exclusão de LEPs.</p>
+
+<h4><ins>PDF Compilation</ins></h4>
+<p align="justify"><b> Descrição: </b>  ferramenta para compilar arquivos em pdf, usa input e informações da Codelist ou LEP para realizar a criação do PDF FULL ou DELTA.</p>
+<p align="justify"><b> Uso: </b> clique para abrir nossa aplicação de criação de PDF FULL ou DELTA.</p>
+
+<h3>Codelist</h3>
+<h4><ins>Create Codelist</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_create.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite a criação e o armazenamento em Banco de Dados do codelist baseado nas inputs fornecidas pelo usuário. </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Atributos</ins></h4>
+<p align="justify"><b> Section Number: </b> digite o número ou código da seção no campo.</p>
+<p align="justify"><b> Subsection: </b> caso exista, digite o número da subseção no campo.</p>
+<p align="justify"><b> Block Number: </b> digite o número do bloco no campo.</p>
+<p align="justify"><b> Block Name: </b> digite o nome do bloco no campo.</p>
+<p align="justify"><b> Code: </b> digite o código no campo.</p>
+
+<h4><ins>Adicionar Mais Atributos [+]</ins></h4>
+<p align="justify"><b> Uso: </b> clique para adicionar mais linhas de atributos.</p>
+
+<h4><ins>Create</ins></h4>
+<p align="justify"><b> Uso: </b> clique para criar a CodeList.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+
+<h4><ins>Consult Codelist</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_consult.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite a consulta de codelists armazenados no Banco de Dados, sendo a consulta realizada por meio da identificação do documento. </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Botão de Busca</ins></h4>
+<p align="justify"><b> Uso: </b> clique para buscar a tabela que contenha a primary key, secundary key (caso for necessário) e tag.</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Filtro</ins></h4>
+<p align="justify"><b> Uso: </b> após digitar a Tag, clique no botão para filtrar a visualização da Codelist.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h4><ins>Export</ins></h4>
+<p align="justify"><b> Uso: </b> clique para exportar (salvar) a tabela.</p>
+
+
+<h4><ins>Edit Codelist</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_edit.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite que o usuário edit um codelist existente, caso ocorra alguma mudança em sua estrutura. </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Botão de Busca</ins></h4>
+<p align="justify"><b> Uso: </b> clique para buscar a tabela que contenha a primary key, secundary key (caso for necessário) e tag.</p>
+
+<h4><ins>Edição de Dados</ins></h4>
+<p align="justify"><b> Uso: </b> clique e digite os novos dados.</p>
+
+<h4><ins>Adicionar Mais Atributos [+]</ins></h4>
+<p align="justify"><b> Uso: </b> clique para adicionar mais linhas de atributos.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h4><ins>Save</ins></h4>
+<p align="justify"><b> Uso: </b> clique para salvar as alterações.</p>
+
+
+
+<h4><ins>Delete Codelist</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_delete.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite que o usuário delete uma codelist que não tenha mais necessidade de estar armazenada no banco de dados devido por estar obsoleta . </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Botão de Busca</ins></h4>
+<p align="justify"><b> Uso: </b> clique para buscar a tabela que contenha a primary key, secundary key (caso for necessário) e tag.</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Filtro</ins></h4>
+<p align="justify"><b> Uso: </b> após digitar a Tag, clique no botão para filtrar a visualização da Codelist.</p>
+
+<h4><ins>Tabela Codelist/ins></h4>
+  <p align="justify"><b> Uso: </b> o usuário pode visualizar CodeLists já criadas. <i> Dica: </i> pode ser usado para checagem de erros.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h4><ins>Delete</ins></h4>
+<p align="justify"><b> Uso: </b> clique para deletar a tabela sendo visualizada.</p>
+
+<h3>List of Effective Pages (LEP)</h3>
+<h4><ins>Create LEP</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/lep_create.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite a criação da LEP de forma automática lendo o rodapé das páginas e formando um sumário armazenados em arquivos do tipo .doc e .pdf . </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Date</ins></h4>
+<p align="justify"><b> Uso: </b> digite a data de criação da LEP.</p>
+
+<h4><ins>Version</ins></h4>
+<p align="justify"><b> Uso: </b> selecione FULL ou DELTA.</p>
+
+<h4><ins>Revision Number</ins></h4>
+<p align="justify"><b> Uso: </b> digite o número da revisão da LEP.</p>
+
+<h4><ins>Revision Date</ins></h4>
+<p align="justify"><b> Uso: </b> digite a data em que a revisão foi realizada.</p>
+
+<h4><ins>Create</ins></h4>
+<p align="justify"><b> Uso: </b> clique para criar a LEP.</p>
+
+<h4><ins>Select Folder</ins></h4>
+<p align="justify"><b> Uso: </b> seleciona a pasta que contenha a estrutura de arquivos da documentação da aeronave.</p>
+
+<h4><ins>Botão Upload</ins></h4>
+<p align="justify"><b> Uso: </b> clique para fazer o upload da pasta selecionada.</p>
+
+<h4><ins>Botão Download</ins></h4>
+<p align="justify"><b> Uso: </b> clique para baixar a LEP desejada.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h4><ins>Consult LEP</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/lep_consult.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite a leitura e download de LEPs já existentes a partir dos inputs fornecidos pelo usuário. </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Version</ins></h4>
+<p align="justify"><b> Uso: </b> selecione FULL ou DELTA.</p>
+
+<h4><ins>Revision Number</ins></h4>
+<p align="justify"><b> Uso: </b> digite o número da revisão da LEP.</p>
+
+<h4><ins>Filtro</ins></h4>
+<p align="justify"><b> Uso: </b> após digitar a Tag e Revision Number(item 6) clique no botão para filtrar a visualização.</p>
+
+<h4><ins>Botão Download</ins></h4>
+<p align="justify"><b> Uso: </b> clique para realizar o download da LEP desejada.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h4><ins>Edit LEP</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/lep_edit.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite criar e substituir a LEP de acordo com os inputs fornecidos pelo usuário, semelhante a função "Create LEP". </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Version</ins></h4>
+<p align="justify"><b> Uso: </b> selecione FULL ou DELTA.</p>
+
+<h4><ins>Revision Number</ins></h4>
+<p align="justify"><b> Uso: </b> digite o número da revisão da LEP.</p>
+
+<h4><ins>Select Folder</ins></h4>
+<p align="justify"><b> Uso: </b> seleciona a pasta que contenha a estrutura de arquivos da documentação da aeronave.</p>
+
+<h4><ins>Botão Download</ins></h4>
+<p align="justify"><b> Uso: </b> clique para baixar a LEP desejada.</p>
+
+<h4><ins>Botão Upload</ins></h4>
+<p align="justify"><b> Uso: </b> clique para fazer o upload da pasta selecionada.</p>
+
+<h4><ins>Botão Edit</ins></h4>
+<p align="justify"><b> Uso: </b> clique para salvar a edição.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h4><ins>Delete LEP</ins></h4>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/lep_delete.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite deletar a LEP de nossos bancos de dados, bem como da pasta em que se encontra.</p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Secundary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+  
+<h4><ins>Revision Number</ins></h4>
+<p align="justify"><b> Uso: </b> digite o número da revisão da LEP.</p>
+
+<h4><ins>Version</ins></h4>
+<p align="justify"><b> Uso: </b> selecione FULL ou DELTA.</p>
+
+<h4><ins>Search</ins></h4>
+<p align="justify"><b> Uso: </b> clique para procurar a LEP.</p>
+
+<h4><ins>Botão Delete</ins></h4>
+<p align="justify"><b> Uso: </b> clique para excluir a LEP desejada.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h3>PDF Compilation</h3>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/pdf_compilation.jpg" width="1000"></h1>
+<p align="justify"> Esta função permite a compilação dos arquivos baseando-se no Codelist e na LEP e o download do arquivo compilado em .pdf, de acordo com os inputs do usuário. </p>
+
+<h4><ins>Version</ins></h4>
+<p align="justify"><b> Uso: </b> selecione FULL ou DELTA.</p>
+
+<h4><ins>Revision Number</ins></h4>
+<p align="justify"><b> Uso: </b> digite o número da revisão da LEP.</p>
+
+<h4><ins>Tag</ins></h4>
+<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+
+<h4><ins>Create</ins></h4>
+<p align="justify"><b> Uso: </b> clique para criar o pdf FULL ou DELTA.</p>
+
+<h4><ins>Botão Download</ins></h4>
+<p align="justify"><b> Uso: </b> clique para baixar o PDF desejado.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
