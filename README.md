@@ -56,7 +56,7 @@
                             <td>Sprint 1</td>
                             <td>Wireframes, Documentação, Compreendimento do Problema e Função "Create Codelist" </td>
                             <td>08/03/2021 a 28/03/2021</td>
-                            <td><p>Em andamento</p></td>
+                            <td><p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/airplane_front/README.md">Visualizar</a></p></td>
                      </tr>
                      <tr>
                             <td>Sprint 2</td>
