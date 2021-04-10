@@ -1,11 +1,10 @@
 package com.airplan.api.repository;
 
-import com.airplan.api.model.CodeListModel;
+import com.airplan.api.model.FlagModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface CreateCodeRepository extends CrudRepository<CodeListModel, Long> {
+public interface FlagRepository extends CrudRepository<FlagModel, Long> {
 
 }
