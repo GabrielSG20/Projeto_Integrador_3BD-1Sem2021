@@ -7,23 +7,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.airplan.api.model.CodeListModel;
+import com.airplan.api.service.CodeListService;
 
-import com.airplan.api.model.FlagModel;
-import com.airplan.api.service.FlagService;
-
-
-
+@RequestMapping("/createCodeList")
 @RestController
-@RequestMapping("/createFlag")
-public class FlagController {
+public class CodeListController {
 
     @Autowired
-    private FlagService flagService;
+    private CodeListService codelistService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarFlag(@RequestBody FlagModel flagModel){
-        flagService.createFlag(flagModel);
+    public ResponseEntity<Void> cadastrarCodeList(@RequestBody CodeListModel codeListModel){
+        codelistService.create(codeListModel);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
 
 }

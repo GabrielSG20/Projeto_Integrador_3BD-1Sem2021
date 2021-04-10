@@ -15,6 +15,10 @@ import javax.persistence.Table;
 @Table(name = "manual_flag")
 public class ManualFlagModel {
 	@Id
-	private String mnl_id;
+	private int mnl_id;
 	private Long flg_secundary;
+	
+	public ManualFlagModel() {
+		
+	}
 }

@@ -1,10 +1,9 @@
 package com.airplan.api;
 
-import com.airplan.api.model.CodeListModel;
+import java.sql.SQLException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.SQLException;
 
 
 @SpringBootApplication

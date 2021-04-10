@@ -15,6 +15,10 @@ import javax.persistence.Table;
 @Table(name = "manual")
 public class ManualModel {
 	@Id
-	private long mnl_id;
+	private int mnl_id;
 	private String mnl_name;
+	
+	public ManualModel() {
+		
+	}
 }

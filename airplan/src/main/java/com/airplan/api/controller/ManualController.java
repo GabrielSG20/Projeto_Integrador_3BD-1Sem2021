@@ -1,8 +1,5 @@
 package com.airplan.api.controller;
 
-import com.airplan.api.model.CodeListModel;
-import com.airplan.api.model.FlagModel;
-import com.airplan.api.service.CreateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping()
-@RestController
-public class CreateCodeController {
+import com.airplan.api.model.ManualModel;
+import com.airplan.api.service.ManualService;
 
-    @Autowired
-    private CreateCodeService createCodeService;
+@RequestMapping("/createManual")
+@RestController
+public class ManualController {
+	@Autowired
+    private ManualService manualService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarCodeList(@RequestBody CodeListModel codeListModel){
-        createCodeService.create(codeListModel);
+    public ResponseEntity<Void> cadastrarCodeList(@RequestBody ManualModel manualModel){
+        manualService.create(manualModel);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
 }
