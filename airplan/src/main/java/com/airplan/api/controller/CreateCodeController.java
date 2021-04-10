@@ -1,6 +1,6 @@
 package com.airplan.api.controller;
 
-import com.airplan.api.model.CreateCodeModel;
+import com.airplan.api.model.FlagModel;
 import com.airplan.api.service.CreateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class CreateCodeController {
 
 
     @PostMapping
-    public ResponseEntity<Void> cadastrar(@RequestBody CreateCodeModel createCodeModel){
+    public ResponseEntity<Void> cadastrar(@RequestBody FlagModel createCodeModel){
         createCodeService.create(createCodeModel);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
