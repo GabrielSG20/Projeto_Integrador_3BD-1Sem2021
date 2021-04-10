@@ -11,7 +11,7 @@ public class ManualService {
     private ManualRepository manualRepository;
 
 
-    public void create(ManualModel manualModel) {
+    public void createManual(ManualModel manualModel) {
         manualRepository.save(manualModel);
     }
 }

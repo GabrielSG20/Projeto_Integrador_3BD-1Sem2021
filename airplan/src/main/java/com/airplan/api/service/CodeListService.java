@@ -12,7 +12,7 @@ public class CodeListService {
     private CodeListRepository codelistRepository;
 
 
-    public void create(CodeListModel codelistModel) {
+    public void createCodelist(CodeListModel codelistModel) {
         codelistRepository.save(codelistModel);
     }
 

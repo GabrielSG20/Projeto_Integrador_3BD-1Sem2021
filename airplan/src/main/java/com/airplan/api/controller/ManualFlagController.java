@@ -8,18 +8,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.airplan.api.model.ManualModel;
-import com.airplan.api.service.ManualService;
+import com.airplan.api.model.ManualFlagModel;
+import com.airplan.api.service.ManualFlagService;
 
-@RequestMapping("/createManual")
+@RequestMapping("/createManualFlag")
 @RestController
-public class ManualController {
-	@Autowired
-    private ManualService manualService;
+public class ManualFlagController {
 
-    @PostMapping
-    public ResponseEntity<Void> cadastrarCodeList(@RequestBody ManualModel manualModel){
-        manualService.createManual(manualModel);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+	@Autowired
+	private ManualFlagService manualflagService;
+
+	@PostMapping
+	public ResponseEntity<Void> cadastrarManualFlag(@RequestBody ManualFlagModel manualflagModel){
+	manualflagService.createManualFlag(manualflagModel);
+	return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
 }

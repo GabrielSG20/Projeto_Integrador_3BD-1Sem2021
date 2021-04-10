@@ -19,7 +19,7 @@ public class CodeListController {
 
     @PostMapping
     public ResponseEntity<Void> cadastrarCodeList(@RequestBody CodeListModel codeListModel){
-        codelistService.create(codeListModel);
+        codelistService.createCodelist(codeListModel);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
