@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.airplan.api.model.ManualModel;
 
+import java.util.List;
+
 @Repository
 public interface ManualRepository extends CrudRepository<ManualModel, Long>{
-
+    List<ManualModel> findAll();
 }

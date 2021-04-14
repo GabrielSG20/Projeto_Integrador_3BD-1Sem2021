@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.airplan.api.model.FlagModel;
 import com.airplan.api.repository.FlagRepository;
 
+import java.util.List;
+
 @Service
 public class FlagService {
 
@@ -17,4 +19,8 @@ public class FlagService {
 
     }
 
+    public List<FlagModel> listar() {
+        List<FlagModel> lista = flagRepository.findAll();
+        return lista;
+    }
 }

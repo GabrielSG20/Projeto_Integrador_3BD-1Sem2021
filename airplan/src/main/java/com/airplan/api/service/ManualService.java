@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.airplan.api.model.ManualModel;
 import com.airplan.api.repository.ManualRepository;
 
+import java.util.List;
+
 @Service
 public class ManualService {
 	@Autowired
@@ -13,5 +15,10 @@ public class ManualService {
 
     public void createManual(ManualModel manualModel) {
         manualRepository.save(manualModel);
+    }
+
+    public List<ManualModel> lista(ManualModel manualModel) {
+        List<ManualModel> listManual = manualRepository.findAll();
+        return listManual;
     }
 }

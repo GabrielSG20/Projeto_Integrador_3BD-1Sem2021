@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class ManualFlagModel {
 	@Id
 	private int mnl_id;
-	private Long flg_secundary;
+	private String flg_secundary;
 	
 	public ManualFlagModel() {
 		

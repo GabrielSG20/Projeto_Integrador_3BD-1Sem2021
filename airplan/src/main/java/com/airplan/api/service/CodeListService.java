@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.airplan.api.model.CodeListModel;
 import com.airplan.api.repository.CodeListRepository;
 
+import java.util.List;
+
 @Service
 public class CodeListService {
 
@@ -16,4 +18,8 @@ public class CodeListService {
         codelistRepository.save(codelistModel);
     }
 
+    public List<CodeListModel> listar() {
+        List<CodeListModel> lista = codelistRepository.findAll();
+        return lista;
+    }
 }
