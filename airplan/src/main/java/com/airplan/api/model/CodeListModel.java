@@ -31,13 +31,7 @@ public class CodeListModel {
 
         private Long cdl_code;
 
-        private Long cdl_rev_number;
-
-        private Date cdl_rev_date;
-
         private Long emp_id;
-
-        private String cdl_arquive_url;
 
         public CodeListModel(){
 
