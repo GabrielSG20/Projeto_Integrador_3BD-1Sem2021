@@ -1,12 +1,13 @@
-package com.airplan.api;
+package com.airplan.api.app;
 
 import java.sql.SQLException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
-@SpringBootApplication
 public class AirplanApplication {
 
 	public static void main(String[] args)  throws SQLException {
@@ -14,6 +15,5 @@ public class AirplanApplication {
 
 
 	}
-
 
 }

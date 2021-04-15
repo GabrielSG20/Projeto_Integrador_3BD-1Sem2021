@@ -13,7 +13,6 @@ public class CodeListService {
     @Autowired
     private CodeListRepository codelistRepository;
 
-
     public void createCodelist(CodeListModel codelistModel) {
         codelistRepository.save(codelistModel);
     }
