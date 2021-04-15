@@ -4,10 +4,6 @@ create user 'admin'@'localhost' identified by 'admin';
 
 grant select, insert, delete, update on codelist.* to admin@'localhost';
 
-create user 'user'@'localhost' identified by 'user';
-
-grant select on codelist.* to user@'localhost';
-
 use codelist;
 
 create table flag (
@@ -33,16 +29,17 @@ constraint pk_manual_flag primary key(mnl_id,flg_secundary)
 );
 
 create table codelist (
-
+cdl_id int auto_increment,
 mnl_id int, 
 flg_secundary varchar(10), 
-cdl_section varchar(30), 
+cdl_section varchar(30) not null, 
 cdl_sub_section varchar(30),
-cdl_block int, 
+cdl_block int not null, 
 cdl_block_name varchar(80) not null,
 cdl_code int not null,
 emp_id int, 
-constraint pk_codelist primary key (mnl_id,flg_secundary,cdl_section,cdl_block)
+constraint pk_codelist primary key (cdl_id),
+constraint uk_codelist unique key (mnl_id,flg_secundary,cdl_section,cdl_block)
 );
 
 create table employee (
