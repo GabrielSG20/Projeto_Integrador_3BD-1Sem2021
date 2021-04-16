@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @AllArgsConstructor
@@ -21,7 +25,10 @@ public class FlagModel {
     
     @Column(name = "flg_tag")
     private String flg_tag;
-
+    
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "flags")
+    private Set<ManualModel> manuais;
+    
     public FlagModel(){
 
     }

@@ -23,10 +23,10 @@ public class CodeListModel {
 	    private int cdl_id;
 
 		@Column(name = "mnl_id")
-        private int mnl_id;
+        private ManualModel mnl_id;
         
         @Column(name = "flg_secundary")
-        private String flg_secundary;
+        private FlagModel flg_secundary;
         
         @Column(name = "cdl_section")
         private int cdl_section;

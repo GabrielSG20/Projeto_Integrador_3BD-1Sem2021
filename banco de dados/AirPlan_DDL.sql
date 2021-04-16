@@ -66,3 +66,12 @@ alter table codelist add constraint fk_codelist_flg_secundary foreign key(flg_se
 alter table codelist add constraint fk_codelist_emp_id foreign key(emp_id) references employee(emp_id);
 alter table employee add constraint fk_employee_typ_id foreign key(typ_id) references employee_type(typ_id);
 
+insert into flag values ('-50','Mars');
+insert into manual(mnl_name) values ('ABC-1234');
+insert into manual_flag values(1,'-50');
+insert into employee_type(typ_desc) values('admin');
+insert into employee(emp_name,emp_password,typ_id) values('Gabriel','1234',1);
+insert into codelist(mnl_id,flg_secundary,cdl_section,cdl_sub_section,cdl_block,cdl_block_name,cdl_code,emp_id) values(1,'-50','00',NULL,0,'Letter',50,1);
+
+
+
