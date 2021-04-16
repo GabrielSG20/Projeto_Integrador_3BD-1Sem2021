@@ -1,11 +1,7 @@
+
 package com.airplan.api.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +17,7 @@ public class CodeListModel {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "cdl_id")
 	    private int cdl_id;
-
+		
 		@Column(name = "mnl_id")
         private ManualModel mnl_id;
         
@@ -43,8 +39,9 @@ public class CodeListModel {
         @Column(name = "cdl_code")
         private int cdl_code;
         
-        @Column(name = "emp_id")
-        private int emp_id;
+        @ManyToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "emp_id")
+        private UserModel emp_id;
 
         public CodeListModel(){
 
