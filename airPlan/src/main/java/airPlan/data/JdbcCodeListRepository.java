@@ -42,4 +42,22 @@ public class JdbcCodeListRepository implements CodeListRepository{
 		return codeList;
 	}
 	
+	@Override
+	public CodeList edit(CodeList codeList) {
+		jdbc.update(
+				"update codelist set mnl_name = (?), flg_secundary = (?), "
+				+ "cdl_section = (?), cdl_sub_section = (?), "
+				+ "cdl_block = (?), cdl_block_name = (?), "
+				+ "cdl_code = (?) "
+				+ "where mnl_name = (?) and flg_secundary = (?) "
+				+ "and cdl_section = (?) and cdl_block = (?)",
+				codeList.getMnl_name(), codeList.getFlg_secundary(),
+				codeList.getCdl_section(), codeList.getCdl_sub_section(),
+				codeList.getCdl_block(), codeList.getCdl_block_name(),
+				codeList.getCdl_code(), codeList.getMnl_name(), codeList.getFlg_secundary(),
+				codeList.getCdl_section(), codeList.getCdl_block());
+		
+		return codeList;
+	}
+	
 }

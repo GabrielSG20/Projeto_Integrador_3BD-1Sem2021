@@ -25,13 +25,13 @@
                      Consult Codelist
                 </button>
                
-                <button id = button3 class="btn">
+                <a id = button3 href="/codeEdit" class="btn">
                      Edit Codelist
-                </button>
+                </a>
             
-                <button id = button4 class="btn">
+                <a id = button4 href="/codeDelete" class="btn">
                      Delete Codelist
-                </button>
+                </a>
         </header>
         <form action="#" th:action="@{/codeDelete}" th:object="${general}" method="post">
         <div class="inline">

@@ -47,4 +47,21 @@ public class GeneralController {
 		GeneralDelete.delete(general);
 			
 	}
+	
+	
+	@GetMapping("/codeEdit")
+	public String codeListForm3(Model model) {
+		model.addAttribute("general", new General());
+		
+		return "/codeEdit";
+	}
+	
+	@RequestMapping(value="/codeEdit",
+			method=RequestMethod.POST,
+			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public void createRole3(@ModelAttribute General general) {
+		
+		GeneralEdit.edit(general);
+			
+	}
 }
