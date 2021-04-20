@@ -21,25 +21,26 @@ constraint pk_manual primary key(mnl_id),
 constraint uk_manual_mnl_name unique(mnl_name)
 );
 
-create table manual_flag (
+select mnl_id from manual where mnl_name = ?;
 
+
+create table manual_flag (
 mnl_id int, 
 flg_secundary varchar(10), 
 constraint pk_manual_flag primary key(mnl_id,flg_secundary)
 );
 
 create table codelist (
-cdl_id int auto_increment,
-mnl_id int, 
-flg_secundary varchar(10), 
-cdl_section varchar(30) not null, 
+
+mnl_id int,
+flg_secundary varchar(10),
+cdl_section varchar(30), 
 cdl_sub_section varchar(30),
-cdl_block int not null, 
+cdl_block int, 
 cdl_block_name varchar(80) not null,
 cdl_code int not null,
-emp_id int, 
-constraint pk_codelist primary key (cdl_id),
-constraint uk_codelist unique key (mnl_id,flg_secundary,cdl_section,cdl_block)
+/*emp_id int,*/
+constraint pk_codelist primary key (mnl_id,flg_secundary,cdl_section,cdl_block)
 );
 
 create table employee (
@@ -63,15 +64,6 @@ alter table manual_flag add constraint fk_manual_flag_mnl_id foreign key(mnl_id)
 alter table manual_flag add constraint fk_manual_flag_flg_secundary foreign key(flg_secundary) references flag(flg_secundary);
 alter table codelist add constraint fk_codelist_mnl_id foreign key(mnl_id) references manual_flag(mnl_id);
 alter table codelist add constraint fk_codelist_flg_secundary foreign key(flg_secundary) references manual_flag(flg_secundary);
-alter table codelist add constraint fk_codelist_emp_id foreign key(emp_id) references employee(emp_id);
-alter table employee add constraint fk_employee_typ_id foreign key(typ_id) references employee_type(typ_id);
-
-insert into flag values ('-50','Mars');
-insert into manual(mnl_name) values ('ABC-1234');
-insert into manual_flag values(1,'-50');
-insert into employee_type(typ_desc) values('admin');
-insert into employee(emp_name,emp_password,typ_id) values('Gabriel','1234',1);
-insert into codelist(mnl_id,flg_secundary,cdl_section,cdl_sub_section,cdl_block,cdl_block_name,cdl_code,emp_id) values(1,'-50','00',NULL,0,'Letter',50,1);
-
-
+/*alter table codelist add constraint fk_codelist_emp_id foreign key(emp_id) references employee(emp_id);
+alter table employee add constraint fk_employee_typ_id foreign key(typ_id) references employee_type(typ_id);*/
 
