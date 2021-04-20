@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import airPlan.Manual;
+import airPlan.model.Manual;
 
 @Repository
 public class JdbcManualRepository implements ManualRepository{

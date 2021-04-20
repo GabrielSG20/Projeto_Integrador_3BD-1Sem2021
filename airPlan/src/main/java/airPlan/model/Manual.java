@@ -1,4 +1,4 @@
-package airPlan;
+package airPlan.model;
 
 import org.springframework.jdbc.core.RowCallbackHandler;
 

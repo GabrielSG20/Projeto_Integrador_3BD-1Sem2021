@@ -1,6 +1,6 @@
 package airPlan.data;
 
-import airPlan.Manual;
+import airPlan.model.Manual;
 
 public interface ManualRepository {
 	Manual save(Manual manual);

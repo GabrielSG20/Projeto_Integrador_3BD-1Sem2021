@@ -1,21 +1,21 @@
-package airPlan;
+package airPlan.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Data;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @Data
-public class ManualFlag {
-    
-    private String mnl_name;
-    
+public class Flag {
+   
     private String flg_secundary;
     
-    public ManualFlag(){
+    private String flg_tag;
+    
+    public Flag(){
 
     }
 }

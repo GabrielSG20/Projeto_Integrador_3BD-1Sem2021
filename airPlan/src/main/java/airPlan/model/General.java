@@ -1,4 +1,5 @@
-package airPlan;
+package airPlan.model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class CodeList {
-	    
-		private String mnl_name;
-		
-	    private String flg_secundary;
+public class General {
+        
+        private String flg_secundary;
         
         private String cdl_section;
         
@@ -25,10 +24,11 @@ public class CodeList {
         
         private int cdl_code;
         
-        /*
-        private UserModel emp_id;
-		*/
-        public CodeList(){
+        private String flg_tag;
+        
+        private String mnl_name;
+        
+        public General(){
 
         }
-}
+    }

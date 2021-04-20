@@ -6,16 +6,16 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import airPlan.CodeList;
-import airPlan.Flag;
-import airPlan.General;
-import airPlan.Manual;
-import airPlan.ManualFlag;
 import airPlan.data.JdbcCodeListRepository;
 import airPlan.data.JdbcFlagRepository;
 import airPlan.data.JdbcManualFlagRepository;
 import airPlan.data.JdbcManualRepository;
 import airPlan.data.SpringJdbcConfig;
+import airPlan.model.CodeList;
+import airPlan.model.Flag;
+import airPlan.model.General;
+import airPlan.model.Manual;
+import airPlan.model.ManualFlag;
 
 public class GeneralCreate {
 	

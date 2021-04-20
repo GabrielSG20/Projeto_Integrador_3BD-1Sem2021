@@ -1,6 +1,6 @@
 package airPlan.data;
 
-import airPlan.Flag;
+import airPlan.model.Flag;
 
 public interface FlagRepository {
 	Flag save(Flag flag);

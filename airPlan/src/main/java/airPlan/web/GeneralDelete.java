@@ -4,10 +4,10 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import airPlan.CodeList;
-import airPlan.General;
 import airPlan.data.JdbcCodeListRepository;
 import airPlan.data.SpringJdbcConfig;
+import airPlan.model.CodeList;
+import airPlan.model.General;
 
 public class GeneralDelete {
 	

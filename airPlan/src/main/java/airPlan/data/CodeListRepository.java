@@ -1,6 +1,6 @@
 package airPlan.data;
 
-import airPlan.CodeList;
+import airPlan.model.CodeList;
 
 public interface CodeListRepository {
 	
