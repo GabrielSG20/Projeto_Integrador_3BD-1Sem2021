@@ -11,7 +11,7 @@ import lombok.Setter;
 @Data
 public class Flag {
    
-    private String flg_secundary;
+    private String flg_secundary_id;
     
     private String flg_tag;
     

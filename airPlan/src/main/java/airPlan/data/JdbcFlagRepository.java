@@ -20,12 +20,12 @@ public class JdbcFlagRepository implements FlagRepository{
 	@Override
 	public Flag save(Flag flag) {
 		
-		boolean x = jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM flag WHERE flg_secundary = ?)", Boolean.class, flag.getFlg_secundary());
+		boolean x = jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM flag WHERE flg_secundary = ?)", Boolean.class, flag.getFlg_secundary_id());
 		System.out.println(x);
 		if(!x) {
 			jdbc.update(
 					"insert into flag (flg_secundary, flg_tag) values (?, ?)",
-					flag.getFlg_secundary(), flag.getFlg_tag());
+					flag.getFlg_secundary_id(), flag.getFlg_tag());
 		}
 		
 		return flag;

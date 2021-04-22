@@ -14,6 +14,8 @@ public class General {
         
         private String flg_secundary;
         
+        private String flg_secundary_id;
+        
         private String cdl_section;
         
         private String cdl_sub_section;

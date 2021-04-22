@@ -13,7 +13,7 @@ public class ManualFlag {
     
     private int mnl_id;
     
-    private String flg_secundary;
+    private String flg_secundary_id;
     
     public ManualFlag(){
 
