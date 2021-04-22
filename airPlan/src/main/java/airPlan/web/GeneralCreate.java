@@ -34,8 +34,8 @@ public class GeneralCreate {
 		manualFlagRepository.save(manualFlagModel);
 		
 		CodeList codeListModel = new CodeList(manualModel.getMnl_id(),general.getFlg_secundary(), general.getCdl_section(),
-														general.getCdl_sub_section(), general.getCdl_block(), general.getCdl_block_name(),
-														general.getCdl_code());
+														general.getCdl_sub_section(), Integer.parseInt(general.getCdl_block()), general.getCdl_block_name(),
+														Integer.parseInt(general.getCdl_code()));
 		codeListRepository.save(codeListModel);
 		
 		System.out.println(manualModel);

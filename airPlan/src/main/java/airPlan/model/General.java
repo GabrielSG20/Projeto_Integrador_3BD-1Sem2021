@@ -20,11 +20,11 @@ public class General {
         
         private String cdl_sub_section;
         
-        private int cdl_block;
+        private String cdl_block;
         
         private String cdl_block_name;
         
-        private int cdl_code;
+        private String cdl_code;
         
         private String flg_tag;
         

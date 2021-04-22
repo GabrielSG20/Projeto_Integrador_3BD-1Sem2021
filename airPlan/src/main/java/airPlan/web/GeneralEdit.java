@@ -25,8 +25,8 @@ public class GeneralEdit {
 		//ManualFlag manualFlagModel = new ManualFlag(general.getMnl_name(), general.getFlg_secundary());
 		
 		CodeList codeListModel = new CodeList(manualModel.getMnl_id(),general.getFlg_secundary(), general.getCdl_section(),
-														general.getCdl_sub_section(), general.getCdl_block(), general.getCdl_block_name(),
-														general.getCdl_code());
+														general.getCdl_sub_section(), Integer.parseInt(general.getCdl_block()), general.getCdl_block_name(),
+														Integer.parseInt(general.getCdl_code()));
 		
 		//Flag flagModel = new Flag(general.getFlg_secundary(), general.getFlg_tag());
 		
