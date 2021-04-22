@@ -11,7 +11,7 @@ import lombok.Setter;
 @Data
 public class CodeList {
 	    
-		private String mnl_name;
+		private int mnl_id;
 		
 	    private String flg_secundary;
         
@@ -28,6 +28,7 @@ public class CodeList {
         /*
         private UserModel emp_id;
 		*/
+        
         public CodeList(){
 
         }

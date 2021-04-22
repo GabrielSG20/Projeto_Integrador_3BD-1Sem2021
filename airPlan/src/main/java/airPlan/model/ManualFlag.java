@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class ManualFlag {
     
-    private String mnl_name;
+    private int mnl_id;
     
     private String flg_secundary;
     

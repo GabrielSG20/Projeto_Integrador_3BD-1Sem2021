@@ -1,4 +1,4 @@
-package airPlan.data;
+package airPlan.repository;
 
 import airPlan.model.Flag;
 

@@ -1,10 +1,7 @@
 package airPlan.model;
 
-import org.springframework.jdbc.core.RowCallbackHandler;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
@@ -12,9 +9,15 @@ import lombok.Setter;
 @Data
 public class Manual {
 		
+	private int mnl_id;
+	
 	private String mnl_name;
         
 	public Manual() {
 		
+	}
+
+	public Manual(String mnl_name) {
+		this.mnl_name = mnl_name;
 	}
 }

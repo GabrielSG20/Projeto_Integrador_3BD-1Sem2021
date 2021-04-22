@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import airPlan.model.Manual;
+import airPlan.repository.ManualRepository;
 
 @Repository
 public class JdbcManualRepository implements ManualRepository{
@@ -30,4 +31,8 @@ public class JdbcManualRepository implements ManualRepository{
 		return manual;
 	}
 	
+	public void findIdManual(Manual manual) {
+		int id = jdbc.queryForObject("SELECT mnl_id FROM manual WHERE mnl_name = ?", Integer.class, manual.getMnl_name());
+		manual.setMnl_id(id);
+	}
 }

@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import airPlan.model.Flag;
+import airPlan.repository.FlagRepository;
 
 @Repository
 public class JdbcFlagRepository implements FlagRepository{
