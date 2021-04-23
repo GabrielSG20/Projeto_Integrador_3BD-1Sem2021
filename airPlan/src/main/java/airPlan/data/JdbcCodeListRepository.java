@@ -1,5 +1,7 @@
 package airPlan.data;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -58,6 +60,22 @@ public class JdbcCodeListRepository implements CodeListRepository{
 				codeList.getCdl_section(), codeList.getCdl_block());
 		
 		return codeList;
+	}
+	
+	public List<CodeList> list(){
+		String sql = "select * from codelist";
+		return jdbc.query(sql, (rs, rowNum) -> {
+			CodeList codeList = new CodeList();
+			codeList.setMnl_id(rs.getInt("mnl_id"));
+			codeList.setFlg_secundary(rs.getString("flg_secundary"));
+			codeList.setCdl_section(rs.getString("cdl_section"));
+			codeList.setCdl_sub_section(rs.getString("cdl_sub_section"));
+			codeList.setCdl_block(rs.getInt("cdl_block"));
+			codeList.setCdl_block_name(rs.getString("cdl_block_name"));
+			codeList.setCdl_code(rs.getInt("cdl_code"));
+			
+			return codeList;
+		});
 	}
 	
 }

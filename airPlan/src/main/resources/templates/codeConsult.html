@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>CodeListCreate</title>
+    <title>CodeConsult</title>
 </head>
-<body id="codecreate" class=".bg-info">
+<body id="codeconsult" class=".bg-info">
 
         <header id = "header">
             <div id="logo">
@@ -17,21 +17,21 @@
                 <h1 id="titulo"> <strong> Codelist </strong> </h1>
             </div>
 
-                <button id = "button1" class="btn">
+                <a id = "button1" href="/codeCreate" class="btn">
                      Create Codelist
-                </button id = "button1">
+                </a>
 
-                <button id = button2 class="btn">
+                <a id = "button2" href="/codeConsult" class="btn">
                      Consult Codelist
-                </button id = button2>
+                </a>
                
-                <button id = button3 class="btn">
+                <a id = "button3" href="/codeEdit" class="btn">
                      Edit Codelist
-                </button id = button3>
+                </a>
             
-                <button id = button4 class="btn">
+                <a id = "button4" href="/codeDelete" class="btn">
                      Delete Codelist
-                </button id = button4>
+                </a>
         </header>
         <div class="inline">
             <label>Primary Key
@@ -48,37 +48,29 @@
             <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
             <button id="back-menu" class="btn btn-secondary float-right">Back</button>
         </div>
-        <div id="consulttable">
+        <div class="container">
+        	<div th:if="${not #list.isEmpty(codelists)">
             <table class="table table-striped">
-                <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th>mnl_id</th>
+                    <th>flg_secundary</th>
+                    <th>cdl_section</th>
+                    <th>cdl_sub_section</th>
+                    <th>cdl_block</th>
+                    <th>cdl_block_name</th>
+                    <th>cdl_code</th>
                   </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
+              	  <tr th:each="codelist: ${codelists}">
+              	  	<td th:text="${codelist.mnl_id}"></td>
+              	  	<td th:text="${codelist.flg_secundary}"></td>
+              	  	<td th:text="${codelist.cdl_section}"></td>
+              	  	<td th:text="${codelist.cdl_sub_section}"></td>
+              	  	<td th:text="${codelist.cdl_block}"></td>
+              	  	<td th:text="${codelist.cdl_block_name}"></td>
+              	  	<td th:text="${codelist.cdl_code}"></td>
+              	  </tr>
               </table>
+              </div>
         </div>
     <script src="script.js"></script> 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

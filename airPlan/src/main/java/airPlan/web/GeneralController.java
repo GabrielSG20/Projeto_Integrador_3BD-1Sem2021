@@ -1,6 +1,7 @@
 package airPlan.web;
 
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import airPlan.data.JdbcCodeListRepository;
+import airPlan.data.SpringJdbcConfig;
 import airPlan.model.General;
 
 
@@ -63,5 +66,16 @@ public class GeneralController {
 		
 		GeneralEdit.edit(general);
 			
+	}
+	
+	@RequestMapping("/codeConsult")
+	public String listCodelists(Model model) {
+		SpringJdbcConfig jdbcConfig = new SpringJdbcConfig();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(jdbcConfig.mysqlDataSource());
+		JdbcCodeListRepository codeListRepository = new JdbcCodeListRepository(jdbcTemplate);
+		
+		model.addAttribute("codelist", codeListRepository.list());
+		
+		return "codelist";
 	}
 }
