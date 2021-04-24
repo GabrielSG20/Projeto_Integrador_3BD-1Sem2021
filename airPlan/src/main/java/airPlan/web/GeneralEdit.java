@@ -28,6 +28,7 @@ public class GeneralEdit {
 														general.getCdl_sub_section(), Integer.parseInt(general.getCdl_block()), general.getCdl_block_name(),
 														Integer.parseInt(general.getCdl_code()));
 		
+		
 		//Flag flagModel = new Flag(general.getFlg_secundary(), general.getFlg_tag());
 		
 		//System.out.println(manualModel);

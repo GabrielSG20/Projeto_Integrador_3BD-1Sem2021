@@ -34,4 +34,26 @@ public class CodeList {
         public CodeList(){
 
         }
+        
+        public CodeList(int mnl_id,String flg_secundary,String cdl_section,int cdl_block){
+        		
+        	this.mnl_id=mnl_id;
+        	this.flg_secundary=flg_secundary;
+        	this.cdl_section=cdl_section;
+        	this.cdl_block=cdl_block;
+
+
+        }
+        
+        public CodeList(String cdl_sub_section,String cdl_block_name,int cdl_code,int mnl_id,String flg_secundary, String cdl_section,int cdl_block){
+        	this.cdl_sub_section=cdl_sub_section;
+        	this.cdl_block_name=cdl_block_name;
+        	this.cdl_code=cdl_code;
+        	this.mnl_id=mnl_id;
+        	this.flg_secundary=flg_secundary;
+        	this.cdl_section=cdl_section;
+        	this.cdl_block=cdl_block;
+
+
+        }
 }
