@@ -49,7 +49,6 @@
             <button id="back-menu" class="btn btn-secondary float-right">Back</button>
         </div>
         <div class="container">
-        	<div th:if="${not #list.isEmpty(codelists)">
             <table class="table table-striped">
                   <tr>
                     <th>mnl_id</th>
@@ -60,7 +59,7 @@
                     <th>cdl_block_name</th>
                     <th>cdl_code</th>
                   </tr>
-              	  <tr th:each="codelist: ${codelists}">
+              	  <tr th:each="codelist : ${codeList}">
               	  	<td th:text="${codelist.mnl_id}"></td>
               	  	<td th:text="${codelist.flg_secundary}"></td>
               	  	<td th:text="${codelist.cdl_section}"></td>
@@ -70,7 +69,6 @@
               	  	<td th:text="${codelist.cdl_code}"></td>
               	  </tr>
               </table>
-              </div>
         </div>
     <script src="script.js"></script> 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

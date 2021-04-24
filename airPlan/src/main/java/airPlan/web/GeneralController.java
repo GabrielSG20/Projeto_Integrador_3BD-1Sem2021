@@ -1,5 +1,7 @@
 package airPlan.web;
 
+import java.util.List;
+
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import airPlan.data.JdbcCodeListRepository;
 import airPlan.data.SpringJdbcConfig;
+import airPlan.model.CodeList;
 import airPlan.model.General;
 
 
@@ -22,7 +25,7 @@ public class GeneralController {
 	public String codeListForm(Model model) {
 		model.addAttribute("general", new General());
 		
-		return "/codeCreate";
+		return "codeCreate";
 	}
 	
 	
@@ -39,7 +42,7 @@ public class GeneralController {
 	public String codeListForm2(Model model) {
 		model.addAttribute("general", new General());
 		
-		return "/codeDelete";
+		return "codeDelete";
 	}
 	
 	@RequestMapping(value="/codeDelete",
@@ -56,7 +59,7 @@ public class GeneralController {
 	public String codeListForm3(Model model) {
 		model.addAttribute("general", new General());
 		
-		return "/codeEdit";
+		return "codeEdit";
 	}
 	
 	@RequestMapping(value="/codeEdit",
@@ -73,9 +76,10 @@ public class GeneralController {
 		SpringJdbcConfig jdbcConfig = new SpringJdbcConfig();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(jdbcConfig.mysqlDataSource());
 		JdbcCodeListRepository codeListRepository = new JdbcCodeListRepository(jdbcTemplate);
+		List<CodeList> codelists = codeListRepository.list();
+
+		model.addAttribute("codeList", codelists);
 		
-		model.addAttribute("codelist", codeListRepository.list());
-		
-		return "codelist";
+		return "codeConsult";
 	}
 }
