@@ -21,14 +21,24 @@ public class JdbcCodeListRepository implements CodeListRepository{
 	
 	@Override
 	public CodeList save(CodeList codeList) {
-		jdbc.update(
-				"insert into codelist (mnl_id, flg_secundary, cdl_section,"
-				+ " cdl_sub_section, cdl_block, cdl_block_name, cdl_code) values (?,?,?,?,?,?,?)",
-				codeList.getMnl_id(), codeList.getFlg_secundary(),
-				codeList.getCdl_section(), codeList.getCdl_sub_section(),
-				codeList.getCdl_block(), codeList.getCdl_block_name(),
-				codeList.getCdl_code()
-				);
+		if(codeList.getCdl_sub_section().equals("")) {
+			jdbc.update(
+					"insert into codelist (mnl_id, flg_secundary, "
+					+ " cdl_section, cdl_block, cdl_block_name, cdl_code) values (?,?,?,?,?,?)",
+					codeList.getMnl_id(), codeList.getFlg_secundary(),
+					codeList.getCdl_section(),codeList.getCdl_block(), 
+					codeList.getCdl_block_name(), codeList.getCdl_code()
+					);
+		} else {
+			jdbc.update(
+					"insert into codelist (mnl_id, flg_secundary, cdl_section,"
+					+ " cdl_sub_section, cdl_block, cdl_block_name, cdl_code) values (?,?,?,?,?,?,?)",
+					codeList.getMnl_id(), codeList.getFlg_secundary(),
+					codeList.getCdl_section(), codeList.getCdl_sub_section(),
+					codeList.getCdl_block(), codeList.getCdl_block_name(),
+					codeList.getCdl_code()
+					);
+		}
 		
 		return codeList;
 	}

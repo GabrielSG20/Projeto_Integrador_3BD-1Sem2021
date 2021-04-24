@@ -1,5 +1,9 @@
 package airPlan.web;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.http.MediaType;
@@ -10,16 +14,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import airPlan.data.JdbcCodeListRepository;
 import airPlan.data.SpringJdbcConfig;
 import airPlan.model.CodeList;
 import airPlan.model.General;
+import airPlan.model.Manual;
 
 
 
 @Controller
 public class GeneralController {
+	
+	public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 	
 	@GetMapping("/codeCreate")
 	public String codeListForm(Model model) {
@@ -82,4 +91,29 @@ public class GeneralController {
 		
 		return "codeConsult";
 	}
+	
+	@GetMapping("/codeImport")
+	public String codeImport(Model model) {
+		model.addAttribute("manual", new Manual());
+		return "codeImport";
+	}
+	
+	@RequestMapping("/codeImport")
+	public String upload(@ModelAttribute Manual manual, Model model, @RequestParam("files") MultipartFile[] files) {
+		StringBuilder fileNames = new StringBuilder();
+		for(MultipartFile file: files) {
+			Path fileNameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());
+			fileNames.append(file.getOriginalFilename());
+			try {
+				Files.write(fileNameAndPath, file.getBytes());
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		model.addAttribute("msg", "Succesfully uploaded files "+fileNames.toString());
+		
+		GeneralImport.getCellData(manual.getMnl_name());
+		return "codeImport";
+	}
+	
 }
