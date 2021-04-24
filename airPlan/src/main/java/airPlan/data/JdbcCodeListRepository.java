@@ -46,9 +46,9 @@ public class JdbcCodeListRepository implements CodeListRepository{
 	@Override
 	public CodeList delete(CodeList codeList) {
 		jdbc.update(
-				"delete from codelist where mnl_id = (?) and flg_secundary = (?) and cdl_section = (?)",
+				"delete from codelist where mnl_id = (?) and flg_secundary = (?) and cdl_section = (?) and cdl_block = (?)",
 				codeList.getMnl_id(), codeList.getFlg_secundary(),
-				codeList.getCdl_section()
+				codeList.getCdl_section(), codeList.getCdl_block()
 				);
 		
 		return codeList;
@@ -57,13 +57,12 @@ public class JdbcCodeListRepository implements CodeListRepository{
 	@Override
 	public CodeList edit(CodeList codeList) {
 		jdbc.update(
-				"update codelist set mnl_id = (?), flg_secundary = (?), "
+				"update codelist set"
 				+ "cdl_section = (?), cdl_sub_section = (?), "
 				+ "cdl_block = (?), cdl_block_name = (?), "
 				+ "cdl_code = (?) "
 				+ "where mnl_name = (?) and flg_secundary = (?) "
 				+ "and cdl_section = (?) and cdl_block = (?)",
-				codeList.getMnl_id(), codeList.getFlg_secundary(),
 				codeList.getCdl_section(), codeList.getCdl_sub_section(),
 				codeList.getCdl_block(), codeList.getCdl_block_name(),
 				codeList.getCdl_code(), codeList.getMnl_id(), codeList.getFlg_secundary(),

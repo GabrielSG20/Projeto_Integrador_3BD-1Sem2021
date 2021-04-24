@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>CodeListCreate</title>
+    <title>CodeDelete</title>
 </head>
 <body id="codecreate" class=".bg-info">
 
@@ -41,11 +41,12 @@
             <label>Secundary Key
                 <input id="secundaryKey" class="file" th:field="*{flg_secundary}" type="text"></input>
             </label>
-            <i class="fas fa-search"></i>
             <label>Section
                 <input id="tag"  class="file" th:field="*{cdl_section}" type="text"></input>
             </label>
-            <i class="fas fa-filter"></i>
+            <label class="fileLabel">Code
+                    <input id="code" class="file" th:field="*{cdl_code}" type="text"></input>
+                </label>
             <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Delete</button>
             <button id="back-menu" class="btn btn-secondary float-right">Back</button>
         </div>
