@@ -3,15 +3,12 @@ body, html{
     margin: 5%;
 
 }
-div.inline {
-    display: flex;
-    align-items: center;
-}
+
 
 label{
     color: #0367A5;
     margin: auto;
-    margin-left: 0;
+    margin-left: 5%;
     text-align: left;
     font-family: Roboto;
     margin-top: 2%;
@@ -19,7 +16,7 @@ label{
 .file{
     background-color: #CFCFCF;
     display: block;
-    Width: 150px;
+    Width: 130px;
     height: 35px;
     border-radius: 10px;
 }
@@ -139,4 +136,14 @@ margin-top: 3%;
   }
   #consulttable{
       margin-top: 3%;
+  }
+
+  .table-striped{
+      margin-top: 5%;
+  }
+
+  #firstDiv{
+    margin: auto;
+    width: 50%;
+    align-items: center;
   }

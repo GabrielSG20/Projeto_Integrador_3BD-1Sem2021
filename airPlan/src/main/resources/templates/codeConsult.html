@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>CodeConsult</title>
+    <title>CodeCreate</title>
 </head>
-<body id="codeconsult" class=".bg-info">
+<body id="codecreate" class=".bg-info">
 
-        <header id = "header">
+<header id = "header">
             <div id="logo">
                 <img id= " imagem1" src ='images/146.png'> </img>  
                 <h1 id="titulo"> <strong> Codelist </strong> </h1>
@@ -32,8 +32,12 @@
                 <a id = "button4" href="/codeDelete" class="btn">
                      Delete Codelist
                 </a>
+                
+                <a id = "button4" href="/codeImport" class="btn">
+                    Import Codelist
+               </a>
         </header>
-        <div class="inline">
+        <div class="inline" hidden = "true">
             <label>Primary Key
                 <input id="primaryKey" class="file" type="text"></input>
             </label>
@@ -48,16 +52,17 @@
             <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
             <button id="back-menu" class="btn btn-secondary float-right">Back</button>
         </div>
+        <hr>
         <div class="container">
             <table class="table table-striped">
                   <tr>
-                    <th>mnl_id</th>
-                    <th>flg_secundary</th>
-                    <th>cdl_section</th>
-                    <th>cdl_sub_section</th>
-                    <th>cdl_block</th>
-                    <th>cdl_block_name</th>
-                    <th>cdl_code</th>
+                    <th>Manual Id</th>
+                    <th>Flag</th>
+                    <th>Section</th>
+                    <th>Subsection</th>
+                    <th>Block</th>
+                    <th>Block Name</th>
+                    <th>Code</th>
                   </tr>
               	  <tr th:each="codelist : ${codeList}">
               	  	<td th:text="${codelist.mnl_id}"></td>

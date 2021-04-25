@@ -1,5 +1,7 @@
 package airPlan.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import airPlan.data.JdbcCodeListRepository;
@@ -15,25 +17,20 @@ public class GeneralDelete {
 		SpringJdbcConfig jdbcConfig = new SpringJdbcConfig();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(jdbcConfig.mysqlDataSource());
 		JdbcManualRepository manualRepository = new JdbcManualRepository(jdbcTemplate);
-		//JdbcFlagRepository flagRepository = new JdbcFlagRepository(jdbcTemplate);
-		//JdbcManualFlagRepository manualFlagRepository = new JdbcManualFlagRepository(jdbcTemplate);
 		JdbcCodeListRepository codeListRepository = new JdbcCodeListRepository(jdbcTemplate);
 		
 		Manual manualModel = new Manual(general.getMnl_name());
 		manualRepository.findIdManual(manualModel);
 		
-		//ManualFlag manualFlagModel = new ManualFlag(general.getMnl_name(), general.getFlg_secundary());
-		
 		CodeList codeListModel = new CodeList(manualModel.getMnl_id(),general.getFlg_secundary(), general.getCdl_section(),
 				 Integer.parseInt(general.getCdl_block()));
 
 		
-		//Flag flagModel = new Flag(general.getFlg_secundary(), general.getFlg_tag());
+		/* DEBUG */
+		Logger loggerCodeList = LoggerFactory.getLogger(CodeList.class);
+		loggerCodeList.debug(codeListModel.toString());
+		loggerCodeList.info(codeListModel.toString());
 		
-		//System.out.println(manualModel);
-		//System.out.println(manualFlagModel);
-		System.out.println(codeListModel);
-		//System.out.println(flagModel);
 		
 		codeListRepository.delete(codeListModel);
 		

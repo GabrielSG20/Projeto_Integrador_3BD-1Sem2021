@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import airPlan.data.JdbcCodeListRepository;
@@ -14,6 +16,7 @@ import airPlan.data.JdbcManualRepository;
 import airPlan.data.SpringJdbcConfig;
 import airPlan.model.CodeList;
 import airPlan.model.Flag;
+import airPlan.model.General;
 import airPlan.model.Manual;
 import airPlan.model.ManualFlag;
 
@@ -23,14 +26,13 @@ public class GeneralImport {
 		
 	}
 	
-	public static void getCellData(String manualName) {
+	public static void getCellData(String manualName, String fileName) {
 		
 		try {
-			String excelPath = "./uploads/Codelist.xlsx";
-			System.out.println(excelPath);
+			String excelPath = "./uploads/"+fileName;
 			XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
 			XSSFSheet sheet = workbook.getSheet("Jedi Codex");
-			int n = getRowCount();
+			int n = getRowCount(workbook);
 			DataFormatter formatter1 = new DataFormatter();
 			ArrayList<String> tags = new ArrayList<>();
 			
@@ -41,17 +43,15 @@ public class GeneralImport {
 			JdbcManualFlagRepository manualFlagRepository = new JdbcManualFlagRepository(jdbcTemplate);
 			JdbcCodeListRepository codeListRepository = new JdbcCodeListRepository(jdbcTemplate);
 			
-			
 			/* Manual Name */
 			Manual manualModel = new Manual(manualName);
 			manualRepository.save(manualModel);
 			manualRepository.findIdManual(manualModel);
-			System.out.println(manualModel);
 			
 			/* check se esta lendo excel */
-			System.out.println(formatter1.formatCellValue(sheet.getRow(1).getCell(7)));
-			System.out.println(formatter1.formatCellValue(sheet.getRow(1).getCell(8)));
-			System.out.println(formatter1.formatCellValue(sheet.getRow(1).getCell(9)));
+			checkDebug(formatter1, formatter1.formatCellValue(sheet.getRow(1).getCell(7)));
+			checkDebug(formatter1, formatter1.formatCellValue(sheet.getRow(1).getCell(8)));
+			checkDebug(formatter1, formatter1.formatCellValue(sheet.getRow(1).getCell(9)));
 			
 			
 			String tagName1 = formatter1.formatCellValue(sheet.getRow(1).getCell(7));
@@ -86,12 +86,7 @@ public class GeneralImport {
 				DataFormatter formatter = new DataFormatter();
 					
 				if(formatter.formatCellValue(sheet.getRow(i).getCell(7)).equals("1")) {
-					System.out.println(formatter.formatCellValue(sheet.getRow(i).getCell(6)));
-					System.out.println(formatter.formatCellValue(sheet.getRow(i).getCell(1)));
-					System.out.println(formatter.formatCellValue(sheet.getRow(i).getCell(2)));
-					System.out.println(formatter.formatCellValue(sheet.getRow(i).getCell(4)));
-					System.out.println(formatter.formatCellValue(sheet.getRow(i).getCell(5)));
-					System.out.println(tags.get(0));
+					
 					CodeList codeListModel = new CodeList(manualModel.getMnl_id(), "-"+parts[0], formatter.formatCellValue(sheet.getRow(i).getCell(1)),
 							formatter.formatCellValue(sheet.getRow(i).getCell(2)), Integer.parseInt(formatter.formatCellValue(sheet.getRow(i).getCell(3))),
 							formatter.formatCellValue(sheet.getRow(i).getCell(4)),
@@ -100,11 +95,13 @@ public class GeneralImport {
 						/* Insert no Banco de Dados */
 					
 					codeListRepository.save(codeListModel);
-						
-					System.out.println(manualModel);
-					System.out.println(manualFlagModel);
-					System.out.println(codeListModel);
-					System.out.println(flagModel);
+					
+					/* DEBUG */
+					checkDebug(manualModel, manualModel.toString());
+					checkDebug(flagModel, flagModel.toString());
+					checkDebug(manualFlagModel, manualFlagModel.toString());
+					checkDebug(codeListModel, codeListModel.toString());
+
 					
 				} if(formatter.formatCellValue(sheet.getRow(i).getCell(8)).equals("1")) {
 					CodeList codeListModel = new CodeList(manualModel.getMnl_id(), "-"+parts2[0], formatter.formatCellValue(sheet.getRow(i).getCell(1)),
@@ -113,7 +110,6 @@ public class GeneralImport {
 							Integer.parseInt(formatter.formatCellValue(sheet.getRow(i).getCell(5))));
 						
 						/* Insert no Banco de Dados */
-					
 					codeListRepository.save(codeListModel);
 					
 				} if(formatter.formatCellValue(sheet.getRow(i).getCell(9)).equals("1")) {
@@ -123,10 +119,10 @@ public class GeneralImport {
 							Integer.parseInt(formatter.formatCellValue(sheet.getRow(i).getCell(5))));
 						
 						/* Insert no Banco de Dados */
-					
 					codeListRepository.save(codeListModel);
 				}
-				System.out.println("ok");
+				
+				/* fechar o arquivo excell */
 				workbook.close();
 				
 			}
@@ -137,11 +133,18 @@ public class GeneralImport {
 		}
 	}
 	
-	public static int getRowCount() {
+	public static void checkDebug(Object obj, String data) {
+		
+		Logger logger= LoggerFactory.getLogger(Object.class);
+		logger.debug(data);
+		logger.info(data);
+		
+	}
+	
+	public static int getRowCount(XSSFWorkbook workbook) {
 		
 		try {
-			String excelPath = "./uploads/Codelist.xlsx";
-			XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
+			
 			XSSFSheet sheet = workbook.getSheet("Jedi Codex");
 			int rowCount = sheet.getPhysicalNumberOfRows();
 			return rowCount;

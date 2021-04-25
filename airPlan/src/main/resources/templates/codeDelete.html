@@ -32,6 +32,11 @@
                 <a id = "button4" href="/codeDelete" class="btn">
                      Delete Codelist
                 </a>
+                
+                <a id = "button4" href="/codeImport" class="btn">
+                    Import Codelist
+               </a>
+               
         </header>
         <form action="#" th:action="@{/codeDelete}" th:object="${general}" method="post">
         <div class="inline">
@@ -48,7 +53,8 @@
                     <input id="block_number" class="file" th:field="*{cdl_block}" type="text"></input>
                 </label>
             <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Delete</button>
-            <button id="back-menu" class="btn btn-secondary float-right">Back</button>
+            <input id="back-menu" class="btn btn-secondary float-right" type="reset" value="Reset" accesskey="r"></input>
+            
         </div>
         </form>
         

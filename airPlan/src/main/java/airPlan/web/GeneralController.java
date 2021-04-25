@@ -112,7 +112,7 @@ public class GeneralController {
 		}
 		model.addAttribute("msg", "Succesfully uploaded files "+fileNames.toString());
 		
-		GeneralImport.getCellData(manual.getMnl_name());
+		GeneralImport.getCellData(manual.getMnl_name(), fileNames.toString());
 		return "codeImport";
 	}
 	

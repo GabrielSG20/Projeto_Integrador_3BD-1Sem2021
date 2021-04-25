@@ -31,6 +31,10 @@
                 <a id = "button4" href="/codeDelete" class="btn">
                      Delete Codelist
                 </a>
+                
+                <a id = "button4" href="/codeImport" class="btn">
+                    Import Codelist
+               </a>
         </header>
     <form th:action="@{/codeEdit}" th:object="${general}" method="post">
     <div>
@@ -69,7 +73,7 @@
         <hr>
         <div>
             <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Edit</button>
-            <button id="back-menu" class="btn btn-secondary float-right">Back</button>
+            <input id="back-menu" class="btn btn-secondary float-right" type="reset" value="Reset" accesskey="r"></input>
         </div>
     </div>
     </form>    

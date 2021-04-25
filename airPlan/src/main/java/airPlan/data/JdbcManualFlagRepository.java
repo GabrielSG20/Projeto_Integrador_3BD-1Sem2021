@@ -21,13 +21,9 @@ public class JdbcManualFlagRepository implements ManualFlagRepository{
 	public ManualFlag save(ManualFlag manualFlag) {
 		
 		boolean x = jdbc.queryForObject("SELECT EXISTS(SELECT 1 FROM manual_flag WHERE mnl_id = ?)", Boolean.class, manualFlag.getMnl_id());
-		System.out.println(x);
 		boolean y = jdbc.queryForObject("select exists(select 1 from manual_flag where flg_secundary = ?)", Boolean.class, manualFlag.getFlg_secundary_id());
-		System.out.println(y);
 		boolean u = jdbc.queryForObject("select exists(select 1 from flag where flg_secundary = ?)", Boolean.class, manualFlag.getFlg_secundary_id());
-		System.out.println(u);
 		boolean i = jdbc.queryForObject("select exists(select 1 from manual where mnl_id = ?)", Boolean.class, manualFlag.getFlg_secundary_id());
-		System.out.println(i);
 		if(!x && !y || !u || !i) {
 			jdbc.update(
 					"insert into manual_flag (mnl_id, flg_secundary) values (?,?)",

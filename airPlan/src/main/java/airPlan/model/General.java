@@ -30,7 +30,19 @@ public class General {
         
         private String mnl_name;
         
+		private General[] codelist = new General[5];
+        
         public General(){
 
         }
+        
+        public void addLista(General [] general, ManualFlag[] manualFlagModel, CodeList[] codeListModel) {
+        	for(int i = 0; i<3;i++) {
+        		manualFlagModel[i] = new ManualFlag(i,general[i].getFlg_secundary());
+        		codeListModel[i] = new CodeList(i,general[i].getFlg_secundary(), general[i].getCdl_section(),
+						general[i].getCdl_sub_section(), Integer.parseInt(general[i].getCdl_block()), general[i].getCdl_block_name(),
+						Integer.parseInt(general[i].getCdl_code()));
+        	}
+        }
+
     }
