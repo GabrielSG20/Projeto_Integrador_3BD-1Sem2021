@@ -21,7 +21,7 @@ public class GeneralCreate {
 		ManualFlag[] manualflags = new ManualFlag[5];
 		CodeList[] codelists = new CodeList[5];
 		
-		general.addLista(general.getCodelist(), manualflags, codelists);
+		int n = general.addLista(general.getCodelist(), manualflags, codelists);
 		
 		SpringJdbcConfig jdbcConfig = new SpringJdbcConfig();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(jdbcConfig.mysqlDataSource());
@@ -73,32 +73,34 @@ public class GeneralCreate {
 			}
 		}
 		
-		for(int j = 0; j < 3; j++) {
+		for(int j = 0; j < n; j++) {
+
 			manualflags[j].setMnl_id(manualModel.getMnl_id());
 			codelists[j].setMnl_id(manualModel.getMnl_id());
-			
+				
 			String flgSecundary = manualflags[j].getFlg_secundary_id();
-			
+				
 			if(flgSecundary.length() > 1) {
 				if(flgSecundary.contains(",")) {
 					String[] flgSecundaryParts = flgSecundary.split(",");
-					
+						
 					for(int i=0;i<flgSecundaryParts.length;i++) {
 						codelists[j].setFlg_secundary(flgSecundaryParts[i]);
-						
+							
 						/* DEBUG */
 						checkDebug(codelists[j], codelists[j].toString());
-						
+							
 						codeListRepository.save(codelists[j]);
 					}
 				} else {
 					/* DEBUG */
 					checkDebug(codelists[j], codelists[j].toString());
-					
+						
 					codeListRepository.save(codelists[j]);
 				}
 			}
 		}
+			
 	}
 	
 	public static void checkDebug(Object obj, String data) {

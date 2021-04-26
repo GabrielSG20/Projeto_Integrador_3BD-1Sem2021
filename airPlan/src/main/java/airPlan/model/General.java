@@ -36,13 +36,26 @@ public class General {
 
         }
         
-        public void addLista(General [] general, ManualFlag[] manualFlagModel, CodeList[] codeListModel) {
+        public Integer addLista(General [] general, ManualFlag[] manualFlagModel, CodeList[] codeListModel) {
+        	int count = 3;
         	for(int i = 0; i<3;i++) {
-        		manualFlagModel[i] = new ManualFlag(i,general[i].getFlg_secundary());
-        		codeListModel[i] = new CodeList(i,general[i].getFlg_secundary(), general[i].getCdl_section(),
-						general[i].getCdl_sub_section(), Integer.parseInt(general[i].getCdl_block()), general[i].getCdl_block_name(),
-						Integer.parseInt(general[i].getCdl_code()));
+        		if(general[i].getFlg_secundary().equals("")) {
+        			--count;
+        			continue;
+        		} else {
+        			manualFlagModel[i] = new ManualFlag(i,general[i].getFlg_secundary());
+        		}
+        		if(general[i].getCdl_section().equals("")) {
+        			--count;
+        			continue;
+        		} else {
+        			codeListModel[i] = new CodeList(i,general[i].getFlg_secundary(), general[i].getCdl_section(),
+					general[i].getCdl_sub_section(), Integer.parseInt(general[i].getCdl_block()), general[i].getCdl_block_name(),
+					Integer.parseInt(general[i].getCdl_code()));
+        		}
         	}
+        	return count;
         }
+       
 
     }
