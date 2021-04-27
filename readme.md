@@ -24,7 +24,7 @@
   <tr>
      <td align="center"><a href="https://www.linkedin.com/in/gabriel-henrique-de-souza-ferraz-4873581b2/"><img style="border-radius: 50%;" src="https://media-exp1.licdn.com/dms/image/C4D35AQFTbC6XKA3MnA/profile-framedphoto-shrink_800_800/0/1594161109388?e=1616896800&v=beta&t=oGNm38_qxew96rwuhspcW8ah3gfZUYOzMxzZJptND2A" width="100px;" alt=""/><br/><sub><b>Gabriel Ferraz</b></sub><br/></a><sub><b>Developer</b></sub></td>
     <td align="center"><a href="https://www.linkedin.com/in/hugo-wagner-692b83150/"><img style="border-radius: 50%;" src="https://media-exp1.licdn.com/dms/image/C4E03AQEwTmjTm74BSA/profile-displayphoto-shrink_200_200/0/1540993874794?e=1621468800&v=beta&t=kScr0vMNhElo4SSwlr39Q0chgpsi1N3w9hLoy42RzJQ" width="100px;" alt=""/><br/><sub><b>Hugo Wagner</b></sub><br/></a><sub><b>Developer</b></sub><br/></td>
-    <td align="center"><a href="https://www.linkedin.com/in/jeferson-tadeu-das-neves-a98343190/"><img style="border-radius: 50%;" src="https://media-exp1.licdn.com/dms/image/C4E35AQGJzPTWb5wmoQ/profile-framedphoto-shrink_800_800/0/1614368416106?e=1616896800&v=beta&t=Jn1TwTlLUFe849D9B4JlHo-y4aOiNTvzuWrQe747Juw" width="100px;" alt=""/><br/><sub><b>Jeferson das Neves</b></sub><br/></a><sub><b>Developer</b></sub><br/></td>
+    <td align="center"><a href="https://www.linkedin.com/in/jeferson-tadeu-das-neves-a98343190/"><img style="border-radius: 50%;" src="https://media-exp1.licdn.com/dms/image/C4E35AQGJzPTWb5wmoQ/profile-displayphoto-shrink_200_200/0/1614368416106?e=1616896800&v=beta&t=Jn1TwTlLUFe849D9B4JlHo-y4aOiNTvzuWrQe747Juw" width="100px;" alt=""/><br/><sub><b>Jeferson das Neves</b></sub><br/></a><sub><b>Developer</b></sub><br/></td>
     </tr>
     </table>
     <table>
