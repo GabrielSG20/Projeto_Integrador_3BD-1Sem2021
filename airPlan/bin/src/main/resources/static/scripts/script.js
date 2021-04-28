@@ -39,11 +39,12 @@ function filesValues(final){
 };
 
 function getFile(){
-
     let primaryKey = document.getElementById("primaryKey").value;
     let secundaryKey = document.getElementById("secundaryKey").value;
     let tag = document.getElementById("tag").value;
     let final = [];
     filesValues(final);
     makeFile(primaryKey, secundaryKey, tag, final);
+
+
 }

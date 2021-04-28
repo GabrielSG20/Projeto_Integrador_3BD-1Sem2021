@@ -12,7 +12,7 @@
 	<artifactId>airPlan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>airPlan</name>
-	<description>Projeto Integrador 3 Semestre</description>
+	<description>taco cloud example</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -21,28 +21,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-
-		<dependency>
-        	<groupId>org.slf4j</groupId>
-        	<artifactId>slf4j-api</artifactId>
-        	<version>1.7.6</version>
-    	</dependency>
-    	
-    	<dependency>
-        	<groupId>org.slf4j</groupId>
-        	<artifactId>slf4j-log4j12</artifactId>
-        	<version>1.7.5</version>
-    	</dependency>
-    
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>5.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -56,12 +37,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

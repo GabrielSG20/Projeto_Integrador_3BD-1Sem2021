@@ -1,27 +1,31 @@
 package airPlan.web;
 
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.nio.file.StandardCopyOption;
+
 
 import org.springframework.http.MediaType;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import airPlan.data.JdbcCodeListRepository;
-import airPlan.data.SpringJdbcConfig;
-import airPlan.model.CodeList;
-import airPlan.model.General;
-import airPlan.model.Manual;
+import airPlan.General;
 
 
 
@@ -34,7 +38,7 @@ public class GeneralController {
 	public String codeListForm(Model model) {
 		model.addAttribute("general", new General());
 		
-		return "codeCreate";
+		return "/codeCreate";
 	}
 	
 	
@@ -51,7 +55,7 @@ public class GeneralController {
 	public String codeListForm2(Model model) {
 		model.addAttribute("general", new General());
 		
-		return "codeDelete";
+		return "/codeDelete";
 	}
 	
 	@RequestMapping(value="/codeDelete",
@@ -68,7 +72,7 @@ public class GeneralController {
 	public String codeListForm3(Model model) {
 		model.addAttribute("general", new General());
 		
-		return "codeEdit";
+		return "/codeEdit";
 	}
 	
 	@RequestMapping(value="/codeEdit",
@@ -80,26 +84,12 @@ public class GeneralController {
 			
 	}
 	
-	@RequestMapping("/codeConsult")
-	public String listCodelists(Model model) {
-		SpringJdbcConfig jdbcConfig = new SpringJdbcConfig();
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(jdbcConfig.mysqlDataSource());
-		JdbcCodeListRepository codeListRepository = new JdbcCodeListRepository(jdbcTemplate);
-		List<CodeList> codelists = codeListRepository.list();
-
-		model.addAttribute("codeList", codelists);
-		
-		return "codeConsult";
-	}
-	
 	@GetMapping("/codeImport")
 	public String codeImport(Model model) {
-		model.addAttribute("manual", new Manual());
 		return "codeImport";
 	}
-	
 	@RequestMapping("/codeImport")
-	public String upload(@ModelAttribute Manual manual, Model model, @RequestParam("files") MultipartFile[] files) {
+	public String upload(Model model, @RequestParam("files") MultipartFile[] files) {
 		StringBuilder fileNames = new StringBuilder();
 		for(MultipartFile file: files) {
 			Path fileNameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());
@@ -112,7 +102,7 @@ public class GeneralController {
 		}
 		model.addAttribute("msg", "Succesfully uploaded files "+fileNames.toString());
 		
-		GeneralImport.getCellData(manual.getMnl_name(), fileNames.toString());
+		GeneralImport.getCellData();
 		return "codeImport";
 	}
 	

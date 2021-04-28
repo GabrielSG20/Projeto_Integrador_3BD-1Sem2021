@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles/style.css}" />
+    <title>CodeList_Creat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div class = "">
+        <header id = "header">
+            <div id="logo">
+                <img id= " imagem1" src ='images/146.png'> </img>  
+                <h1 id="titulo"> <strong> Codelist </strong> </h1>
+            </div>
+        </header>
+    </div>
+	<h1>Form</h1>
+    <form action="#" th:action="@{/index}" th:object="${general}" method="post">
+        <div class="inline">
+    	<label>Primary Key: 
+            <input type="text" th:field="*{mnl_name}" />
+        </label>
+        <label>Secundary Key:
+             <input type="text" th:field="*{flg_secundary}" />
+        </label>
+        <label>Tag: 
+            <input type="text" th:field="*{flg_tag}" />
+        </label>
+        </div>
+        <hr>
+        <div>
+            <div>
+                <label>Section Number: 
+                    <input type="text" th:field="*{cdl_section}" />
+                </label>
+                <label>Sub Number: 
+                    <input type="text" th:field="*{cdl_sub_section}" />
+                </label>
+                <label>Block Number: 
+                    <input type="text" th:field="*{cdl_block}" />
+                </label>
+                <label>Code: 
+                    <input type="text" th:field="*{cdl_code}" />
+                </label>
+                <label>Block name: 
+                    <input type="text" th:field="*{cdl_block_name}" />
+                </label>
+            </div>
+        </div>
+        <hr>
+        <div>
+        <button id="create-code" class="btn btn-secondary float-right" type="submit" value="Submit">Create</button>
+        <button id="back-menu" class="btn btn-secondary float-right" type="reset" value="Reset">Back</button>
+        </div>
+    </form>
+   
+</body>
+</html>

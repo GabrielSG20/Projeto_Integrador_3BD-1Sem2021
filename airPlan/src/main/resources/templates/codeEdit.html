@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>CodeEdit</title>
+    <title>CodeListEdit</title>
 </head>
 <body id="codecreate" class=".bg-info">
 
@@ -20,9 +20,9 @@
                      Create Codelist
                 </a>
 
-                <a id = "button2" href="/codeConsult" class="btn">
+                <button id = "button2" class="btn">
                      Consult Codelist
-                </a>
+                </button>
                
                 <a id = "button3" href="/codeEdit" class="btn">
                      Edit Codelist
@@ -31,10 +31,6 @@
                 <a id = "button4" href="/codeDelete" class="btn">
                      Delete Codelist
                 </a>
-                
-                <a id = "button4" href="/codeImport" class="btn">
-                    Import Codelist
-               </a>
         </header>
     <form th:action="@{/codeEdit}" th:object="${general}" method="post">
     <div>
@@ -47,7 +43,7 @@
         <label>Secundary Key
             <input id="secundaryKey" class="file" th:field="*{flg_secundary}" type="text"></input>
         </label>
- 		<label>Tag
+        <label>Tag
             <input id="tag"  class="file" th:field="*{flg_tag}" type="text"></input>
         </label>
     </div>
@@ -73,7 +69,7 @@
         <hr>
         <div>
             <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Edit</button>
-            <input id="back-menu" class="btn btn-secondary float-right" type="reset" value="Reset" accesskey="r"></input>
+            <button id="back-menu" class="btn btn-secondary float-right">Back</button>
         </div>
     </div>
     </form>    
