@@ -19,6 +19,7 @@ label{
     Width: 130px;
     height: 35px;
     border-radius: 10px;
+    border: none;
 }
 .codeimport{
     width: 500px;
@@ -38,6 +39,7 @@ label{
     Height: 50px;
     border-radius: 25px;
     margin-top: 3%;
+    border: none;
 }
 
 #create-code {
@@ -53,6 +55,7 @@ label{
     Height: 50px;
     border-radius: 25px;
     margin-top: 3.2%;
+    border:0;
 }
 header {
     text-align: center;
@@ -92,10 +95,10 @@ hr {
 width: 100%;
 border: none;
 height: 1px;
-/* Set the hr color */
 background-color:rgba(196, 196, 196, 1);
 margin-top: 3%;
 }
+
 #codecreate {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
