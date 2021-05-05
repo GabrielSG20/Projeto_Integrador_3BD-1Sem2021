@@ -1,8 +1,3 @@
-/bin/
-/.settings/
-/.classpath
-/.project
-
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -17,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.bin
 
 ### IntelliJ IDEA ###
 .idea
