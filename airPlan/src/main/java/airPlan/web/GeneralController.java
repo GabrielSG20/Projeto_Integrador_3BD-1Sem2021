@@ -31,6 +31,12 @@ public class GeneralController {
 	
 	public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 	
+	@GetMapping("/menu")
+	public String menu() {
+		
+		return "menu";
+	}
+	
 	@GetMapping("/codeCreate")
 	public String codeListForm(Model model) {
 		model.addAttribute("general", new General());

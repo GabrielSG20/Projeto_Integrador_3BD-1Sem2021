@@ -81,7 +81,7 @@ border-radius: 10px;
 display: flex;
 
 }
-img {
+#imagem1 {
 width: 70px;
 height: 70px;
 }
@@ -149,4 +149,59 @@ margin-top: 3%;
     margin: auto;
     width: 50%;
     align-items: center;
+  }
+
+  /* Início do css da view Menu */
+
+  #mainMenu, #htmlMenu {
+    background-color: #5498c2 !important;
+  }
+  #codeMenu{
+    width: 250px;
+    height: 250px;
+    margin: auto;
+  }
+  #lepMenu, #pdfMenu {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+  }
+
+  #codeTitle {
+    margin: auto;
+
+  }
+
+  .card {
+    border-radius: 30px !important;
+    background-color: #D0F2F3 !important;
+    width: 18rem;
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #535c5c;
+  }
+
+  .card:hover {
+    background-color: #a4e7e9 !important;
+  }
+
+  .card-text {
+    text-align: center;
+    margin-top: 10%;
+  }
+
+  #logoMenu {
+    width: 60px;
+    height: 90px;
+  }
+  #divLogo{
+    margin-bottom: 5%;
+    margin-top: -4%;
+    margin-left: -3%;
+  }
+
+  #logoutMenu {
+    float: right;
+    margin-top: 3%;
+    margin-right: 5%;
   }
