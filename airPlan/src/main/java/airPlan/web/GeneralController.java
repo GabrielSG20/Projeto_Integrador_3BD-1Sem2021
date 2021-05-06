@@ -13,12 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import airPlan.data.JdbcCodeListRepository;
+import airPlan.data.JdbcManualRepository;
 import airPlan.data.SpringJdbcConfig;
 import airPlan.model.CodeList;
 import airPlan.model.General;
@@ -100,6 +102,26 @@ public class GeneralController {
 
 		model.addAttribute("codeList", codelists);
 		
+		return "codeConsult";
+	}
+	
+	@PostMapping("**/filtrar")
+	public String filtrar(@RequestParam("flg_secundary") String flg_secundary,@RequestParam("mnl_name") String mnl_name, 
+			@RequestParam("cdl_block") String cdl_block,ModelMap model){
+		if (mnl_name.equals("")) {
+			
+		} else {
+			SpringJdbcConfig jdbcConfig = new SpringJdbcConfig();
+			JdbcTemplate jdbcTemplate = new JdbcTemplate(jdbcConfig.mysqlDataSource());
+			JdbcCodeListRepository codeListRepository = new JdbcCodeListRepository(jdbcTemplate);
+			JdbcManualRepository manualRepository = new JdbcManualRepository(jdbcTemplate);
+			Manual manualModel = new Manual(mnl_name);
+			manualRepository.findIdManual(manualModel);
+			
+			List<CodeList> codelists = codeListRepository.fitrar(String.valueOf(manualModel.getMnl_id()), flg_secundary, cdl_block);
+			
+			model.addAttribute("codeList", codelists);
+		}
 		return "codeConsult";
 	}
 	

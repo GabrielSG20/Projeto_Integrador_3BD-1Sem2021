@@ -7,9 +7,9 @@
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>CodeCreate</title>
+    <title>CodeConsult</title>
 </head>
-<body id="codecreate" class=".bg-info">
+<body id="codeconsult" class=".bg-info">
 
 <header id = "header">
             <div id="logo">
@@ -37,20 +37,22 @@
                     Import Codelist
                </a>
         </header>
-        <div class="inline" hidden = "true">
-            <label>Primary Key
-                <input id="primaryKey" class="file" type="text"></input>
+        <div>
+        	<form action="filtrar" method="post">
+            <label>Primary Key*
+                <input id="primaryKey" class="file" type="text" name="mnl_name"></input>
             </label>
             <label>Secundary Key
-                <input id="secundaryKey" class="file" type="text"></input>
+                <input id="secundaryKey" class="file" type="text" name="flg_secundary"></input>
             </label>
             <i class="fas fa-search"></i>
-            <label>Tag
-                <input id="tag"  class="file" type="text"></input>
+            <label>Block
+                <input id="blocknumber" class="file" type="text" name="cdl_block"></input>
             </label>
             <i class="fas fa-filter"></i>
             <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
-            <button id="back-menu" class="btn btn-secondary float-right">Back</button>
+            </form>
+            <a id = "limparfiltros" href="/codeConsult" class="btn">Limpar Filtros</a>
         </div>
         <hr>
         <div class="container">

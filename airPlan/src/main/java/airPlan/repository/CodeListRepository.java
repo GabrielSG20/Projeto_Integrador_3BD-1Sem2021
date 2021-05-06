@@ -10,4 +10,5 @@ public interface CodeListRepository {
 	CodeList delete(CodeList codeList);
 	CodeList edit(CodeList codeList);
 	List<CodeList> list();
+	List<CodeList> fitrar(String mnlId,String flgSecundary, String cdlBlock);
 }

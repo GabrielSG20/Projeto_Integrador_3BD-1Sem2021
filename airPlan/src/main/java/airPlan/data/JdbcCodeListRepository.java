@@ -83,4 +83,65 @@ public class JdbcCodeListRepository implements CodeListRepository{
 		});
 	}
 	
+	public List<CodeList> fitrar(String mnlId,String flgSecundary, String cdlBlock){
+		if (flgSecundary.equals("") && cdlBlock.equals("")) {
+			String sql = "select * from codelist where mnl_id = " + mnlId;
+			return jdbc.query(sql, (rs, rowNum) -> {
+				CodeList codeList = new CodeList();
+				codeList.setMnl_id(rs.getInt("mnl_id"));
+				codeList.setFlg_secundary(rs.getString("flg_secundary"));
+				codeList.setCdl_section(rs.getString("cdl_section"));
+				codeList.setCdl_sub_section(rs.getString("cdl_sub_section"));
+				codeList.setCdl_block(rs.getInt("cdl_block"));
+				codeList.setCdl_block_name(rs.getString("cdl_block_name"));
+				codeList.setCdl_code(rs.getInt("cdl_code"));
+				
+				return codeList;
+			});
+			
+		} else if(cdlBlock.equals("")){
+			String sql = "select * from codelist where flg_secundary = " + flgSecundary + " and mnl_id = " + mnlId;
+			return jdbc.query(sql, (rs, rowNum) -> {
+				CodeList codeList = new CodeList();
+				codeList.setMnl_id(rs.getInt("mnl_id"));
+				codeList.setFlg_secundary(rs.getString("flg_secundary"));
+				codeList.setCdl_section(rs.getString("cdl_section"));
+				codeList.setCdl_sub_section(rs.getString("cdl_sub_section"));
+				codeList.setCdl_block(rs.getInt("cdl_block"));
+				codeList.setCdl_block_name(rs.getString("cdl_block_name"));
+				codeList.setCdl_code(rs.getInt("cdl_code"));
+				
+				return codeList;
+			});
+		} else if (flgSecundary.equals("")){
+			String sql = "select * from codelist where cdl_block = " + cdlBlock + " and mnl_id = " + mnlId;
+			return jdbc.query(sql, (rs, rowNum) -> {
+				CodeList codeList = new CodeList();
+				codeList.setMnl_id(rs.getInt("mnl_id"));
+				codeList.setFlg_secundary(rs.getString("flg_secundary"));
+				codeList.setCdl_section(rs.getString("cdl_section"));
+				codeList.setCdl_sub_section(rs.getString("cdl_sub_section"));
+				codeList.setCdl_block(rs.getInt("cdl_block"));
+				codeList.setCdl_block_name(rs.getString("cdl_block_name"));
+				codeList.setCdl_code(rs.getInt("cdl_code"));
+				
+				return codeList;
+			});
+		} else {
+			String sql = "select * from codelist where mnl_id = " + mnlId + " and flg_secundary = " + flgSecundary + 
+					" and cdl_block = " + cdlBlock;
+			return jdbc.query(sql, (rs, rowNum) -> {
+				CodeList codeList = new CodeList();
+				codeList.setMnl_id(rs.getInt("mnl_id"));
+				codeList.setFlg_secundary(rs.getString("flg_secundary"));
+				codeList.setCdl_section(rs.getString("cdl_section"));
+				codeList.setCdl_sub_section(rs.getString("cdl_sub_section"));
+				codeList.setCdl_block(rs.getInt("cdl_block"));
+				codeList.setCdl_block_name(rs.getString("cdl_block_name"));
+				codeList.setCdl_code(rs.getInt("cdl_code"));
+				
+				return codeList;
+			});
+		}
+	}
 }
