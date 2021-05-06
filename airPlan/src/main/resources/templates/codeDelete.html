@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>CodeListCreate</title>
+    <title>CodeDelete</title>
 </head>
 <body id="codecreate" class=".bg-info">
 
@@ -21,18 +21,24 @@
                      Create Codelist
                 </a>
 
-                <button id = button2 class="btn">
+                <a id = "button2" href="/codeConsult" class="btn">
                      Consult Codelist
-                </button>
+                </a>
                
-                <a id = button3 href="/codeEdit" class="btn">
+                <a id = "button3" href="/codeEdit" class="btn">
                      Edit Codelist
                 </a>
             
-                <a id = button4 href="/codeDelete" class="btn">
+                <a id = "button4" href="/codeDelete" class="btn">
                      Delete Codelist
                 </a>
+                
+                <a id = "button4" href="/codeImport" class="btn">
+                    Import Codelist
+               </a>
+               
         </header>
+        <hr>
         <form action="#" th:action="@{/codeDelete}" th:object="${general}" method="post">
         <div class="inline">
             <label>Primary Key
@@ -41,16 +47,30 @@
             <label>Secundary Key
                 <input id="secundaryKey" class="file" th:field="*{flg_secundary}" type="text"></input>
             </label>
-            <i class="fas fa-search"></i>
             <label>Section
                 <input id="tag"  class="file" th:field="*{cdl_section}" type="text"></input>
             </label>
-            <i class="fas fa-filter"></i>
-            <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Delete</button>
-            <button id="back-menu" class="btn btn-secondary float-right">Back</button>
+            <label class="fileLabel">Block
+                    <input id="block_number" class="file" th:field="*{cdl_block}" type="text"></input>
+                </label>
+            
+            
         </div>
-        </form>
+        <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Delete</button>
         
+        </form>
+        <button onclick="formReset()" id="back-menu" class="btn btn-secondary float-right">Reset</button>
+        <hr>
+
+    <script>
+	function formReset() {
+  		document.getElementById("block_number").value="";
+  		document.getElementById("primaryKey").value="";
+  		document.getElementById("secundaryKey").value="";
+  		document.getElementById("tag").value="";
+  	
+	}
+	</script>    
     <script src="script.js"></script> 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
