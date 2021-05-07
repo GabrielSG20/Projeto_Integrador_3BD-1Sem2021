@@ -1,7 +1,7 @@
-package com.airPlan.Services;
+package com.airPlan.services;
 
-import com.airPlan.Entities.Flag;
-import com.airPlan.Repository.FlagRepository;
+import com.airPlan.entities.Flag;
+import com.airPlan.repository.FlagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

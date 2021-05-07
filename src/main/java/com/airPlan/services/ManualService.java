@@ -1,8 +1,8 @@
-package com.airPlan.Services;
+package com.airPlan.services;
 
 
-import com.airPlan.Entities.Manual;
-import com.airPlan.Repository.ManualRepository;
+import com.airPlan.entities.Manual;
+import com.airPlan.repository.ManualRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +31,8 @@ public class ManualService {
     public void delete(Integer id) {
         repo.deleteById(id);
     }
+
+    public Integer findManualByName(String nomeManual){
+        return repo.findManualByName(nomeManual);
+    };
 }

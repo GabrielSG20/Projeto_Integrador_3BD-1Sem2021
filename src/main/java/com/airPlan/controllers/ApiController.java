@@ -1,9 +1,9 @@
-package com.airPlan.Controllers;
+package com.airPlan.controllers;
 
-import com.airPlan.Entities.*;
-import com.airPlan.Services.FlagService;
-import com.airPlan.Services.ManualFlagService;
-import com.airPlan.Services.ManualService;
+import com.airPlan.entities.*;
+import com.airPlan.services.FlagService;
+import com.airPlan.services.ManualFlagService;
+import com.airPlan.services.ManualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +33,7 @@ public class ApiController {
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
     public String saveManual(@ModelAttribute("general") General general) {
         Manual manual = new Manual(general.getMnl_name());
+        manual.setMnl_id(manualService.findManualByName(manual.getMnl_name()));
 
         Flag flag = new Flag(general.getFlg_secundary_id(), general.getFlg_tag());
         System.out.println(manual.toString());

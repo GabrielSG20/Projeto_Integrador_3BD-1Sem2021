@@ -1,8 +1,7 @@
-package com.airPlan.Services;
+package com.airPlan.services;
 
-import com.airPlan.Entities.ManualFlag;
-import com.airPlan.Entities.ManualFlagId;
-import com.airPlan.Repository.ManualFlagRepository;
+import com.airPlan.entities.ManualFlag;
+import com.airPlan.repository.ManualFlagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

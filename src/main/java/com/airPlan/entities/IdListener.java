@@ -1,4 +1,4 @@
-package com.airPlan.Entities;
+package com.airPlan.entities;
 
 import javax.persistence.PostPersist;
 
