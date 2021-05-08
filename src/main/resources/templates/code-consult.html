@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>CodeConsult</title>
+</head>
+<body id="code-consult" class=".bg-info">
+
+<header id="header">
+    <div id="logo">
+        <img id="imagem1" src='images/146.png'> </img>
+        <h1 id="titulo"> <strong> Codelist </strong> </h1>
+    </div>
+
+    <a id="button1" href="/code-create" class="btn">
+        Create Codelist
+    </a>
+
+    <a id="button2" href="/code-consult" class="btn">
+        Consult Codelist
+    </a>
+
+    <a id="button3" href="/code-edit" class="btn">
+        Edit Codelist
+    </a>
+
+    <a id="button4" href="/code-delete" class="btn">
+        Delete Codelist
+    </a>
+
+    <a id="button4" href="/code-import" class="btn">
+        Import Codelist
+    </a>
+</header>
+<div>
+    <form action="filtrar" method="post">
+        <label>Primary Key*
+            <input id="primaryKey" class="file" type="text" name="mnl_name"></input>
+        </label>
+        <label>Secundary Key
+            <input id="secundaryKey" class="file" type="text" name="flg_secundary"></input>
+        </label>
+        <i class="fas fa-search"></i>
+        <label>Block
+            <input id="blocknumber" class="file" type="text" name="cdl_block"></input>
+        </label>
+        <i class="fas fa-filter"></i>
+        <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
+    </form>
+    <a id="limparfiltros" href="/codeConsult" class="btn">Limpar Filtros</a>
+</div>
+<hr>
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>Manual Id</th>
+            <th>Flag</th>
+            <th>Section</th>
+            <th>Subsection</th>
+            <th>Block</th>
+            <th>Block Name</th>
+            <th>Code</th>
+        </tr>
+        <tr th:each="codelist : ${codeList}">
+            <td th:text="${codelist.mnl_id}"></td>
+            <td th:text="${codelist.flg_secundary}"></td>
+            <td th:text="${codelist.cdl_section}"></td>
+            <td th:text="${codelist.cdl_sub_section}"></td>
+            <td th:text="${codelist.cdl_block}"></td>
+            <td th:text="${codelist.cdl_block_name}"></td>
+            <td th:text="${codelist.cdl_code}"></td>
+        </tr>
+    </table>
+</div>
+<script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css"></script>
+</body>
+</html>

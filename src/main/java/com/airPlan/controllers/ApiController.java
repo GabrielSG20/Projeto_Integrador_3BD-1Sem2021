@@ -1,17 +1,20 @@
 package com.airPlan.controllers;
 
 import com.airPlan.entities.*;
+import com.airPlan.services.CodeListService;
 import com.airPlan.services.FlagService;
 import com.airPlan.services.ManualFlagService;
 import com.airPlan.services.ManualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class ApiController {
@@ -22,7 +25,14 @@ public class ApiController {
     private FlagService flagService;
     @Autowired
     private ManualFlagService manualFlagService;
+    @Autowired
+    private CodeListService codeListService;
 
+    @GetMapping("/menu")
+    public String menu() {
+
+        return "menu";
+    }
 
     @RequestMapping("/code-create")
     public String showCodeCreatePage(Model model) {
@@ -52,5 +62,35 @@ public class ApiController {
         return "code-create";
     }
 
+    @GetMapping("/code-delete")
+    public String codeListForm2(Model model) {
+        General general = new General();
+        model.addAttribute("general", general);
 
+        return "code-delete";
+    }
+
+    @GetMapping("/code-edit")
+    public String codeListForm3(Model model) {
+        General general = new General();
+        model.addAttribute("general", general);
+
+        return "code-edit";
+    }
+
+    @RequestMapping("/code-consult")
+    public String listCodelists(Model model) {
+
+        List<CodeList> codelists = codeListService.listAll();
+
+        model.addAttribute("codeList", codelists);
+
+        return "code-consult";
+    }
+
+    @GetMapping("/code-import")
+    public String codeImport(Model model) {
+        model.addAttribute("manual", new Manual());
+        return "code-import";
+    }
 }
