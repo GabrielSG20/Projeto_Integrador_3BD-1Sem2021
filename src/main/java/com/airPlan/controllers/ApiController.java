@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.sql.SQLException;
+
 @Controller
 public class ApiController {
 
@@ -31,15 +33,19 @@ public class ApiController {
     }
 
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
-    public String saveManual(@ModelAttribute("general") General general) {
+    public String saveManual(@ModelAttribute("general") General general) throws SQLException {
+
         Manual manual = new Manual(general.getMnl_name());
+
+        manualService.save(manual);
+
+
         manual.setMnl_id(manualService.findManualByName(manual.getMnl_name()));
 
         Flag flag = new Flag(general.getFlg_secundary_id(), general.getFlg_tag());
         System.out.println(manual.toString());
         ManualFlag manualFlag = new ManualFlag(new ManualFlagId(manual.getMnl_id(), flag.getFlg_secundary_id()));
 
-        manualService.save(manual);
         flagService.save(flag);
         manualFlagService.save(manualFlag);
 

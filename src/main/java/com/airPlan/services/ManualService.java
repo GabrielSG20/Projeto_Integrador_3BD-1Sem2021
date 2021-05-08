@@ -21,7 +21,10 @@ public class ManualService {
     }
 
     public void save(Manual manual) {
-        repo.save(manual);
+
+        if(repo.checkCount(manual.getMnl_name()) == 0) {
+            repo.save(manual);
+        }
     }
 
     public Manual get(Integer id) {

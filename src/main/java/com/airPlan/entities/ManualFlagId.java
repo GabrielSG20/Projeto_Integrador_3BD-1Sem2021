@@ -13,11 +13,7 @@ import java.io.Serializable;
 @Embeddable
 public class ManualFlagId implements Serializable {
 
-
-
     private Integer mnl_id;
-
-
 
     private String flg_secundary;
 
