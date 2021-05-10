@@ -1,8 +1,12 @@
-package airPlan.repository;
+package com.airPlan.repository;
 
-import airPlan.model.Manual;
+import com.airPlan.entities.Manual;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-public interface ManualRepository {
-	Manual save(Manual manual);
-	void findIdManual(Manual manual);
+public interface ManualRepository extends JpaRepository<Manual, Integer> {
+    @Query(" select mnl_id from Manual where mnl_name = ?1 ")
+    Integer findManualByName(String nomeManual);
+    @Query("select count(mnl_id) from Manual where mnl_name = ?1")
+    Long checkCount(String nomeManual);
 }

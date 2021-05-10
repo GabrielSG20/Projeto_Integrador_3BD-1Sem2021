@@ -1,8 +1,7 @@
-package airPlan.repository;
+package com.airPlan.repository;
 
-import airPlan.model.Flag;
+import com.airPlan.entities.Flag;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FlagRepository {
-	Flag save(Flag flag);
-	Flag editTag(Flag flag);
+public interface FlagRepository extends JpaRepository<Flag, String> {
 }
