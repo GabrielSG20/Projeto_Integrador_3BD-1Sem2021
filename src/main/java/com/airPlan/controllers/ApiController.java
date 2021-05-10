@@ -8,10 +8,8 @@ import com.airPlan.services.ManualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -85,6 +83,23 @@ public class ApiController {
 
         model.addAttribute("codeList", codelists);
 
+        return "code-consult";
+    }
+
+    @PostMapping("**/filtro")
+    public String filtrar(@RequestParam("flg_secundary") String flg_secundary, @RequestParam("mnl_name") String mnl_name,
+                          @RequestParam("cdl_block_number") String cdl_block_number, ModelMap model){
+        if (mnl_name.equals("")) {
+            List<CodeList> codelists = codeListService.listAll();
+
+            model.addAttribute("codeList", codelists);
+        } else {
+            Manual manualModel = new Manual(manualService.findManualByName(mnl_name),mnl_name);
+
+            List<CodeList> codelists = codeListService.filtrar(String.valueOf(manualModel.getMnl_id()), flg_secundary, cdl_block_number);
+
+            model.addAttribute("codeList", codelists);
+        }
         return "code-consult";
     }
 

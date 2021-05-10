@@ -6,12 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "codelist")
-public class CodeList {
+public class CodeList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +25,7 @@ public class CodeList {
 
     private String cdl_section;
 
-    private Integer cdl_block;
+    private Integer cdl_block_number;
 
     private String cdl_sub_section;
 

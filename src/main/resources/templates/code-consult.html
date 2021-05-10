@@ -38,7 +38,7 @@
     </a>
 </header>
 <div>
-    <form action="filtrar" method="post">
+    <form action="filtro" method="post">
         <label>Primary Key*
             <input id="primaryKey" class="file" type="text" name="mnl_name"></input>
         </label>
@@ -47,12 +47,12 @@
         </label>
         <i class="fas fa-search"></i>
         <label>Block
-            <input id="blocknumber" class="file" type="text" name="cdl_block"></input>
+            <input id="blocknumber" class="file" type="text" name="cdl_block_number"></input>
         </label>
         <i class="fas fa-filter"></i>
         <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
     </form>
-    <a id="limparfiltros" href="/codeConsult" class="btn">Limpar Filtros</a>
+    <a id="limparfiltros" href="/code-consult" class="btn">Limpar Filtros</a>
 </div>
 <hr>
 <div class="container">
@@ -62,7 +62,7 @@
             <th>Flag</th>
             <th>Section</th>
             <th>Subsection</th>
-            <th>Block</th>
+            <th>Block Number</th>
             <th>Block Name</th>
             <th>Code</th>
         </tr>
@@ -71,7 +71,7 @@
             <td th:text="${codelist.flg_secundary}"></td>
             <td th:text="${codelist.cdl_section}"></td>
             <td th:text="${codelist.cdl_sub_section}"></td>
-            <td th:text="${codelist.cdl_block}"></td>
+            <td th:text="${codelist.cdl_block_number}"></td>
             <td th:text="${codelist.cdl_block_name}"></td>
             <td th:text="${codelist.cdl_code}"></td>
         </tr>
