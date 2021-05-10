@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -9,36 +9,52 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>CodeImport</title>
 </head>
-<body id="codecreate" class=".bg-info">
+<body id="code-import" class=".bg-info">
 
+<<<<<<< HEAD:airPlan/src/main/resources/templates/codeImport.html
 <header id = "header">
+=======
+<header id="header">
+>>>>>>> PL014:src/main/resources/templates/code-import.html
             <div id="logo">
                 <img id="imagem1" src='images/146.png'> </img>  
                 <h1 id="titulo"> <strong> Codelist </strong> </h1>
             </div>
 
-                <a id = "button1" href="/codeCreate" class="btn">
+                <a id="button1" href="/code-create" class="btn">
                      Create Codelist
                 </a>
 
+<<<<<<< HEAD:airPlan/src/main/resources/templates/codeImport.html
                 <a id = "button2" href="/codeConsult" class="btn">
+=======
+                <a id="button2" href="/code-consult" class="btn">
+>>>>>>> PL014:src/main/resources/templates/code-import.html
                      Consult Codelist
                 </a>
                
-                <a id = "button3" href="/codeEdit" class="btn">
+                <a id="button3" href="/code-edit" class="btn">
                      Edit Codelist
                 </a>
             
-                <a id = "button4" href="/codeDelete" class="btn">
+                <a id="button4" href="/code-delete" class="btn">
                      Delete Codelist
                 </a>
                 
+<<<<<<< HEAD:airPlan/src/main/resources/templates/codeImport.html
                 <a id = "button4" href="/codeImport" class="btn">
+=======
+                <a id="button4" href="/code-import" class="btn">
+>>>>>>> PL014:src/main/resources/templates/code-import.html
                     Import Codelist
                </a>
         </header>
         <hr>
+<<<<<<< HEAD:airPlan/src/main/resources/templates/codeImport.html
         <form th:action="@{/codeImport}" enctype="multipart/form-data" th:object="${manual}" method="post">
+=======
+        <form th:action="@{/code-import}" enctype="multipart/form-data" th:object="${manual}" method="post">
+>>>>>>> PL014:src/main/resources/templates/code-import.html
         <div class="inline">
         	<label class="fileLabel" value="Section Number">Primary key
                     <input id="primaryKey" class="file" th:field="*{mnl_name}" type="text"></input>
