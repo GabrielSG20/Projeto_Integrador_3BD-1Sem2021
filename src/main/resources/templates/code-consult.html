@@ -58,6 +58,7 @@
 <div class="container">
     <table class="table table-striped">
         <tr>
+            <th>CodeList Id</th>
             <th>Manual Id</th>
             <th>Flag</th>
             <th>Section</th>
@@ -67,6 +68,7 @@
             <th>Code</th>
         </tr>
         <tr th:each="codelist : ${codeList}">
+            <td th:text="${codelist.cdl_id}"></td>
             <td th:text="${codelist.mnl_id}"></td>
             <td th:text="${codelist.flg_secundary}"></td>
             <td th:text="${codelist.cdl_section}"></td>
