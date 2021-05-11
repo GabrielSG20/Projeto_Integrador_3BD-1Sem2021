@@ -14,8 +14,6 @@ import java.io.Serializable;
 @Table(name="flag")
 public class Flag implements Serializable {
 
-    /* poderia mudar flg_secundary_id
-       para flg_secundary?*/
     @Id
     @Column(name = "flg_secundary")
     private String flg_secundary_id;

@@ -17,7 +17,7 @@ public class General {
 
     private String cdl_sub_section;
 
-    private String cdl_block;
+    private String cdl_block_number;
 
     private String cdl_block_name;
 

@@ -13,8 +13,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "manual_flag")
 public class ManualFlag implements Serializable {
-    /* problema para salvar
-     usa generated id de outra table*/
+
     @EmbeddedId
     private ManualFlagId manualFlagId;
 
