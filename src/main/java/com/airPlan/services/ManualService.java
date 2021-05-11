@@ -1,6 +1,7 @@
 package com.airPlan.services;
 
 
+import com.airPlan.entities.CodeList;
 import com.airPlan.entities.Manual;
 import com.airPlan.repository.ManualRepository;
 import lombok.NoArgsConstructor;

@@ -1,20 +1,18 @@
 package com.airPlan.controllers;
 
 import com.airPlan.entities.*;
-import com.airPlan.services.CodeListService;
-import com.airPlan.services.FlagService;
-import com.airPlan.services.ImportCodeList;
-import com.airPlan.services.ManualService;
+import com.airPlan.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.springframework.ui.ModelMap;
+import java.util.List;
 
 
 @Controller
@@ -28,8 +26,16 @@ public class ApiController {
     private CodeListService codeListService;
     @Autowired
     private ImportCodeList importCodeList;
+    @Autowired
+    private ManualFlagService manualFlagService;
 
     public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
+
+    @GetMapping("/menu")
+    public String menu() {
+
+        return "menu";
+    }
 
     @RequestMapping("/code-create")
     public String showCodeCreatePage(Model model) {
@@ -69,20 +75,62 @@ public class ApiController {
     @RequestMapping("/code-import")
     public String importCodeList(@ModelAttribute Manual manual, Model model, @RequestParam("files") MultipartFile[] files) {
         StringBuilder fileNames = new StringBuilder();
-        for(MultipartFile file: files) {
-            Path fileNameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());
+        for (MultipartFile file : files) {
+            Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
             fileNames.append(file.getOriginalFilename());
             try {
                 Files.write(fileNameAndPath, file.getBytes());
-            } catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        model.addAttribute("msg", "Succesfully uploaded files "+fileNames.toString());
+        model.addAttribute("msg", "Succesfully uploaded files " + fileNames.toString());
 
         importCodeList.getCellData(manual.getMnl_name(), fileNames.toString());
 
         return "code-import";
     }
 
+    @GetMapping("/code-delete")
+    public String codeListForm2(Model model) {
+        General general = new General();
+        model.addAttribute("general", general);
+
+        return "code-delete";
+    }
+
+    @GetMapping("/code-edit")
+    public String codeListForm3(Model model) {
+        General general = new General();
+        model.addAttribute("general", general);
+
+        return "code-edit";
+    }
+
+    @RequestMapping("/code-consult")
+    public String listCodelists(Model model) {
+
+        List<CodeList> codelists = codeListService.listAll();
+
+        model.addAttribute("codeList", codelists);
+
+        return "code-consult";
+    }
+
+    @PostMapping("**/filtro")
+    public String filtrar(@RequestParam("flg_secundary") String flg_secundary, @RequestParam("mnl_name") String mnl_name,
+                          @RequestParam("cdl_block_number") String cdl_block_number, ModelMap model){
+        if (mnl_name.equals("")) {
+            List<CodeList> codelists = codeListService.listAll();
+
+            model.addAttribute("codeList", codelists);
+        } else {
+            Manual manualModel = new Manual(manualService.findManualByName(mnl_name),mnl_name);
+
+            List<CodeList> codelists = codeListService.filtrar(String.valueOf(manualModel.getMnl_id()), flg_secundary, cdl_block_number);
+
+            model.addAttribute("codeList", codelists);
+        }
+        return "code-consult";
+    }
 }

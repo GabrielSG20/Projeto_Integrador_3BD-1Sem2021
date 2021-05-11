@@ -7,9 +7,9 @@
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>CodeImport</title>
+    <title>CodeConsult</title>
 </head>
-<body id="code-import" class=".bg-info">
+<body id="code-consult" class=".bg-info">
 
 <header id="header">
     <div id="logo">
@@ -37,27 +37,52 @@
         Import Codelist
     </a>
 </header>
-<hr>
-<form th:action="@{/code-import}" enctype="multipart/form-data" th:object="${manual}" method="post">
-    <div class="inline">
-        <label class="fileLabel" value="Section Number">Primary key
-            <input id="primaryKey" class="file" th:field="*{mnl_name}" type="text"></input>
+<div>
+    <form action="filtro" method="post">
+        <label>Primary Key*
+            <input id="primaryKey" class="file" type="text" name="mnl_name"></input>
         </label>
-    </div>
-    <input class="codeimport" type="file" id="myFile" name="files" accept=".xls,.xlsx">
-
-    <hr>
-    <div>
-
-        <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Create</button>
-
-    </div>
-    </div>
-</form>
-<button id="back-menu" class="btn btn-secondary float-right">Back</button>
+        <label>Secundary Key
+            <input id="secundaryKey" class="file" type="text" name="flg_secundary"></input>
+        </label>
+        <i class="fas fa-search"></i>
+        <label>Block
+            <input id="blocknumber" class="file" type="text" name="cdl_block_number"></input>
+        </label>
+        <i class="fas fa-filter"></i>
+        <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
+    </form>
+    <a id="limparfiltros" href="/code-consult" class="btn">Limpar Filtros</a>
+</div>
+<hr>
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>CodeList Id</th>
+            <th>Manual Id</th>
+            <th>Flag</th>
+            <th>Section</th>
+            <th>Subsection</th>
+            <th>Block Number</th>
+            <th>Block Name</th>
+            <th>Code</th>
+        </tr>
+        <tr th:each="codelist : ${codeList}">
+            <td th:text="${codelist.cdl_id}"></td>
+            <td th:text="${codelist.mnl_id}"></td>
+            <td th:text="${codelist.flg_secundary}"></td>
+            <td th:text="${codelist.cdl_section}"></td>
+            <td th:text="${codelist.cdl_sub_section}"></td>
+            <td th:text="${codelist.cdl_block_number}"></td>
+            <td th:text="${codelist.cdl_block_name}"></td>
+            <td th:text="${codelist.cdl_code}"></td>
+        </tr>
+    </table>
+</div>
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css"></script>
 </body>
 </html>
