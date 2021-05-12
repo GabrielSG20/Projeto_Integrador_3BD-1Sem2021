@@ -67,7 +67,7 @@ public class ApiController {
                                                         Integer.parseInt(general.getCdl_code()));
         codeListService.save(codeList);
 
-        return "code-create";
+        return "redirect:/code-create";
     }
 
     @GetMapping("/code-import")
