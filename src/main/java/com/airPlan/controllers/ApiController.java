@@ -3,6 +3,7 @@ package com.airPlan.controllers;
 import com.airPlan.entities.*;
 import com.airPlan.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.springframework.ui.ModelMap;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -101,9 +103,23 @@ public class ApiController {
 
     @RequestMapping("/code-consult")
     public String listCodelists(Model model) {
+        return listaPaginas(model, 1);
+    }
 
-        List<CodeList> codelists = codeListService.listAll();
+    @GetMapping("/page/{pageNumber}")
+    public String listaPaginas(Model model, @PathVariable("pageNumber") int currentPage){
+        Page<CodeList> page = codeListService.listAll(currentPage);
+        long totalItems = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<CodeList> codelists = page.getContent();
 
+        List<Manual> manuals = manualService.listAll();
+
+        model.addAttribute("manual", manuals);
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("codeList", codelists);
 
         return "code-consult";
@@ -111,24 +127,37 @@ public class ApiController {
 
     @PostMapping("**/filtro")
     public String filtrar(@RequestParam("flg_secundary") String flg_secundary, @RequestParam("mnl_name") String mnl_name,
-                          @RequestParam("cdl_block_number") String cdl_block_number, ModelMap model){
+                          @RequestParam("cdl_block_number") String cdl_block_number, Model model){
+        int currentPage = 1;
         if (mnl_name.equals("")) {
-            List<CodeList> codelists = codeListService.listAll();
-
-            model.addAttribute("codeList", codelists);
+            return listaPaginas(model, 1);
         } else {
             Manual manualModel = new Manual(manualService.findManualByName(mnl_name),mnl_name);
 
             List<CodeList> codelists = codeListService.filtrar(String.valueOf(manualModel.getMnl_id()), flg_secundary, cdl_block_number);
+            long totalItems = codelists.size();
+            int totalPages = 1;
 
+            model.addAttribute("currentPage", currentPage);
+            model.addAttribute("totalItems", totalItems);
+            model.addAttribute("totalPages", totalPages);
             model.addAttribute("codeList", codelists);
         }
+        List<Manual> manuals = manualService.listAll();
+
+        model.addAttribute("manual", manuals);
         return "code-consult";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteCodeList(@PathVariable(name = "id") Integer id) {
         codeListService.delete(id);
+        return "redirect:/code-consult";
+    }
+
+    @GetMapping("/delete-manual/{id}")
+    public String deleteManual(@PathVariable(name = "id") Integer id) {
+        manualService.delete(id);
         return "redirect:/code-consult";
     }
 }

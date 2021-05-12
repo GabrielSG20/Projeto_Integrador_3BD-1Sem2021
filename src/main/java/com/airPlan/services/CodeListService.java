@@ -3,6 +3,9 @@ package com.airPlan.services;
 import com.airPlan.entities.CodeList;
 import com.airPlan.repository.CodeListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,8 +26,9 @@ public class CodeListService {
         repo.deleteById(id);
     }
 
-    public List<CodeList> listAll() {
-        return repo.findAll();
+    public Page<CodeList> listAll(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber-1,10);
+        return repo.findAll(pageable);
     }
 
     public List<CodeList> filtrar(String manualId, String flgSecundary, String cdlBlockNumber){

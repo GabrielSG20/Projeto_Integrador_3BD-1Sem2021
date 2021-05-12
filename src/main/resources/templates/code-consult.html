@@ -29,10 +29,6 @@
         Edit Codelist
     </a>
 
-    <a id="button4" href="/code-delete" class="btn">
-        Delete Codelist
-    </a>
-
     <a id="button4" href="/code-import" class="btn">
         Import Codelist
     </a>
@@ -56,6 +52,21 @@
 </div>
 <hr>
 <div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>Manual Id</th>
+            <th>Manual Name</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="manual : ${manual}">
+            <td th:text="${manual.mnl_id}"></td>
+            <td th:text="${manual.mnl_name}"></td>
+            <td>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{/delete-manual/{id}(id=${manual.mnl_id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
     <table class="table table-striped">
         <tr>
             <th>CodeList Id</th>
@@ -83,6 +94,16 @@
             </td>
         </tr>
     </table>
+</div>
+<div>
+    Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
+    &nbsp; - &nbsp;
+
+    <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+        <a th:if="${i != currentPage}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+        <span th:unless="${i != currentPage}">[[${i}]]</span>
+        &nbsp;&nbsp;
+    </span>
 </div>
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
