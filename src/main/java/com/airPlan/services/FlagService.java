@@ -4,7 +4,6 @@ import com.airPlan.entities.Flag;
 import com.airPlan.entities.ManualFlag;
 import com.airPlan.entities.ManualFlagId;
 import com.airPlan.repository.FlagRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
