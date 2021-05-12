@@ -8,7 +8,15 @@ body, html{
 label{
     color: #0367A5;
     margin: auto;
-    margin-left: 5%;
+    margin-left: 3.5%;
+    text-align: left;
+    font-family: Roboto;
+    margin-top: 2%;
+}
+.labelstyle {
+    color: #0367A5;
+    margin: auto;
+    margin-left: 3.5%;
     text-align: left;
     font-family: Roboto;
     margin-top: 2%;
@@ -26,6 +34,18 @@ label{
     border-radius: 5px;
     margin-top: 2%;
     background-color: #CFCFCF;
+}
+
+.container{
+    display:flex;
+    margin-right: auto;
+}
+.container2{
+    display:grid;
+}
+.container3{
+    display:grid;
+    justify-content:center;
 }
 #back-menu{
     background-color:  #D89191;

@@ -125,7 +125,7 @@ public class ApiController {
         return listaPaginas(model, 1);
     }
 
-    @GetMapping("/page/{pageNumber}")
+    @GetMapping("/code-consult/page/{pageNumber}")
     public String listaPaginas(Model model, @PathVariable("pageNumber") int currentPage){
         Page<CodeList> page = codeListService.listAll(currentPage);
         long totalItems = page.getTotalElements();
@@ -144,7 +144,7 @@ public class ApiController {
         return "code-consult";
     }
 
-    @PostMapping("**/filtro")
+    @PostMapping("/filtro")
     public String filtrar(@RequestParam("flg_secundary") String flg_secundary, @RequestParam("mnl_name") String mnl_name,
                           @RequestParam("cdl_block_number") String cdl_block_number, Model model){
         int currentPage = 1;
