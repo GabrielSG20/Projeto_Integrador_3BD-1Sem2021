@@ -89,6 +89,7 @@
             <td th:text="${codelist.cdl_block_name}"></td>
             <td th:text="${codelist.cdl_code}"></td>
             <td>
+                <a th:href="@{/edit/{id}(id=${codelist.cdl_id})}">Edit</a>
                 &nbsp;&nbsp;&nbsp;
                 <a th:href="@{/delete/{id}(id=${codelist.cdl_id})}">Delete</a>
             </td>

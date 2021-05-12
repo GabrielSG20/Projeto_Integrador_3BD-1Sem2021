@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.springframework.ui.ModelMap;
-import java.sql.SQLException;
+
+import org.springframework.web.servlet.ModelAndView;
+
+
 import java.util.List;
 
 
@@ -93,13 +95,30 @@ public class ApiController {
         return "code-import";
     }
 
-    @GetMapping("/code-edit")
-    public String codeListForm3(Model model) {
-        General general = new General();
-        model.addAttribute("general", general);
 
-        return "code-edit";
+
+    @RequestMapping("/edit/{id}")
+    public ModelAndView showCodeEditPage (@PathVariable(name="id") Integer id) {
+
+        ModelAndView mav = new ModelAndView("code-edit");
+        CodeList codeList = codeListService.get(id);
+        System.out.println(codeList);
+        mav.addObject("codelist", codeList);
+
+        return mav;
     }
+
+    @RequestMapping(value = "/save-edit", method = RequestMethod.POST)
+    public String saveCodeListEdit(@ModelAttribute("codelist") CodeList codeList){
+
+        if(codeList.getCdl_sub_section().equals("")) {
+            codeList.setCdl_sub_section(null);
+        }
+        codeListService.save(codeList);
+
+        return "redirect:/code-consult";
+    }
+
 
     @RequestMapping("/code-consult")
     public String listCodelists(Model model) {

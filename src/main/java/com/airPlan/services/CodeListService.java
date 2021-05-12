@@ -20,7 +20,7 @@ public class CodeListService {
 
     public void save(CodeList codeList) {repo.save(codeList);}
 
-    public CodeList get(CodeList codeList) {return repo.findById(codeList.getCdl_id()).get();}
+    public CodeList get(Integer id) {return repo.findById(id).get();}
 
     public void delete(Integer id) {
         repo.deleteById(id);
