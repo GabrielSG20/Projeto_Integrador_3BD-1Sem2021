@@ -31,7 +31,7 @@
 </header>
 <hr>
 <form th:action="@{/code-import}" enctype="multipart/form-data" th:object="${manual}" method="post">
-    <div class="container">
+    <div>
 
         <label class="fileLabel" value="Section Number">Primary key
             <input id="primaryKey" class="file" th:field="*{mnl_name}" type="text"></input>

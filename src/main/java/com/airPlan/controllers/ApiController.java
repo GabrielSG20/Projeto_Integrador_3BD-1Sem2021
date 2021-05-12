@@ -45,13 +45,13 @@ public class ApiController {
     public String showCodeCreatePage(Model model) {
         General general = new General();
         model.addAttribute("general", general);
-        System.out.println(general.toString());
+
         return "code-create";
     }
 
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
     public String saveCodeList(@ModelAttribute("general") General general){
-
+        System.out.println(general.toString());
         Manual manual = new Manual(general.getMnl_name());
         manualService.save(manual);
 
