@@ -3,19 +3,23 @@ package com.airPlan.repository;
 import com.airPlan.entities.CodeList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CodeListRepository extends JpaRepository<CodeList, Integer> {
-    @Query(" from CodeList where mnl_id = ?1 ")
-    public List<CodeList> filtroManual(Integer manualId);
 
-    @Query(" from CodeList where mnl_id = ?1 and flg_secundary = ?2 ")
-    public List<CodeList> filtroSecundary(Integer manualId, String flgSecundary);
+    @Query(" select c from CodeList c where c.mnl_id = :manualId ")
+    List<CodeList> filtroManual(@Param("manualId") Integer manualId);
 
-    @Query(" from CodeList where mnl_id = ?1 and cdl_block_number = ?2 ")
-    public List<CodeList> filtroBloco(Integer manualId, Integer cdlBlock);
+    @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary ")
+    List<CodeList> filtroSecundary(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary);
 
-    @Query(" from CodeList where mnl_id = ?1 and flg_secundary = ?2 and cdl_block_number = ?3 ")
-    public List<CodeList> filtroAll(Integer manualId, String flgSecundary, Integer cdlBlock);
+    @Query(" select c from CodeList c where c.mnl_id = :manualId and c.cdl_block_number = :cdlBlock ")
+    List<CodeList> filtroBloco(@Param("manualId") Integer manualId, @Param("cdlBlock") Integer cdlBlock);
+
+    @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary and c.cdl_block_number = :cdlBlock ")
+    List<CodeList> filtroAll(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary, @Param("cdlBlock") Integer cdlBlock);
 }
