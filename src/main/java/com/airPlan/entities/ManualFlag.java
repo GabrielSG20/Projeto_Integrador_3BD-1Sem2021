@@ -16,6 +16,4 @@ public class ManualFlag implements Serializable {
 
     @EmbeddedId
     private ManualFlagId manualFlagId;
-
-
 }

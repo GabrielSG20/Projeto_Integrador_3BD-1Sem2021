@@ -19,8 +19,8 @@ public class CodeListService {
 
     public CodeList get(CodeList codeList) {return repo.findById(codeList.getCdl_id()).get();}
 
-    public void delete(CodeList codeList) {
-        repo.deleteById(codeList.getCdl_id());
+    public void delete(Integer id) {
+        repo.deleteById(id);
     }
 
     public List<CodeList> listAll() {

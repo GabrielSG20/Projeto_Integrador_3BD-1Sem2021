@@ -91,14 +91,6 @@ public class ApiController {
         return "code-import";
     }
 
-    @GetMapping("/code-delete")
-    public String codeListForm2(Model model) {
-        General general = new General();
-        model.addAttribute("general", general);
-
-        return "code-delete";
-    }
-
     @GetMapping("/code-edit")
     public String codeListForm3(Model model) {
         General general = new General();
@@ -132,5 +124,11 @@ public class ApiController {
             model.addAttribute("codeList", codelists);
         }
         return "code-consult";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteCodeList(@PathVariable(name = "id") Integer id) {
+        codeListService.delete(id);
+        return "redirect:/code-consult";
     }
 }

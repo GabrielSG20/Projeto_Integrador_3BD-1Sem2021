@@ -49,7 +49,7 @@ public class ImportCodeList {
 
             String tagName = ".";
             int count = 7;
-            while (!tagName.equals("")) {
+            while (true) {
                 System.out.println(tagName);
                 tagName = formatter1.formatCellValue(sheet.getRow(1).getCell(count));
                 count++;
@@ -102,7 +102,7 @@ public class ImportCodeList {
 
         try {
 
-            XSSFSheet sheet = workbook.getSheet("Jedi Codex");
+            XSSFSheet sheet = workbook.getSheet(workbook.getSheetName(0));
             return sheet.getPhysicalNumberOfRows();
 
         }catch(Exception e) {

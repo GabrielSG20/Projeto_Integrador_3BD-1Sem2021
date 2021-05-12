@@ -66,6 +66,7 @@
             <th>Block Number</th>
             <th>Block Name</th>
             <th>Code</th>
+            <th>Action</th>
         </tr>
         <tr th:each="codelist : ${codeList}">
             <td th:text="${codelist.cdl_id}"></td>
@@ -76,6 +77,10 @@
             <td th:text="${codelist.cdl_block_number}"></td>
             <td th:text="${codelist.cdl_block_name}"></td>
             <td th:text="${codelist.cdl_code}"></td>
+            <td>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{/delete/{id}(id=${codelist.cdl_id})}">Delete</a>
+            </td>
         </tr>
     </table>
 </div>

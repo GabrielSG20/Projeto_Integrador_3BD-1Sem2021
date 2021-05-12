@@ -2,9 +2,13 @@ package com.airPlan.entities;
 
 
 import javax.persistence.*;
+
+import com.airPlan.services.CodeListService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
+
 import java.io.Serializable;
 
 @AllArgsConstructor
