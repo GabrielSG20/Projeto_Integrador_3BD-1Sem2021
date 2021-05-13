@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.springframework.ui.ModelMap;
-import java.sql.SQLException;
+
+import org.springframework.web.servlet.ModelAndView;
+
+
 import java.util.List;
 
 
@@ -28,8 +30,6 @@ public class ApiController {
     private CodeListService codeListService;
     @Autowired
     private ImportCodeList importCodeList;
-    @Autowired
-    private ManualFlagService manualFlagService;
 
     public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
@@ -43,13 +43,12 @@ public class ApiController {
     public String showCodeCreatePage(Model model) {
         General general = new General();
         model.addAttribute("general", general);
-        System.out.println(general.toString());
+
         return "code-create";
     }
 
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
     public String saveCodeList(@ModelAttribute("general") General general){
-
         Manual manual = new Manual(general.getMnl_name());
         manualService.save(manual);
 
@@ -65,7 +64,7 @@ public class ApiController {
                                                         Integer.parseInt(general.getCdl_code()));
         codeListService.save(codeList);
 
-        return "code-create";
+        return "redirect:/code-create";
     }
 
     @GetMapping("/code-import")
@@ -90,23 +89,40 @@ public class ApiController {
 
         importCodeList.getCellData(manual.getMnl_name(), fileNames.toString());
 
-        return "code-import";
+        return "redirect:/code-import";
     }
 
-    @GetMapping("/code-edit")
-    public String codeListForm3(Model model) {
-        General general = new General();
-        model.addAttribute("general", general);
 
-        return "code-edit";
+
+    @RequestMapping("/edit/{id}")
+    public ModelAndView showCodeEditPage (@PathVariable(name="id") Integer id) {
+
+        ModelAndView mav = new ModelAndView("code-edit");
+        CodeList codeList = codeListService.get(id);
+        System.out.println(codeList);
+        mav.addObject("codelist", codeList);
+
+        return mav;
     }
+
+    @RequestMapping(value = "/save-edit", method = RequestMethod.POST)
+    public String saveCodeListEdit(@ModelAttribute("codelist") CodeList codeList){
+
+        if(codeList.getCdl_sub_section().equals("")) {
+            codeList.setCdl_sub_section(null);
+        }
+        codeListService.save(codeList);
+
+        return "redirect:/code-consult";
+    }
+
 
     @RequestMapping("/code-consult")
     public String listCodelists(Model model) {
         return listaPaginas(model, 1);
     }
 
-    @GetMapping("/page/{pageNumber}")
+    @GetMapping("/code-consult/page/{pageNumber}")
     public String listaPaginas(Model model, @PathVariable("pageNumber") int currentPage){
         Page<CodeList> page = codeListService.listAll(currentPage);
         long totalItems = page.getTotalElements();
@@ -125,7 +141,7 @@ public class ApiController {
         return "code-consult";
     }
 
-    @PostMapping("**/filtro")
+    @PostMapping("/filtro")
     public String filtrar(@RequestParam("flg_secundary") String flg_secundary, @RequestParam("mnl_name") String mnl_name,
                           @RequestParam("cdl_block_number") String cdl_block_number, Model model){
         int currentPage = 1;

@@ -25,16 +25,13 @@
         Consult Codelist
     </a>
 
-    <a id="button3" href="/code-edit" class="btn">
-        Edit Codelist
-    </a>
-
     <a id="button4" href="/code-import" class="btn">
         Import Codelist
     </a>
 </header>
+<hr>
 <div>
-    <form action="filtro" method="post">
+    <form action="/filtro" method="post">
         <label>Primary Key*
             <input id="primaryKey" class="file" type="text" name="mnl_name"></input>
         </label>
@@ -51,7 +48,7 @@
     <a id="limparfiltros" href="/code-consult" class="btn">Limpar Filtros</a>
 </div>
 <hr>
-<div class="container">
+<div class="container3">
     <table class="table table-striped">
         <tr>
             <th>Manual Id</th>
@@ -89,22 +86,24 @@
             <td th:text="${codelist.cdl_block_name}"></td>
             <td th:text="${codelist.cdl_code}"></td>
             <td>
+                <a th:href="@{/edit/{id}(id=${codelist.cdl_id})}">Edit</a>
                 &nbsp;&nbsp;&nbsp;
                 <a th:href="@{/delete/{id}(id=${codelist.cdl_id})}">Delete</a>
             </td>
         </tr>
     </table>
-</div>
-<div>
-    Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
-    &nbsp; - &nbsp;
+    <div>
+        Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
+        &nbsp; - &nbsp;
 
-    <span th:each="i: ${#numbers.sequence(1,totalPages)}">
-        <a th:if="${i != currentPage}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+        <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+        <a th:if="${i != currentPage}" th:href="@{'code-consult/page/' + ${i}}">[[${i}]]</a>
         <span th:unless="${i != currentPage}">[[${i}]]</span>
         &nbsp;&nbsp;
     </span>
+    </div>
 </div>
+
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

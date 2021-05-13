@@ -24,68 +24,46 @@
         Consult Codelist
     </a>
 
-    <a id="button3" href="/code-edit" class="btn">
-        Edit Codelist
-    </a>
-
     <a id="button4" href="/code-import" class="btn">
         Import Codelist
     </a>
 </header>
-<form th:action="@{/code-edit}" th:object="${general}" method="post">
+<form th:action="@{/save-edit}" th:object="${codelist}" method="post">
     <div>
-
-        <hr>
-        <div class="inline">
-            <label>Primary Key*
-                <input id="primaryKey" class="file" th:field="*{mnl_name}" type="text"></input>
-            </label>
-            <label>Secundary Key*
-                <input id="secundaryKey" class="file" th:field="*{flg_secundary}" type="text"></input>
-            </label>
-            <label>Tag
-                <input id="tag"  class="file" th:field="*{flg_tag}" type="text"></input>
-            </label>
-        </div>
         <div>
-            <div class="inline" action="#">
-                <label class="fileLabel" value="Section Number">Section Number*
-                    <input id="sectionNumber" class="file" th:field="*{cdl_section}" type="text"></input>
-                </label>
-                <label class="fileLabel">Subsection
-                    <input id="subsection" class="file" th:field="*{cdl_sub_section}" type="text" ></input>
-                </label>
-                <label class="fileLabel">Block Number*
-                    <input id="blockNumber" class="file" th:field="*{cdl_block_number}" type="text"></input>
-                </label>
-                <label class="fileLabel">Code
-                    <input id="code" class="file" th:field="*{cdl_code}" type="text"></input>
-                </label>
-                <label class="fileLabel">Block Name
-                    <input id="secundaryKey1" class="file" th:field="*{cdl_block_name}" type="text"></input>
-                </label>
+        <div action="#">
+        <label>Code List Id
+            <input style="background-color: rgba(0,0,0,.05);" readonly="readonly" id="primaryKey" class="file" th:field="*{cdl_id}" type="text"></input>
+        </label>
+        <label>Manual Id
+            <input id="secundaryKey" class="file" th:field="*{mnl_id}" type="text"></input>
+        </label>
+        <label>Flag
+            <input id="tag" class="file" th:field="*{flg_secundary}" type="text"></input>
+        </label>
+            <label class="fileLabel" value="Section Number">Section Number
+                <input id="sectionNumber" class="file" th:field="*{cdl_section}" type="text"></input>
+            </label>
             </div>
+            <label class="fileLabel">Subsection
+                <input id="subsection" class="file" th:field="*{cdl_sub_section}" type="text" ></input>
+            </label>
+            <label class="fileLabel">Block Number
+                <input id="blockNumber" class="file" th:field="*{cdl_block_number}" type="text" ></input>
+            </label>
+            <label class="fileLabel">Block Name
+                <input id="blockname" class="file" th:field="*{cdl_block_name}" type="text"></input>
+            </label>
+            <label class="fileLabel">Code
+                <input id="code" class="file" th:field="*{cdl_code}" type="text"></input>
+            </label>
         </div>
-        <hr>
-        <div>
-            <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Edit</button>
-        </div>
+
+        <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Edit</button>
     </div>
 </form>
-<button onclick="formReset()" id="back-menu" class="btn btn-secondary float-right">Reset</button>
-<script>
-    function formReset() {
-        document.getElementById("sectionNumber").value="";
-        document.getElementById("subsection").value="";
-        document.getElementById("blockNumber").value="";
-        document.getElementById("code").value="";
-        document.getElementById("secundaryKey1").value="";
-        document.getElementById("primaryKey").value="";
-        document.getElementById("secundaryKey").value="";
-        document.getElementById("tag").value="";
+<button id="back-menu" class="btn btn-secondary float-right">Back</button>
 
-    }
-</script>
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

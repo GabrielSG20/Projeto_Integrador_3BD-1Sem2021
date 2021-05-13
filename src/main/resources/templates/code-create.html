@@ -24,18 +24,14 @@
         Consult Codelist
     </a>
 
-    <a id="button3" href="/code-edit" class="btn">
-        Edit Codelist
-    </a>
-
     <a id="button4" href="/code-import" class="btn">
         Import Codelist
     </a>
 </header>
 <form id="myForm" th:action="@{/code-create}" th:object="${general}" method="post">
     <hr>
-    <div>
-        <div class="d-flex justify-content-around" id="firstDiv">
+    <div class="container2">
+        <div class="container" style = "background-color: rgba(0,0,0,.05);">
             <label>Primary Key
                 <input id="primaryKey" class="file" th:field="*{mnl_name}" type="text"></input>
             </label>
@@ -46,8 +42,8 @@
                 <input id="tag" class="file" th:field="*{flg_tag}" type="text"></input>
             </label>
         </div>
-        <div>
-            <div action="#" class="d-flex justify-content-around">
+
+            <div class="container">
                 <label class="fileLabel" value="Section Number">Section Number
                     <input id="sectionNumber" class="file" th:field="*{cdl_section}" type="text"></input>
                 </label>
@@ -67,7 +63,7 @@
                     <input id="secundaryKey1" class="file" th:field="*{flg_secundary}" type="text"></input>
                 </label>
             </div>
-            <div class="d-flex justify-content-around">
+            <div class="container" style = "background-color: rgba(0,0,0,.05);">
                 <label class="fileLabel">Section Number
                     <input id="sectionNumber2" class="file" type="text"></input>
                 </label>
@@ -87,7 +83,7 @@
                     <input id="secundaryKey2" class="file" type="text">
                 </label>
             </div>
-            <div class="d-flex justify-content-around">
+            <div class="container">
                 <label class="fileLabel">Section Number
                     <input id="sectionNumber3" class="file" type="text"></input>
                 </label>
@@ -107,38 +103,11 @@
                     <input id="secundaryKey3" class="file" type="text">
                 </label>
             </div>
-        </div>
-        <hr>
     </div>
+    <hr>
     <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Create</button>
 </form>
-    <button onclick="formReset()" id="back-menu" class="btn btn-secondary float-right">Reset</button>
-<script>
-    function formReset() {
-        document.getElementById("sectionNumber").value="";
-        document.getElementById("sectionNumber2").value="";
-        document.getElementById("sectionNumber3").value="";
-        document.getElementById("subsection").value="";
-        document.getElementById("subsection2").value="";
-        document.getElementById("subsection3").value="";
-        document.getElementById("blockNumber").value="";
-        document.getElementById("blockNumber2").value="";
-        document.getElementById("blockNumber3").value="";
-        document.getElementById("blockname").value="";
-        document.getElementById("blockname2").value="";
-        document.getElementById("blockname3").value="";
-        document.getElementById("code").value="";
-        document.getElementById("code2").value="";
-        document.getElementById("code3").value="";
-        document.getElementById("secundaryKey1").value="";
-        document.getElementById("secundaryKey2").value="";
-        document.getElementById("secundaryKey3").value="";
-        document.getElementById("primaryKey").value="";
-        document.getElementById("secundaryKey").value="";
-        document.getElementById("tag").value="";
-
-    }
-</script>
+    <button id="back-menu" class="btn btn-secondary float-right">Back</button>
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

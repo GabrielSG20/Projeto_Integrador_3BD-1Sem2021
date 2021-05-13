@@ -1,7 +1,6 @@
 package com.airPlan.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -15,7 +14,5 @@ public class ManualFlagId implements Serializable {
     private Integer mnl_id;
 
     private String flg_secundary;
-
-
 
 }

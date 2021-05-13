@@ -18,9 +18,25 @@ public class CodeListService {
     @Autowired
     private CodeListRepository repo;
 
-    public void save(CodeList codeList) {repo.save(codeList);}
+    public void save(CodeList codeList) {
 
-    public CodeList get(CodeList codeList) {return repo.findById(codeList.getCdl_id()).get();}
+        if(codeList.getFlg_secundary().contains(",")) {
+            String[] parts = codeList.getFlg_secundary().split(",");
+
+            for (String part : parts) {
+                CodeList newCodeList = new CodeList(codeList.getMnl_id(), part,
+                        codeList.getCdl_section(), codeList.getCdl_block_number(),
+                        codeList.getCdl_sub_section(), codeList.getCdl_block_name(),
+                        codeList.getCdl_code());
+                repo.save(newCodeList);
+            }
+        } else {
+            repo.save(codeList);
+        }
+
+    }
+
+    public CodeList get(Integer id) {return repo.findById(id).get();}
 
     public void delete(Integer id) {
         repo.deleteById(id);

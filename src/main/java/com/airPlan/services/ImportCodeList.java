@@ -26,9 +26,6 @@ public class ImportCodeList {
 
 
     public void getCellData(String manualName, String fileName) {
-        System.out.println("ok");
-
-
         try {
             String excelPath = "./uploads/" + fileName;
             XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
@@ -50,7 +47,6 @@ public class ImportCodeList {
             String tagName = ".";
             int count = 7;
             while (true) {
-                System.out.println(tagName);
                 tagName = formatter1.formatCellValue(sheet.getRow(1).getCell(count));
                 count++;
                 if(tagName.equals("")) {
@@ -59,17 +55,14 @@ public class ImportCodeList {
                 tagNames.add(tagName);
 
             }
-            System.out.println(tagNames);
+
             for (String s : tagNames) {
-                System.out.println(s);
                 String[] parts = s.split(" - ");
                 Flag flag = new Flag("-" + parts[0], parts[1]);
                 tags.add("-" + parts[0]);
                 System.out.println(flag);
                 flagService.save(flag, manual.getMnl_id());
             }
-
-            System.out.println(tags);
 
             for (int i = 2; i < n; i++) {
                 DataFormatter formatter = new DataFormatter();
@@ -84,9 +77,7 @@ public class ImportCodeList {
                                 formatter.formatCellValue(sheet.getRow(i).getCell(4)),
                                 Integer.parseInt(formatter.formatCellValue(sheet.getRow(i).getCell(5))));
 
-                        System.out.println(codeList);
                         codeListService.save(codeList);
-
                     }
                 }
             }
