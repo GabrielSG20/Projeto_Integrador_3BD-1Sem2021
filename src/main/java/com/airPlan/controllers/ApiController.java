@@ -49,6 +49,10 @@ public class ApiController {
 
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
     public String saveCodeList(@ModelAttribute("general") General general){
+        CodeList[] codelists = new CodeList[3];
+
+        int n = general.addLista(general.getCodelist(), codelists);
+
         Manual manual = new Manual(general.getMnl_name());
         manualService.save(manual);
 
@@ -57,12 +61,7 @@ public class ApiController {
         Flag flag = new Flag(general.getFlg_secundary_id(), general.getFlg_tag());
         flagService.save(flag, manual.getMnl_id());
 
-        CodeList codeList = new CodeList(manual.getMnl_id(), general.getFlg_secundary(),
-                                                        general.getCdl_section(),
-                                                        Integer.parseInt(general.getCdl_block_number()),
-                                                        general.getCdl_sub_section(), general.getCdl_block_name(),
-                                                        Integer.parseInt(general.getCdl_code()));
-        codeListService.save(codeList);
+        codeListService.saveCodeList(codelists, n, manual);
 
         return "redirect:/code-create";
     }
@@ -99,7 +98,6 @@ public class ApiController {
 
         ModelAndView mav = new ModelAndView("code-edit");
         CodeList codeList = codeListService.get(id);
-        System.out.println(codeList);
         mav.addObject("codelist", codeList);
 
         return mav;

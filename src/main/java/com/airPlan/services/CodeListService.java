@@ -1,6 +1,7 @@
 package com.airPlan.services;
 
 import com.airPlan.entities.CodeList;
+import com.airPlan.entities.Manual;
 import com.airPlan.repository.CodeListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,28 +19,33 @@ public class CodeListService {
     @Autowired
     private CodeListRepository repo;
 
-    public void save(CodeList codeList) {
+    public void saveCodeList(CodeList[] codeList, int n, Manual manual) {
+            for (int j = 0; j < n; j++){
+                codeList[j].setMnl_id(manual.getMnl_id());
+                if(codeList[j].getFlg_secundary().contains(",")) {
+                    String[] parts = codeList[j].getFlg_secundary().split(",");
 
-        if(codeList.getFlg_secundary().contains(",")) {
-            String[] parts = codeList.getFlg_secundary().split(",");
-
-            for (String part : parts) {
-                CodeList newCodeList = new CodeList(codeList.getMnl_id(), part,
-                        codeList.getCdl_section(), codeList.getCdl_block_number(),
-                        codeList.getCdl_sub_section(), codeList.getCdl_block_name(),
-                        codeList.getCdl_code());
-                repo.save(newCodeList);
+                    for (String part : parts) {
+                        CodeList newCodeList = new CodeList(codeList[j].getMnl_id(), part,
+                                codeList[j].getCdl_section(), codeList[j].getCdl_block_number(),
+                                codeList[j].getCdl_sub_section(), codeList[j].getCdl_block_name(),
+                                codeList[j].getCdl_code());
+                        repo.save(newCodeList);
+                    }
+                } else {
+                    repo.save(codeList[j]);
+                }
             }
-        } else {
-            repo.save(codeList);
-        }
-
     }
 
     public CodeList get(Integer id) {return repo.findById(id).get();}
 
     public void delete(Integer id) {
         repo.deleteById(id);
+    }
+
+    public void save(CodeList codeList) {
+        repo.save(codeList);
     }
 
     public Page<CodeList> listAll(int pageNumber) {

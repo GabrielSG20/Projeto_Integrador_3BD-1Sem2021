@@ -45,62 +45,62 @@
 
             <div class="container">
                 <label class="fileLabel" value="Section Number">Section Number
-                    <input id="sectionNumber" class="file" th:field="*{cdl_section}" type="text"></input>
+                    <input id="sectionNumber" class="file" th:field="*{codelist[0].cdl_section}" type="text"></input>
                 </label>
                 <label class="fileLabel">Subsection
-                    <input id="subsection" class="file" th:field="*{cdl_sub_section}" type="text" ></input>
+                    <input id="subsection" class="file" th:field="*{codelist[0].cdl_sub_section}" type="text" ></input>
                 </label>
                 <label class="fileLabel">Block Number
-                    <input id="blockNumber" class="file" th:field="*{cdl_block_number}" type="text" ></input>
+                    <input id="blockNumber" class="file" th:field="*{codelist[0].cdl_block_number}" type="text" ></input>
                 </label>
                 <label class="fileLabel">Block Name
-                    <input id="blockname" class="file" th:field="*{cdl_block_name}" type="text"></input>
+                    <input id="blockname" class="file" th:field="*{codelist[0].cdl_block_name}" type="text"></input>
                 </label>
                 <label class="fileLabel">Code
-                    <input id="code" class="file" th:field="*{cdl_code}" type="text"></input>
+                    <input id="code" class="file" th:field="*{codelist[0].cdl_code}" type="text"></input>
                 </label>
                 <label class="fileLabel">Secundary Key
-                    <input id="secundaryKey1" class="file" th:field="*{flg_secundary}" type="text"></input>
+                    <input id="secundaryKey1" class="file" th:field="*{codelist[0].flg_secundary}" type="text"></input>
                 </label>
             </div>
             <div class="container" style = "background-color: rgba(0,0,0,.05);">
                 <label class="fileLabel">Section Number
-                    <input id="sectionNumber2" class="file" type="text"></input>
+                    <input id="sectionNumber2" class="file" th:field="*{codelist[1].cdl_section}" type="text"></input>
                 </label>
                 <label class="fileLabel">Subsection
-                    <input id="subsection2" class="file" type="text"></input>
+                    <input id="subsection2" class="file" th:field="*{codelist[1].cdl_sub_section}" type="text"></input>
                 </label>
                 <label class="fileLabel">Block Number
-                    <input id="blockNumber2" class="file" type="text"></input>
+                    <input id="blockNumber2" class="file" th:field="*{codelist[1].cdl_block_number}" type="text"></input>
                 </label>
                 <label class="fileLabel">Block Name
-                    <input id="blockname2" type="text" class="file"/>
+                    <input id="blockname2" type="text" th:field="*{codelist[1].cdl_block_name}" class="file"/>
                 </label>
                 <label class="fileLabel">Code
-                    <input id="code2" class="file" type="text"></input>
+                    <input id="code2" class="file" th:field="*{codelist[1].cdl_code}" type="text"></input>
                 </label>
                 <label class="fileLabel">Secundary Key
-                    <input id="secundaryKey2" class="file" type="text">
+                    <input id="secundaryKey2" th:field="*{codelist[1].flg_secundary}" class="file" type="text">
                 </label>
             </div>
             <div class="container">
                 <label class="fileLabel">Section Number
-                    <input id="sectionNumber3" class="file" type="text"></input>
+                    <input id="sectionNumber3" class="file" th:field="*{codelist[2].cdl_section}" type="text"></input>
                 </label>
                 <label class="fileLabel">Subsection
-                    <input id="subsection3" class="file" type="text"></input>
+                    <input id="subsection3" class="file" th:field="*{codelist[2].cdl_sub_section}" type="text"></input>
                 </label>
                 <label class="fileLabel">Block Number
-                    <input id="blockNumber3" class="file" type="text"></input>
+                    <input id="blockNumber3" class="file" th:field="*{codelist[2].cdl_block_number}" type="text"></input>
                 </label>
                 <label class="fileLabel">Block Name
-                    <input id="blockname3" type="text" class="file"/>
+                    <input id="blockname3" type="text" th:field="*{codelist[2].cdl_block_name}" class="file"/>
                 </label>
                 <label class="fileLabel">Code
-                    <input id="code3" class="file" type="text"></input>
+                    <input id="code3" class="file" th:field="*{codelist[2].cdl_code}" type="text"></input>
                 </label>
                 <label class="fileLabel">Secundary Key
-                    <input id="secundaryKey3" class="file" type="text">
+                    <input id="secundaryKey3" class="file" th:field="*{codelist[2].flg_secundary}" type="text">
                 </label>
             </div>
     </div>

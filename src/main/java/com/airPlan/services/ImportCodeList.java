@@ -39,7 +39,6 @@ public class ImportCodeList {
 
             /* Manual Name */
             Manual manual = new Manual(manualName);
-            System.out.println(manual);
             manualService.save(manual);
             manual.setMnl_id(manualService.findManualByName(manual.getMnl_name()));
 
@@ -60,7 +59,6 @@ public class ImportCodeList {
                 String[] parts = s.split(" - ");
                 Flag flag = new Flag("-" + parts[0], parts[1]);
                 tags.add("-" + parts[0]);
-                System.out.println(flag);
                 flagService.save(flag, manual.getMnl_id());
             }
 
