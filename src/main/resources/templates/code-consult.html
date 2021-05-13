@@ -97,7 +97,7 @@
         &nbsp; - &nbsp;
 
         <span th:each="i: ${#numbers.sequence(1,totalPages)}">
-        <a th:if="${i != currentPage}" th:href="@{'code-consult/page/' + ${i}}">[[${i}]]</a>
+        <a th:if="${i != currentPage}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
         <span th:unless="${i != currentPage}">[[${i}]]</span>
         &nbsp;&nbsp;
     </span>

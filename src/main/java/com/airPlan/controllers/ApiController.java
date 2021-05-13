@@ -122,7 +122,7 @@ public class ApiController {
         return listaPaginas(model, 1);
     }
 
-    @GetMapping("/code-consult/page/{pageNumber}")
+    @GetMapping("/page/{pageNumber}")
     public String listaPaginas(Model model, @PathVariable("pageNumber") int currentPage){
         Page<CodeList> page = codeListService.listAll(currentPage);
         long totalItems = page.getTotalElements();
