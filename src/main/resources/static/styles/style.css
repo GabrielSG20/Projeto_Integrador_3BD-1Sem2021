@@ -8,7 +8,7 @@ body, html{
 label{
   color: #0367A5;
   margin: auto;
-  margin-left: 5%;
+  margin-left: 3%;
   text-align: left;
   font-family: Roboto;
   margin-top: 2%;
@@ -51,10 +51,11 @@ label{
   font-size: 24px;
   line-height: 28px;
   margin: auto;
-  width: 200px;
-  Height: 50px;
+  width: 160px;
+  Height: 40px;
   border-radius: 25px;
-  margin-top: 3.2%;
+  margin-top: 2%;
+  margin-right: 1%;
   border:0;
 }
 header {
@@ -148,6 +149,20 @@ margin-top: 3%;
 
 .table-striped{
     margin-top: 5%;
+    display: grid;
+}
+
+#table2{
+  margin-top: -9.4% !important;
+  margin-left: 30%;
+}
+
+#pagenable{
+  margin-left: 30%;
+}
+
+#importLabel{
+  margin-right: 4%;
 }
 
 #firstDiv{
