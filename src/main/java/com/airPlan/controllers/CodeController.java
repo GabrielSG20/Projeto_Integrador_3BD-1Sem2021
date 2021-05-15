@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @Controller
-public class ApiController {
+public class CodeController {
 
     @Autowired
     private ManualService manualService;
