@@ -49,7 +49,7 @@
                      <th width=100px>Entregas</th>
                      <th>Descrições</th>
                      <th width=215px>Datas</th>
-                     <th width=215px>User Stories</th>
+                     <th width=100px>User Stories</th>
                      <th width=100px>Links</th>
               </thead>
               <tbody>
@@ -57,7 +57,7 @@
                             <td>Sprint 1</td>
                             <td>Wireframes, Documentação, Compreendimento do Problema e Função "Create Codelist" </td>
                             <td>08/03/2021 a 28/03/2021</td>
-                            <td>Sprint 1</td>
+                            <td><p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/sprint1.png">Sprint 1</a></p></td>
                             <td><p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/airplane_front/README.md">Visualizar</a></p></td>
                      </tr>
                      <tr>
@@ -107,15 +107,18 @@ Para o funcionamento da aplicação, serão necessários:
 
 
 <h2>Entregas</h2>
-<h3>Sprint 1</h3>
 
 <a href="https://1drv.ms/v/s!AikVauceXWW2gbJtf8HpXTKgzrX9-Q?e=0zUtKz">Vídeo Apresentação Sprint 1</a>
 
 <table>
               <thead>
-                     <th width=400px><img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/sprint1.png" width="400"></h1></th>
-                     <th><p align="justify">Durante a primeira Sprint a equipe desenvolveu o backlog junto ao cliente, entendendo as necessidades da aplicação e levantando os possíveis riscos e bloqueios técnicos de acordo com o nível de cada integrante da airPLAN. Com isso, foram desenvolvidas as wireframes do sistema, a documentação necessária até o momento e, também, a função "Create Codelist" para a criação da Codelist que será utilizada, posteriormente, na criação da Lista Efetiva de Páginas (LEP). </th>
+                     <th width=400px><img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/desenvolvido_sprint1.png" width="400"></h1></th>
+                     <th><p align="justify"><b>Sprint 1:</b> Durante a primeira Sprint a equipe desenvolveu o backlog junto ao cliente, entendendo as necessidades da aplicação e levantando os possíveis riscos e bloqueios técnicos de acordo com o nível de cada integrante da airPLAN. Com isso, foram desenvolvidas as wireframes do sistema, a documentação necessária até o momento e, também, a função "Create Codelist" para a criação da Codelist que será utilizada, posteriormente, na criação da Lista Efetiva de Páginas (LEP). </th>
+             <thead>
+                    <th width=400px><img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/desenvolvido_sprint2.png" width="400"></h1></th>
+                    <th><p align="justify"><b>Sprint 2:</b> Durante a segunda Sprint a equipe desenvolveu o CRUD do Codelist, focando no Create Codelist a partir de arquivo .xlsm e pela barra de digitação. Foi criada a função Consult (Read) Codelist para verificar um codelist já existente e a opção Delete Codelit. </th>
        </table>
+       
 </section>
               
 <h2>Funcionamento da Ferramenta</h2>
@@ -129,7 +132,7 @@ Para o funcionamento da aplicação, serão necessários:
 
 
 <h3>Menu Principal</h3>
-<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/menu.jpg" width="1000"></h1>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/PL001/images-codelist/menu.png" width="1000"></h1>
 <p align="justify"> A ferramenta terá três APIs principais independentes. Portanto, o menu dará acesso a cada uma delas de acordo com a necessidade do usuário. </p>
 
 <h4><ins>Codelist</ins></h4>
@@ -146,7 +149,7 @@ Para o funcionamento da aplicação, serão necessários:
 
 <h3>Codelist</h3>
 <h4><ins>Create Codelist</ins></h4>
-<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_create.jpg" width="1000"></h1>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/PL001/images-codelist/create.png" width="1000"></h1>
 <p align="justify"> Esta função permite a criação e o armazenamento em Banco de Dados do codelist baseado nas inputs fornecidas pelo usuário. </p>
 
 <h4><ins>Primary Key</ins></h4>
@@ -165,8 +168,20 @@ Para o funcionamento da aplicação, serão necessários:
 <p align="justify"><b> Block Name: </b> digite o nome do bloco no campo.</p>
 <p align="justify"><b> Code: </b> digite o código no campo.</p>
 
-<h4><ins>Adicionar Mais Atributos [+]</ins></h4>
-<p align="justify"><b> Uso: </b> clique para adicionar mais linhas de atributos.</p>
+<h4><ins>Create</ins></h4>
+<p align="justify"><b> Uso: </b> clique para criar a CodeList.</p>
+
+<h4><ins>Back</ins></h4>
+<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
+
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/PL001/images-codelist/import.png" width="1000"></h1>
+<p align="justify"> Esta função permite a criação e o armazenamento em Banco de Dados do codelist baseado em codelists já existentes em arquivos .xlsm. </p>
+
+<h4><ins>Primary Key</ins></h4>
+<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
+
+<h4><ins>Escolher Arquivo</ins></h4>
+<p align="justify"><b> Uso: </b> selecionar arquivo no formato .xlsm.</p>
 
 <h4><ins>Create</ins></h4>
 <p align="justify"><b> Uso: </b> clique para criar a CodeList.</p>
@@ -174,10 +189,9 @@ Para o funcionamento da aplicação, serão necessários:
 <h4><ins>Back</ins></h4>
 <p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
 
-
 <h4><ins>Consult Codelist</ins></h4>
-<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_consult.jpg" width="1000"></h1>
-<p align="justify"> Esta função permite a consulta de codelists armazenados no Banco de Dados, sendo a consulta realizada por meio da identificação do documento. </p>
+<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/PL001/images-codelist/consult.png" width="1000"></h1>
+<p align="justify"> Esta função permite a <b>consulta, edição e exclusão</b> de codelists armazenados no Banco de Dados. </p>
 
 <h4><ins>Primary Key</ins></h4>
 <p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
@@ -185,79 +199,39 @@ Para o funcionamento da aplicação, serão necessários:
 <h4><ins>Secundary Key</ins></h4>
 <p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
 
-<h4><ins>Botão de Busca</ins></h4>
+<h4><ins>Block</ins></h4>
+<p align="justify"><b> Uso: </b> digite o número do bloco no campo.</p>
+
+<h4><ins>Botão Consult</ins></h4>
 <p align="justify"><b> Uso: </b> clique para buscar a tabela que contenha a primary key, secundary key (caso for necessário) e tag.</p>
 
-<h4><ins>Tag</ins></h4>
-<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
+<h4><ins>:wastebasket:</ins></h4>
+<p align="justify"><b> Uso: </b> Delete o codelist desejado.</p>
 
-<h4><ins>Filtro</ins></h4>
-<p align="justify"><b> Uso: </b> após digitar a Tag, clique no botão para filtrar a visualização da Codelist.</p>
+<h4><ins>:memo:</ins></h4>
+<p align="justify"><b> Uso: </b> Edit o codelist desejado.</p>
 
 <h4><ins>Back</ins></h4>
 <p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
 
-<h4><ins>Export</ins></h4>
-<p align="justify"><b> Uso: </b> clique para exportar (salvar) a tabela.</p>
-
-
 <h4><ins>Edit Codelist</ins></h4>
-<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_edit.jpg" width="1000"></h1>
+<h1 align="center"> <img src=https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/PL001/images-codelist/edit.png width="1000"></h1>
 <p align="justify"> Esta função permite que o usuário edit um codelist existente, caso ocorra alguma mudança em sua estrutura. </p>
-
-<h4><ins>Primary Key</ins></h4>
-<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
 
 <h4><ins>Secundary Key</ins></h4>
 <p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
-
-<h4><ins>Tag</ins></h4>
-<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
-
-<h4><ins>Botão de Busca</ins></h4>
-<p align="justify"><b> Uso: </b> clique para buscar a tabela que contenha a primary key, secundary key (caso for necessário) e tag.</p>
 
 <h4><ins>Edição de Dados</ins></h4>
 <p align="justify"><b> Uso: </b> clique e digite os novos dados.</p>
 
-<h4><ins>Adicionar Mais Atributos [+]</ins></h4>
-<p align="justify"><b> Uso: </b> clique para adicionar mais linhas de atributos.</p>
-
 <h4><ins>Back</ins></h4>
 <p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
 
-<h4><ins>Save</ins></h4>
+<h4><ins>Edit</ins></h4>
 <p align="justify"><b> Uso: </b> clique para salvar as alterações.</p>
 
-
-
 <h4><ins>Delete Codelist</ins></h4>
-<h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/wireframe/codelist_delete.jpg" width="1000"></h1>
-<p align="justify"> Esta função permite que o usuário delete uma codelist que não tenha mais necessidade de estar armazenada no banco de dados devido por estar obsoleta . </p>
-
-<h4><ins>Primary Key</ins></h4>
-<p align="justify"><b> Uso: </b> digite a primary key (código da aeronave).</p>
-
-<h4><ins>Secundary Key</ins></h4>
-<p align="justify"><b> Uso: </b> digite, caso o arquivo possua, a secundary key (código que começa com "-", ex.: -50, -55, -60).</p>
-
-<h4><ins>Botão de Busca</ins></h4>
-<p align="justify"><b> Uso: </b> clique para buscar a tabela que contenha a primary key, secundary key (caso for necessário) e tag.</p>
-
-<h4><ins>Tag</ins></h4>
-<p align="justify"><b> Uso: </b> digite a tag para ser usada no banco de dados - geralmente o nome de um planeta ou estrela, ex.: Mars, Alpha Centauri, Saturn.</p>
-
-<h4><ins>Filtro</ins></h4>
-<p align="justify"><b> Uso: </b> após digitar a Tag, clique no botão para filtrar a visualização da Codelist.</p>
-
-<h4><ins>Tabela Codelist/ins></h4>
-  <p align="justify"><b> Uso: </b> o usuário pode visualizar CodeLists já criadas. <i> Dica: </i> pode ser usado para checagem de erros.</p>
-
-<h4><ins>Back</ins></h4>
-<p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
-
-<h4><ins>Delete</ins></h4>
-<p align="justify"><b> Uso: </b> clique para deletar a tabela sendo visualizada.</p>
+<p align="justify"> Esta função permite que o usuário delete uma codelist que não tenha mais necessidade de estar armazenada no banco de dados por estar obsoleta. Está integrada ao Consult.</p>
 
 <h3>List of Effective Pages (LEP)</h3>
 <h4><ins>Create LEP</ins></h4>
