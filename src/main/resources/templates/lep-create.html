@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <title>List of Effective Pages</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style3.css">
+</head>
+<body>
+<header id = "header">
+    <div id="logo">
+        <img id= "imagem1" src ='images/146.png'> </img>
+        <h1 id="titulo"> <strong> List of Effective Pages </strong> </h1>
+    </div>
+
+    <a id = "button1" href="/codeCreate" class="btn">
+        Create LEP
+    </a>
+
+    <a id = "button2" href="/codeConsult" class="btn">
+        Consult LEP
+    </a>
+
+    <a id = "button3" href="/codeEdit" class="btn">
+        Edit LEP
+    </a>
+
+    <a id = "button4" href="/codeDelete" class="btn">
+        Delete LEP
+    </a>
+</header>
+<form>
+    <div class="row g-4">
+        <div class="col-sm">
+            <label>Primary key</label>
+            <input type="text" class="file" >
+        </div>
+        <div class="col-sm">
+            <label>Secundary key</label>
+            <input type="text" class="file">
+        </div>
+        <div class="col-sm">
+            <label>Tag</label>
+            <input type="text" class="file" >
+        </div>
+        <div class="col-sm">
+            <label>Date</label>
+            <input type="text" class="file" >
+        </div>
+    </div>
+
+    <div class="row g-4" >
+        <div class="col-sm">
+            <label>Version</label>
+            <input type="text" class="file" >
+        </div>
+        <div class="col-sm">
+            <label>Revision Number</label>
+            <input type="text" class="file" >
+        </div>
+        <div class="col-sm">
+            <label>Revision Date</label>
+            <input type="text" class="file" >
+        </div>
+        <div class="col-sm">
+            <button type="button" class="btn btn-primary btn-lg" id="button5">Create</button>
+        </div>
+    </div>
+    </div>
+    <div>
+        <div style="display: block; border-bottom: 1px solid #8bdee0; margin-top: 20px;"></div>
+    </div>
+</form>
+<table class="table table-bordered" id="table">
+    <thead>
+    <tr>
+        <span class="border-top" id="border"></span>
+        <td scope="row" class="descricao">Name</td>
+        <td scope="row" class="descricao">Modification date</td>
+        <td scope="col" class="descricao">Type</td>
+        <td scope="col" class="descricao">Size</td>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>
+<div>
+    <div style="display: block; border-bottom: 1px solid #8bdee0; margin-top: 20px;"></div>
+</div>
+<div>
+    <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+</div>
+</body>
+</html>
