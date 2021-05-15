@@ -5,15 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>CodeConsult</title>
 </head>
 <body id="code-consult" class=".bg-info">
 
 <header id="header">
     <div id="logo">
-        <img id="imagem1" src='images/146.png'> </img>
         <h1 id="titulo"> <strong> Codelist </strong> </h1>
     </div>
 
@@ -38,14 +37,12 @@
         <label>Secundary Key
             <input id="secundaryKey" class="file" type="text" name="flg_secundary"></input>
         </label>
-        <i class="fas fa-search"></i>
         <label>Block
             <input id="blocknumber" class="file" type="text" name="cdl_block_number"></input>
         </label>
-        <i class="fas fa-filter"></i>
         <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
+        <a class="btn" href="/code-consult"><i class="fas fa-sync"></i></a>
     </form>
-    <a id="limparfiltros" href="/code-consult" class="btn">Limpar Filtros</a>
 </div>
 <hr>
 <div class="container3">
@@ -60,11 +57,11 @@
             <td th:text="${manual.mnl_name}"></td>
             <td>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="@{/delete-manual/{id}(id=${manual.mnl_id})}">Delete</a>
+                <a th:href="@{/delete-manual/{id}(id=${manual.mnl_id})}"><i class="fas fa-trash"></i></a>
             </td>
         </tr>
     </table>
-    <table class="table table-striped">
+    <table id="table2" class="table table-striped">
         <tr>
             <th>CodeList Id</th>
             <th>Manual Id</th>
@@ -86,13 +83,13 @@
             <td th:text="${codelist.cdl_block_name}"></td>
             <td th:text="${codelist.cdl_code}"></td>
             <td>
-                <a th:href="@{/edit/{id}(id=${codelist.cdl_id})}">Edit</a>
+                <a th:href="@{/edit/{id}(id=${codelist.cdl_id})}"><i class="fas fa-edit"></i></a>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="@{/delete/{id}(id=${codelist.cdl_id})}">Delete</a>
+                <a th:href="@{/delete/{id}(id=${codelist.cdl_id})}"><i class="fas fa-trash"></i></a>
             </td>
         </tr>
     </table>
-    <div>
+    <div id="pagenable">
         Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
         &nbsp; - &nbsp;
 
@@ -102,6 +99,7 @@
         &nbsp;&nbsp;
     </span>
     </div>
+    <a id="back" href="/menu" class="btn btn-secondary float-right">Back</a>
 </div>
 
 <script src="script.js"></script>
