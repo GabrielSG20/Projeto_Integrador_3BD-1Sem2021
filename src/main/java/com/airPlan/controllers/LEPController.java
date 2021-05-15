@@ -10,4 +10,10 @@ public class LEPController {
 
         return "lep-create";
     }
+
+    @GetMapping("/lep-delete")
+    public String lepDreate() {
+
+        return "lep-delete";
+    }
 }
