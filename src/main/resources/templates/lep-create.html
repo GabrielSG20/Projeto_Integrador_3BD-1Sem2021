@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <title>LepCreate</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style3.css">
@@ -29,39 +31,31 @@
         Delete LEP
     </a>
 </header>
-<form>
+<form id="myForm" th:action="@{/lep-create}" th:object="${lep}" method="post">
     <div class="row g-4">
         <div class="col-sm">
             <label>Primary key</label>
-            <input type="text" class="file" >
-        </div>
-        <div class="col-sm">
-            <label>Secundary key</label>
-            <input type="text" class="file">
+            <input type="text" th:field="*{mnl_name}" class="file" >
         </div>
         <div class="col-sm">
             <label>Tag</label>
-            <input type="text" class="file" >
+            <input type="text" th:field="*{flg_tag}" class="file">
         </div>
-    </div>
-
-    <div class="row g-4" >
         <div class="col-sm">
-            <label>Revision Number</label>
-            <input type="text" class="file" >
+            <label>Code</label>
+            <input type="text" th:field="*{cdl_code}" class="file" >
         </div>
         <div class="col-sm">
             <label>Revision Date</label>
-            <input type="text" class="file" >
-        </div>
-        <div class="col-sm">
-            <button type="button" class="btn btn-primary btn-lg" id="button5">Create</button>
+            <input type="text" th:field="*{revision_dates}" class="file" >
         </div>
     </div>
-    </div>
+
+
     <div>
         <div style="display: block; border-bottom: 1px solid #8bdee0; margin-top: 20px;"></div>
     </div>
+    <button type="submit" class="btn btn-primary btn-lg" id="button5">Create</button>
 </form>
 <table class="table table-bordered" id="table">
     <thead>
