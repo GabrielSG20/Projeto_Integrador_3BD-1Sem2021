@@ -6,14 +6,6 @@
 
 <h2>Descrição</h2>
 <p align="justify"> Para otimizar a criação e melhorar o controle na documentação de aeronaves, a empresa parceira solicitou a equipe airPLAN o desenvolvimento de uma aplicação que automatize e aperfeiçoe a forma de armazenar e gerar documentos de maneira intuitiva e eficaz.
-  
-  - [Objetivos](#objetivos)
-  - [A Equipe](#a-equipe)
-  - [Product Backlog](#product-backlog)
-  - [Pré-Requisitos](#pré-requisitos)
-  - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-  - [Entregas](#entregas)
-  - [Funcionamento da Ferramenta](#funcionamento-da-ferramenta)
 
 <h2>Objetivos</h2>
 <p align="justify"> Nosso objetivo é desenvolver uma aplicação que integre três APIs independentes. Além disso, as ferramentas necessitam manter, customizar e versionar partes de arquivos em PDF, utilizando regras de negócio específicas para gerar documentos finais que dispõe as partes selecionadas.<p>
@@ -386,7 +378,9 @@ Para o funcionamento da aplicação, serão necessários:
 <h4><ins>Back</ins></h4>
 <p align="justify"><b> Uso: </b> clique para retornar ao menu principal.</p>
 
-<h2>Intalação do Protótipo</h2>
+<h2>Instalação do Protótipo</h2>
+
+<b> Link para download: [airPlan.zip](https://drive.google.com/file/d/130JL91hKQc2Wm1XfKkqr2ftpfOce8Wtz/view?usp=sharing) </b>
 
 <b> Instalação: </b>
 
