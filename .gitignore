@@ -29,9 +29,13 @@ bin/
 /nbdist/
 /.nb-gradle/
 build/
-/uploads/
+
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+
+### Project ###
+/uploads/
+/manuals/

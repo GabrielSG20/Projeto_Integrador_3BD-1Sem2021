@@ -42,20 +42,28 @@
             <input type="text" th:field="*{flg_tag}" class="file">
         </div>
         <div class="col-sm">
-            <label>Code</label>
+            <label>Lep Code</label>
             <input type="text" th:field="*{cdl_code}" class="file" >
-        </div>
-        <div class="col-sm">
-            <label>Revision Date</label>
-            <input type="text" th:field="*{revision_dates}" class="file" >
         </div>
     </div>
 
-
+    <div class="row g-4" >
+        <div class="col-sm">
+            <label>Revision Dates</label>
+            <input type="text" th:field="*{revision_dates}" class="file" >
+        </div>
+        <div class="col-sm">
+            <label>List of Codes</label>
+            <input type="text" th:field="*{cdl_code_list}" class="file" >
+        </div>
+        <div class="col-sm">
+            <button type="submit" class="btn btn-primary btn-lg" id="button5">Create</button>
+        </div>
+    </div>
+    </div>
     <div>
         <div style="display: block; border-bottom: 1px solid #8bdee0; margin-top: 20px;"></div>
     </div>
-    <button type="submit" class="btn btn-primary btn-lg" id="button5">Create</button>
 </form>
 <table class="table table-bordered" id="table">
     <thead>

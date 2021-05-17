@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @Controller
 public class LEPController {
@@ -29,7 +30,7 @@ public class LEPController {
     }
 
     @RequestMapping(value = "/lep-create", method = RequestMethod.POST)
-    public String createLep(@ModelAttribute("lep") Lep lep) throws FileNotFoundException {
+    public String createLep(@ModelAttribute("lep") Lep lep) throws IOException {
 
         System.out.println(lep.toString());
 
