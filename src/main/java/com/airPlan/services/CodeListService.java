@@ -28,13 +28,19 @@ public class CodeListService {
                     for (String part : parts) {
                         CodeList newCodeList = new CodeList(codeList[j].getMnl_id(), part,
                                 codeList[j].getCdl_section(), codeList[j].getCdl_block_number(),
-                                codeList[j].getCdl_sub_section().equals("") ? null:codeList[j].getCdl_sub_section(),
+                                codeList[j].getCdl_sub_section().equals("")? null : codeList[j].getCdl_sub_section(),
                                 codeList[j].getCdl_block_name(),
                                 codeList[j].getCdl_code());
                         repo.save(newCodeList);
                     }
                 } else {
-                    repo.save(codeList[j]);
+                    CodeList newCodeList = new CodeList(codeList[j].getMnl_id(), codeList[j].getFlg_secundary(),
+                            codeList[j].getCdl_section(), codeList[j].getCdl_block_number(),
+                            codeList[j].getCdl_sub_section().equals("")? null : codeList[j].getCdl_sub_section(),
+                            codeList[j].getCdl_block_name(),
+                            codeList[j].getCdl_code());
+
+                    repo.save(newCodeList);
                 }
             }
     }
