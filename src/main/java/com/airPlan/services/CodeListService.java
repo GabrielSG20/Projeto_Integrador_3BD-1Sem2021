@@ -55,6 +55,10 @@ public class CodeListService {
         repo.save(codeList);
     }
 
+    public List<CodeList> filtroLep(final Integer mnlId, final String flgTag) {
+        return this.repo.filtroLep(mnlId, flgTag);
+    }
+
     public Page<CodeList> listAll(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber-1,10);
         return repo.findAll(pageable);
