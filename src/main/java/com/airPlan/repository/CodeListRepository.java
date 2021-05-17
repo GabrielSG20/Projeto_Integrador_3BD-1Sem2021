@@ -21,7 +21,7 @@ public interface CodeListRepository extends JpaRepository<CodeList, Integer> {
 
     @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary and c.cdl_block_number = :cdlBlock ")
     List<CodeList> filtroAll(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary, @Param("cdlBlock") Integer cdlBlock);
-
+    // for future use
     @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary")
     List<CodeList> filtroLep(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary);
 }
