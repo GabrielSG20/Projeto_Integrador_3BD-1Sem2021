@@ -148,7 +148,6 @@ public class LepService
             try {
                 filepath.forEach(s -> {
                     String tempStr = s.toString();
-                    System.out.println(tempStr);
                     for (CodeList y: listCode1) {
                         if (tempStr.contains(y.getCdl_block_name()) && tempStr.contains(".pdf")) {
                             if (y.getCdl_code() < 10) {
