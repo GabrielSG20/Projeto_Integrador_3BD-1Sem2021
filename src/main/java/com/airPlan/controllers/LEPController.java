@@ -31,6 +31,7 @@ public class LEPController {
 
 
         lepService.populateRevisionDates(lep);
+        lepService.creatConcat(lep);
 
 
         return "redirect:/lep-create";

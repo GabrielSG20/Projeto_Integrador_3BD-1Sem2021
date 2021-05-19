@@ -1,10 +1,12 @@
 package com.airPlan.services;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.stream.Stream;
 import java.util.List;
+
+import com.itextpdf.kernel.utils.PdfMerger;
 import com.itextpdf.layout.property.HorizontalAlignment;
-import com.itextpdf.kernel.pdf.canvas.parser.listener.ITextExtractionStrategy;
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrategy;
 import com.itextpdf.kernel.pdf.PdfReader;
@@ -35,13 +37,10 @@ public class LepService
     private ManualService manualService;
     @Autowired
     private CodeListService codeListService;
-    ArrayList<String> filterRevisionDates;
 
-    public LepService() {
-        this.filterRevisionDates = new ArrayList<String>();
-    }
 
     public void populateRevisionDates(final Lep lep) throws IOException {
+        List<String> filterRevisionDates = new ArrayList<>();
         final String[] rvParts = lep.getRevision_dates().split("-");
         for (int i = 0; i < rvParts.length; ++i) {
             String rvFinal = "";
@@ -51,13 +50,22 @@ public class LepService
                     rvFinal += ".................";
                 }
             }
-            this.filterRevisionDates.add(rvFinal);
+            filterRevisionDates.add(rvFinal);
         }
         final Integer mnl_id = this.manualService.findManualByName(lep.getMnl_name());
-        this.createPage1(lep.getCdl_code(), lep.getMnl_name(), lep.getFlg_tag(), mnl_id);
+        this.createPage1(lep.getCdl_code(), lep.getMnl_name(), lep.getFlg_tag(), mnl_id, filterRevisionDates);
     }
 
-    public void createPage1(final String code, final String manualName, final String flgTag, final Integer mnlId) throws IOException {
+    public void creatConcat(final Lep lep) throws IOException {
+        final Integer mnl_id = this.manualService.findManualByName(lep.getMnl_name());
+        concatDocs(lep.getCdl_code(), lep.getMnl_name(), lep.getFlg_tag(), mnl_id);
+    }
+
+    public void createPage1(final String code, final String manualName,
+                            final String flgTag, final Integer mnlId,
+                            List filterRevisionDates) throws IOException {
+
+
         List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
         String destPath = String.valueOf(Paths.get("./manuals/" + manualName.toUpperCase() + "-00-02c" + code + ".pdf"));
         Paragraph paragraph1 = new Paragraph("LIST OF EFFECTIVE PAGES");
@@ -66,8 +74,8 @@ public class LepService
         pdfDocument.addNewPage();
         final Document document = new Document(pdfDocument);
         document.add(paragraph1.setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(18.0f));
-        for (final String s2 : this.filterRevisionDates) {
-            final Paragraph temp = new Paragraph(s2);
+        for (Object s2 : filterRevisionDates) {
+            final Paragraph temp = new Paragraph(String.valueOf(s2));
             document.add(temp.setTextAlignment(TextAlignment.CENTER).setFontSize(16.0f));
         }
         // INTERFACE
@@ -313,6 +321,9 @@ public class LepService
             throw new IOException("Directory Not Present!");
         }
 
+        // sort dict
+        sortLepTable(lepTable);
+
         document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
         float[] columnWidths = { 60.0f, 60.0f, 60.0f, 90.0f, 60.0f };
         Table table = new Table(columnWidths);
@@ -324,7 +335,7 @@ public class LepService
         if (lepTable.get("01 Cover") != null) {
             table.addCell(new Cell().add("0-TITLE"));
             table.addCell(new Cell().add("00"));
-            table.addCell((Cell)new Cell().add("cover").setBold());
+            table.addCell(new Cell().add("cover").setBold());
             table.addCell(new Cell().add("*"));
             table.addCell(new Cell().add("REVISION 06"));
         }
@@ -558,9 +569,9 @@ public class LepService
             final PdfReader pdfReader2 = new PdfReader(String.valueOf(lepTable.get("04 Middle").get(j)));
             final PdfDocument doc2 = new PdfDocument(pdfReader2);
             for (int n3 = doc2.getNumberOfPages(), l = 1; l <= n3; ++l) {
-                final String text2 = PdfTextExtractor.getTextFromPage(doc2.getPage(l), (ITextExtractionStrategy)new SimpleTextExtractionStrategy());
+                final String text2 = PdfTextExtractor.getTextFromPage(doc2.getPage(l), new SimpleTextExtractionStrategy());
                 final String[] textParts2 = text2.split("\n");
-                final ArrayList<String> textPartsf2 = new ArrayList<String>();
+                final ArrayList<String> textPartsf2 = new ArrayList<>();
                 for (final String x4 : textParts2) {
                     if (!x4.equals(" ")) {
                         textPartsf2.add(x4);
@@ -638,9 +649,9 @@ public class LepService
             pdfReader2.close();
             doc2.close();
         }
+
         for (int j = 0; j < lepTable.get("05 General Data").size(); ++j) {
             final PdfReader pdfReader2 = new PdfReader(String.valueOf(lepTable.get("05 General Data").get(j)));
-            System.out.println(lepTable.get("05 General Data").get(j));
             final PdfDocument doc2 = new PdfDocument(pdfReader2);
             for (int n3 = doc2.getNumberOfPages(), l = 1; l <= n3; ++l) {
                 final String text2 = PdfTextExtractor.getTextFromPage(doc2.getPage(l), new SimpleTextExtractionStrategy());
@@ -651,28 +662,140 @@ public class LepService
                         textPartsf2.add(x4);
                     }
                 }
-                String x5;
-                if (l % 2 == 0) {
-                    if (textPartsf2.size() > 3) {
-                        x5 = textPartsf2.get(2) + textPartsf2.get(3);
+                if(textPartsf2.get(0).charAt(1) == '5') {
+
+                    String x5 = textPartsf2.get(0) + textPartsf2.get(1);
+
+                    final String[] x6 = x5.split(" ");
+                    System.out.println("x6 = " + x6.length);
+                    System.out.println("x6 >>>>> start ");
+                    for(String str: x6) {
+                        System.out.println(str);
                     }
-                    else {
-                        x5 = textPartsf2.get(0) + textPartsf2.get(1);
+                    System.out.println("x6 >>>>> end ");
+                    if(l%2!=0) {
+                        if (x6.length == 9) {
+                            final String block2 = x6[1];
+                            final String code3 = x6[6];
+                            final String page2 = x6[7] + " ";
+                            final String change2 = x6[3] + " " + x6[4];
+                            table.addCell(new Cell().add(block2));
+                            table.addCell(new Cell().add(code3));
+                            table.addCell(new Cell().add(page2 + l));
+                            if (change2.equals("REVISION 06")) {
+                                table.addCell(new Cell().add("*"));
+                            }
+                            else {
+                                table.addCell(new Cell().add(""));
+                            }
+                            table.addCell(new Cell().add(change2));
+                        } else if (x6.length == 8) {
+                            final String block2 = x6[1];
+                            final String code3 = x6[5];
+                            final String page2 = x6[3] + " ";
+                            final String change2 = x6[6];
+                            table.addCell(new Cell().add(block2));
+                            table.addCell(new Cell().add(code3));
+                            table.addCell(new Cell().add(page2 + l));
+                            if (change2.equals("REVISION 06")) {
+                                table.addCell(new Cell().add("*"));
+                            }
+                            else {
+                                table.addCell(new Cell().add(""));
+                            }
+                            table.addCell(new Cell().add(change2));
+                        }
+                    } else {
+                        if (x6.length == 9) {
+                            final String block2 = x6[1];
+                            final String code3 = x6[6];
+                            final String page2 = x6[3] + " ";
+                            final String change2 = x6[7] + " " + x6[8];
+                            table.addCell(new Cell().add(block2));
+                            table.addCell(new Cell().add(code3));
+                            table.addCell(new Cell().add(page2 + l));
+                            if (change2.equals("REVISION 06")) {
+                                table.addCell(new Cell().add("*"));
+                            }
+                            else {
+                                table.addCell(new Cell().add(""));
+                            }
+                            table.addCell(new Cell().add(change2));
+                        } else if (x6.length == 8) {
+                            final String block2 = x6[1];
+                            final String code3 = x6[6];
+                            final String page2 = x6[3] + " ";
+                            final String change2 = x6[7];
+                            table.addCell(new Cell().add(block2));
+                            table.addCell(new Cell().add(code3));
+                            table.addCell(new Cell().add(page2 + l));
+                            if (change2.equals("REVISION 06")) {
+                                table.addCell(new Cell().add("*"));
+                            }
+                            else {
+                                table.addCell(new Cell().add(""));
+                            }
+                            table.addCell(new Cell().add(change2));
+                        }
                     }
-                }
-                else if (textPartsf2.size() > 3) {
-                    x5 = textPartsf2.get(1) + textPartsf2.get(2);
-                }
-                else {
-                    x5 = textPartsf2.get(0) + textPartsf2.get(1);
-                }
-                final String[] x6 = x5.split(" ");
-                if (l % 2 == 0) {
-                    if (x6.length == 9) {
+
+                } else {
+                    String x5;
+                    if (l % 2 == 0) {
+                        if (textPartsf2.size() > 3) {
+                            x5 = textPartsf2.get(2) + textPartsf2.get(3);
+                        }
+                        else {
+                            x5 = textPartsf2.get(0) + textPartsf2.get(1);
+                        }
+                    } else {
+                        if (textPartsf2.size() > 3) {
+                            x5 = textPartsf2.get(1) + textPartsf2.get(2);
+                        }
+                        else {
+                            x5 = textPartsf2.get(0) + textPartsf2.get(1);
+                        }
+                    }
+                    final String[] x6 = x5.split(" ");
+                    if (l % 2 == 0) {
+                        if (x6.length == 9) {
+                            final String block2 = x6[1];
+                            final String code3 = x6[6];
+                            final String page2 = x6[3] + " ";
+                            final String change2 = x6[7] + " " + x6[8];
+                            table.addCell(new Cell().add(block2));
+                            table.addCell(new Cell().add(code3));
+                            table.addCell(new Cell().add(page2 + l));
+                            if (change2.equals("REVISION 06")) {
+                                table.addCell(new Cell().add("*"));
+                            }
+                            else {
+                                table.addCell(new Cell().add(""));
+                            }
+                            table.addCell(new Cell().add(change2));
+                        }
+                        else if (x6.length == 8) {
+                            final String block2 = x6[1];
+                            final String code3 = x6[5];
+                            final String page2 = x6[6] + " ";
+                            final String change2 = x6[3];
+                            table.addCell(new Cell().add(block2));
+                            table.addCell(new Cell().add(code3));
+                            table.addCell(new Cell().add(page2 + l));
+                            if (change2.equals("REVISION 06")) {
+                                table.addCell(new Cell().add("*"));
+                            }
+                            else {
+                                table.addCell(new Cell().add(""));
+                            }
+                            table.addCell(new Cell().add(change2));
+                        }
+                    }
+                    else if (x6.length == 9) {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
-                        final String change2 = x6[7] + " " + x6[8];
+                        final String page2 = x6[7] + " ";
+                        final String change2 = x6[3] + " " + x6[6];
                         table.addCell(new Cell().add(block2));
                         table.addCell(new Cell().add(code3));
                         table.addCell(new Cell().add(page2 + l));
@@ -700,38 +823,6 @@ public class LepService
                         }
                         table.addCell(new Cell().add(change2));
                     }
-                }
-                else if (x6.length == 9) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[6];
-                    final String page2 = x6[7] + " ";
-                    final String change2 = x6[3] + " " + x6[6];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
-                }
-                else if (x6.length == 8) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[5];
-                    final String page2 = x6[6] + " ";
-                    final String change2 = x6[3];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
                 }
             }
             pdfReader2.close();
@@ -906,7 +997,7 @@ public class LepService
             doc2.close();
         }
 
-        document.add(table.setHorizontalAlignment(HorizontalAlignment.CENTER).setMarginBottom(50));
+
         // interface
         document.showTextAligned(new Paragraph(String
                         .format("Page " + 3 )).setFontSize(14),
@@ -950,8 +1041,268 @@ public class LepService
         document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
                 300, 30, 4, TextAlignment.CENTER,
                 VerticalAlignment.TOP, 0);
+        document.add(table.setHorizontalAlignment(HorizontalAlignment.CENTER).setMarginBottom(50));
+
 
         pdfDocument.close();
         document.close();
+    }
+
+    public void concatDocs(final String code, final String manualName,
+                            final String flgTag, final Integer mnlId) throws IOException {
+
+        List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
+
+        HashMap<String, ArrayList> lepTable = new HashMap<>();
+        ArrayList<String> coverList = new ArrayList<>();
+        lepTable.put("01 Cover", coverList);
+        ArrayList<String> lepList = new ArrayList<>();
+        lepTable.put("02 List of Effective Pages", lepList);
+        ArrayList<String> tocList = new ArrayList<>();
+        lepTable.put("03 Table of Contents", tocList);
+        ArrayList<String> storyList = new ArrayList<>();
+        lepTable.put("02 Story", storyList);
+        ArrayList<String> chapterList = new ArrayList<>();
+        lepTable.put("03 Chapter", chapterList);
+        ArrayList<String> middleList = new ArrayList<>();
+        lepTable.put("04 Middle", middleList);
+        ArrayList<String> generalDataList = new ArrayList<>();
+        lepTable.put("05 General Data", generalDataList);
+        ArrayList<String> appendixList = new ArrayList<>();
+        lepTable.put("AP01 Appendix", appendixList);
+        ArrayList<String> supplementList = new ArrayList<>();
+        lepTable.put("S03 Supplement", supplementList);
+        try {
+            Stream<Path> filepath = Files.walk(Paths.get("./manuals/"));
+            try {
+                filepath.forEach(s -> {
+                    String tempStr = s.toString();
+                    for (CodeList y: listCode1) {
+                        if (tempStr.contains(y.getCdl_block_name()) && tempStr.contains(".pdf")) {
+                            if (y.getCdl_code() < 10) {
+                                if (tempStr.contains("01 Cover")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("01 Cover").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("03 Table of Contents")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("03 Table of Contents").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("02 Story")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("02 Story").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("03 Chapter")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("03 Chapter").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("04 Middle")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("04 Middle").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("05 General Data")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("05 General Data").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("AP01 Appendix")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("AP01 Appendix").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("S03 Supplement")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("S03 Supplement").add(tempStr);
+                                    }
+                                    else {
+                                        continue;
+                                    }
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                            else {
+                                if (tempStr.contains("Cover")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("01 Cover").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("03 Table of Contents")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("03 Table of Contents").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("02 Story")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("02 Story").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("03 Chapter")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("03 Chapter").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("04 Middle")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("04 Middle").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("05 General Data")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("05 General Data").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("AP01 Appendix")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("AP01 Appendix").add(tempStr);
+                                        continue;
+                                    }
+                                }
+                                if (tempStr.contains("S03 Supplement")) {
+                                    if (tempStr.contains("c" + y.getCdl_code())) {
+                                        lepTable.get("S03 Supplement").add(tempStr);
+                                    }
+                                    else {
+                                        continue;
+                                    }
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                        }
+                        else if (tempStr.contains("03 Table of Contents") && y.getCdl_block_name().equals("TOC") && tempStr.contains(".pdf")) {
+                            if (y.getCdl_code() < 10) {
+                                if (tempStr.contains("03 Table of Contents")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("03 Table of Contents").add(tempStr);
+                                    }
+                                    else {
+                                        continue;
+                                    }
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                            else if (tempStr.contains("03 Table of Contents")) {
+                                if (tempStr.contains("c" + y.getCdl_code())) {
+                                    lepTable.get("03 Table of Contents").add(tempStr);
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                            else {
+                                continue;
+                            }
+                        }
+                        else if (tempStr.contains("02 List of Effective Pages")
+                                && y.getCdl_block_name().equals("LEP") && tempStr.contains(".pdf")){
+                            if (y.getCdl_code() < 10) {
+                                if (tempStr.contains("02 List of Effective Pages")) {
+                                    if (tempStr.contains("c0" + y.getCdl_code())) {
+                                        lepTable.get("02 List of Effective Pages").add(tempStr);
+                                    }
+                                    else {
+                                        continue;
+                                    }
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                            else if (tempStr.contains("02 List of Effective Pages")) {
+                                if (tempStr.contains("c" + y.getCdl_code())) {
+                                    lepTable.get("02 List of Effective Pages").add(tempStr);
+                                }
+                                else {
+                                    continue;
+                                }
+                            }
+                            else {
+                                continue;
+                            }
+                        }
+                    }
+                    return;
+                });
+                if (filepath != null) {
+                    filepath.close();
+                }
+            }
+            catch (Throwable t) {
+                if (filepath != null) {
+                    try {
+                        filepath.close();
+                    }
+                    catch (Throwable exception) {
+                        t.addSuppressed(exception);
+                    }
+                }
+                throw t;
+            }
+        }
+        catch (IOException e) {
+            throw new IOException("Directory Not Present!");
+        }
+        sortLepTable(lepTable);
+
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter("./manuals/"
+                + manualName+flgTag+"REV6-FULL.pdf"));
+        PdfMerger merger = new PdfMerger(pdfDoc);
+
+        List<String> blockNames = new ArrayList<>();
+        blockNames.add("01 Cover");
+        blockNames.add("02 List of Effective Pages");
+        blockNames.add("03 Table of Contents");
+        blockNames.add("02 Story");
+        blockNames.add("03 Chapter");
+        blockNames.add("04 Middle");
+        blockNames.add("05 General Data");
+        blockNames.add("AP01 Appendix");
+        blockNames.add("S03 Supplement");
+
+
+        for(String s1: blockNames) {
+            ArrayList arr = lepTable.get(s1);
+            int n = arr.size();
+
+            for(Object s: arr){
+                PdfDocument tempPdf = new PdfDocument(new PdfReader(String.valueOf(s)));
+                merger.merge(tempPdf, 1, tempPdf.getNumberOfPages());
+                tempPdf.close();
+            }
+
+        }
+
+        pdfDoc.close();
+    }
+
+    public void sortLepTable(HashMap <String, ArrayList> dict) {
+
+        // sort dict
+        for(List arr: dict.values()) {
+            Collections.sort(arr);
+        }
     }
 }
