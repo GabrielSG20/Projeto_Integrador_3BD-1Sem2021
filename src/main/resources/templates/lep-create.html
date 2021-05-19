@@ -61,6 +61,8 @@
         <div style="display: block; border-bottom: 1px solid #8bdee0; margin-top: 20px;"></div>
     </div>
 </form>
+<div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 <table class="table table-bordered" id="table">
     <thead>
     <tr>

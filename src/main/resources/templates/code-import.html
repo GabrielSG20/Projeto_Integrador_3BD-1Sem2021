@@ -39,6 +39,8 @@
         <input class="codeimport" type="file" id="myFile" name="files" accept=".xls,.xlsx">
 
     </div>
+    <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
     <hr>
     <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Create</button>
 </form>

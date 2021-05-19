@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -27,12 +28,18 @@ public class LEPController {
     }
 
     @RequestMapping(value = "/lep-create", method = RequestMethod.POST)
-    public String createLep(@ModelAttribute("lep") Lep lep) throws IOException {
+    public String createLep(@ModelAttribute("lep") Lep lep,
+                            RedirectAttributes redirAttrs) throws IOException {
 
+
+        if(!lepService.checkIntegrity(lep)) {
+            redirAttrs.addFlashAttribute("error", "Incorrect data, check" +
+                    " fields integrity, eg.: all fields are filled?");
+            return "redirect:/lep-create";
+        }
 
         lepService.populateRevisionDates(lep);
-        lepService.creatConcat(lep);
-
+        redirAttrs.addFlashAttribute("success", "LEP successfully created!");
 
         return "redirect:/lep-create";
     }

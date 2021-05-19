@@ -39,6 +39,21 @@ public class LepService
     private CodeListService codeListService;
 
 
+    public boolean checkIntegrity(Lep lep) {
+
+        if(lep.getRevision_dates().equals("")) {
+            return false;
+        } if(lep.getCdl_code().equals("")){
+            return false;
+        } if(lep.getMnl_name().equals("")) {
+            return false;
+        } if(lep.getFlg_tag().equals("")) {
+            return false;
+        }
+
+        return true;
+    }
+
     public void populateRevisionDates(final Lep lep) throws IOException {
         List<String> filterRevisionDates = new ArrayList<>();
         final String[] rvParts = lep.getRevision_dates().split("-");

@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.lang.reflect.Field;
+import java.util.Objects;
+import java.util.stream.Stream;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -29,14 +33,14 @@ public class General {
 
     private General[] codelist = new General[3];
 
-    public Integer addLista(General [] general, CodeList[] codeListModel) {
+    public Integer addLista(General[] general, CodeList[] codeListModel) {
         int count = 3;
-        for(int i = 0; i<3;i++) {
-            if(general[i].getCdl_section().equals("")) {
+        for (int i = 0; i < 3; i++) {
+            if (general[i].getCdl_section().equals("")) {
                 --count;
                 continue;
             } else {
-                codeListModel[i] = new CodeList(i,general[i].getFlg_secundary(), general[i].getCdl_section(),
+                codeListModel[i] = new CodeList(i, general[i].getFlg_secundary(), general[i].getCdl_section(),
                         Integer.parseInt(general[i].getCdl_block_number()), general[i].getCdl_sub_section(),
                         general[i].getCdl_block_name(), Integer.parseInt(general[i].getCdl_code()));
             }
@@ -44,3 +48,4 @@ public class General {
         return count;
     }
 }
+

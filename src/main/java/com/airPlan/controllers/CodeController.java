@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class CodeController {
     }
 
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
-    public String saveCodeList(@ModelAttribute("general") General general){
+    public String saveCodeList(@ModelAttribute("general") General general, RedirectAttributes redirAttrs){
         CodeList[] codelists = new CodeList[3];
 
         int n = general.addLista(general.getCodelist(), codelists);
@@ -63,6 +64,7 @@ public class CodeController {
 
         codeListService.saveCodeList(codelists, n, manual);
 
+
         return "redirect:/code-create";
     }
 
@@ -73,7 +75,8 @@ public class CodeController {
     }
 
     @RequestMapping("/code-import")
-    public String importCodeList(@ModelAttribute Manual manual, Model model, @RequestParam("files") MultipartFile[] files) {
+    public String importCodeList(@ModelAttribute Manual manual, Model model, @RequestParam("files") MultipartFile[] files,
+                                 RedirectAttributes redirAttrs) {
         StringBuilder fileNames = new StringBuilder();
         for (MultipartFile file : files) {
             Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
@@ -86,7 +89,16 @@ public class CodeController {
         }
         model.addAttribute("msg", "Succesfully uploaded files " + fileNames.toString());
 
+        if(manual.getMnl_name().isEmpty()) {
+            redirAttrs.addFlashAttribute("error", "Incorrect data, check" +
+                    " fields integrity, eg.: Primary Key (Manual Name) field is required.");
+
+            return "redirect:/code-import";
+        }
+
         importCodeList.getCellData(manual.getMnl_name(), fileNames.toString());
+        redirAttrs.addFlashAttribute("success", "File '" + fileNames + "' successfully uploaded to database " +
+                "(copy created at .\\uploads).");
 
         return "redirect:/code-import";
     }
