@@ -41,13 +41,13 @@ public class LepService
 
     public boolean checkIntegrity(Lep lep) {
 
-        if(lep.getRevision_dates().equals("")) {
+        if(lep.getRevision_dates().length() == 0) {
             return false;
-        } if(lep.getCdl_code().equals("")){
+        } else if(lep.getCdl_code().length() == 0){
             return false;
-        } if(lep.getMnl_name().equals("")) {
+        } else if(lep.getMnl_name().length() == 0) {
             return false;
-        } if(lep.getFlg_tag().equals("")) {
+        } else if(lep.getFlg_tag().length() == 0) {
             return false;
         }
 
@@ -83,15 +83,16 @@ public class LepService
 
         List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
         String destPath = String.valueOf(Paths.get("./manuals/" + manualName.toUpperCase() + "-00-02c" + code + ".pdf"));
-        Paragraph paragraph1 = new Paragraph("LIST OF EFFECTIVE PAGES");
-        PdfWriter pdfWriter = new PdfWriter(destPath);
-        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        final Paragraph paragraph1 = new Paragraph("LIST OF EFFECTIVE PAGES");
+        final PdfWriter pdfWriter = new PdfWriter(destPath);
+        final PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.addNewPage();
         final Document document = new Document(pdfDocument);
         document.add(paragraph1.setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(18.0f));
         for (Object s2 : filterRevisionDates) {
             final Paragraph temp = new Paragraph(String.valueOf(s2));
-            document.add(temp.setTextAlignment(TextAlignment.CENTER).setFontSize(16.0f));
+            temp.setMultipliedLeading(0.5f);
+            document.add(temp.setTextAlignment(TextAlignment.CENTER).setFontSize(12.0f));
         }
         // INTERFACE
         document.showTextAligned(new Paragraph(String
@@ -501,6 +502,7 @@ public class LepService
             PdfDocument doc2 = new PdfDocument(pdfReader2);
             for (int n3 = doc2.getNumberOfPages(), l = 1; l <= n3; ++l) {
                 String text2 = PdfTextExtractor.getTextFromPage(doc2.getPage(l), new SimpleTextExtractionStrategy());
+                String text3 = text2;
                 String[] textParts2 = text2.split("\n");
                 ArrayList<String> textPartsf2 = new ArrayList<>();
                 for (final String x4 : textParts2) {
@@ -682,12 +684,6 @@ public class LepService
                     String x5 = textPartsf2.get(0) + textPartsf2.get(1);
 
                     final String[] x6 = x5.split(" ");
-                    System.out.println("x6 = " + x6.length);
-                    System.out.println("x6 >>>>> start ");
-                    for(String str: x6) {
-                        System.out.println(str);
-                    }
-                    System.out.println("x6 >>>>> end ");
                     if(l%2!=0) {
                         if (x6.length == 9) {
                             final String block2 = x6[1];
@@ -1300,7 +1296,6 @@ public class LepService
 
         for(String s1: blockNames) {
             ArrayList arr = lepTable.get(s1);
-            int n = arr.size();
 
             for(Object s: arr){
                 PdfDocument tempPdf = new PdfDocument(new PdfReader(String.valueOf(s)));

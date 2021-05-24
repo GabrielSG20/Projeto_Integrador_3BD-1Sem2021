@@ -16,10 +16,6 @@ header {
     margin-top: -10%;
 }
 
-.field-error {
-    background-color: red;
-}
-
 #button1, #button2, #button3, #button4 {
     background-color: #0367A5;
     font-family: Roboto;
