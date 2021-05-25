@@ -75,49 +75,49 @@ public class LepService
     public void addCell(String block, String code, Integer page, String change, Table table, Integer lastPage ) {
 
         if (page == 1) {
-            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderTop(new SolidBorder(0.5f)));
-            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderTop(new SolidBorder(0.5f)));
-            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderTop(new SolidBorder(0.5f)));
             if (change.equals("REVISION 06")) {
-                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
+                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                         .setBorderTop(new SolidBorder(0.5f)));
             } else {
-                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER)
+                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                         .setBorderTop(new SolidBorder(0.5f)));
             }
-            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderTop(new SolidBorder(0.5f)));
 
         } else if (page == lastPage) {
-            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderBottom(new SolidBorder(0.5f)));
-            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderBottom(new SolidBorder(0.5f)));
-            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderBottom(new SolidBorder(0.5f)));
             if (change.equals("REVISION 06")) {
-                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
+                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                         .setBorderBottom(new SolidBorder(0.5f)));
             } else {
-                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER)
+                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                         .setBorderBottom(new SolidBorder(0.5f)));
             }
-            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER)
+            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderBottom(new SolidBorder(0.5f)));
         } else {
-            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER));
-            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER));
-            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER));
+            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
+            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
+            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
             if (change.equals("REVISION 06")) {
-                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
             }
             else {
-                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
             }
-            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER));
+            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
         }
     }
 
@@ -390,72 +390,70 @@ public class LepService
         // sort dict
         sortLepTable(lepTable);
 
-        /* TODO fazer addCell borderbottom e bordertop quando for page == 1 e page == n */
-
         document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
         float[] columnWidths = { 60.0f, 60.0f, 60.0f, 90.0f, 60.0f };
         Table table = new Table(columnWidths);
         table.addCell(new Cell().add("Block").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
-                .setBorderTop(new SolidBorder(0.5f)));
+                .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
         table.addCell(new Cell().add("Code").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
-                .setBorderTop(new SolidBorder(0.5f)));
+                .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
         table.addCell(new Cell().add("Page").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
-                .setBorderTop(new SolidBorder(0.5f)));
+                .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
         table.addCell(new Cell().add("    ").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
-                .setBorderTop(new SolidBorder(0.5f)));
+                .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
         table.addCell(new Cell().add("Change").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
-                .setBorderTop(new SolidBorder(0.5f)));
+                .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
         if (lepTable.get("01 Cover") != null) {
             table.addCell(new Cell().add("0-TITLE").setBorder(Border.NO_BORDER)
                     .setBorderBottom(new SolidBorder(0.5f))
-                    .setBorderTop(new SolidBorder(0.5f)));
+                    .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
             table.addCell(new Cell().add("00").setBorder(Border.NO_BORDER)
                     .setBorderBottom(new SolidBorder(0.5f))
-                    .setBorderTop(new SolidBorder(0.5f)));
+                    .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
             table.addCell(new Cell().add("cover").setBold().setBorder(Border.NO_BORDER)
                     .setBorderBottom(new SolidBorder(0.5f))
-                    .setBorderTop(new SolidBorder(0.5f)));
+                    .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
             table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
                     .setBorderBottom(new SolidBorder(0.5f))
-                    .setBorderTop(new SolidBorder(0.5f)));
+                    .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
             table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER)
                     .setBorderBottom(new SolidBorder(0.5f))
-                    .setBorderTop(new SolidBorder(0.5f)));
+                    .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
         }
         for (int i = 1; i <= 4; ++i) {
             switch(i) {
                 case 1:
                     table.addCell(new Cell().add("0-LEP").setBorder(Border.NO_BORDER)
-                            .setBorderTop(new SolidBorder(0.5f)));
+                            .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
-                            .setBorderTop(new SolidBorder(0.5f)));
+                            .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add(String.valueOf(i)).setBorder(Border.NO_BORDER)
-                            .setBorderTop(new SolidBorder(0.5f)));
+                            .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
-                            .setBorderTop(new SolidBorder(0.5f)));
+                            .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER)
-                            .setBorderTop(new SolidBorder(0.5f)));
+                            .setBorderTop(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     break;
 
                 case 4:
                     table.addCell(new Cell().add("0-LEP").setBorder(Border.NO_BORDER)
-                            .setBorderBottom(new SolidBorder(0.5f)));
+                            .setBorderBottom(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
-                            .setBorderBottom(new SolidBorder(0.5f)));
+                            .setBorderBottom(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add(String.valueOf(i)).setBorder(Border.NO_BORDER)
-                            .setBorderBottom(new SolidBorder(0.5f)));
+                            .setBorderBottom(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
-                            .setBorderBottom(new SolidBorder(0.5f)));
+                            .setBorderBottom(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER)
-                            .setBorderBottom(new SolidBorder(0.5f)));
+                            .setBorderBottom(new SolidBorder(0.5f)).setTextAlignment(TextAlignment.CENTER));
                     break;
 
                 default:
-                    table.addCell(new Cell().add("0-LEP").setBorder(Border.NO_BORDER));
-                    table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER));
-                    table.addCell(new Cell().add(String.valueOf(i)).setBorder(Border.NO_BORDER));
-                    table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER));
-                    table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER));
+                    table.addCell(new Cell().add("0-LEP").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+                    table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+                    table.addCell(new Cell().add(String.valueOf(i)).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+                    table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+                    table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
                     break;
             }
         }
