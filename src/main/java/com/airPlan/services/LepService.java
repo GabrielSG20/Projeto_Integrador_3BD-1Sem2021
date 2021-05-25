@@ -6,23 +6,24 @@ import java.util.stream.Stream;
 import java.util.List;
 
 import com.itextpdf.kernel.utils.PdfMerger;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
+import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrategy;
 import com.itextpdf.kernel.pdf.PdfReader;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Table;
 import com.airPlan.entities.CodeList;
 import java.nio.file.Files;
 import java.util.HashMap;
-import com.itextpdf.layout.element.AreaBreak;
+
 import com.itextpdf.layout.property.AreaBreakType;
 import com.itextpdf.layout.property.VerticalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.Document;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.element.Paragraph;
+
 import java.nio.file.Paths;
 import java.io.IOException;
 import com.airPlan.entities.Lep;
@@ -69,6 +70,55 @@ public class LepService
         }
         final Integer mnl_id = this.manualService.findManualByName(lep.getMnl_name());
         this.createPage1(lep.getCdl_code(), lep.getMnl_name(), lep.getFlg_tag(), mnl_id, filterRevisionDates);
+    }
+
+    public void addCell(String block, String code, Integer page, String change, Table table, Integer lastPage ) {
+
+        if (page == 1) {
+            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER)
+                    .setBorderTop(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
+                    .setBorderTop(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER)
+                    .setBorderTop(new SolidBorder(0.5f)));
+            if (change.equals("REVISION 06")) {
+                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
+                        .setBorderTop(new SolidBorder(0.5f)));
+            } else {
+                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER)
+                        .setBorderTop(new SolidBorder(0.5f)));
+            }
+            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER)
+                    .setBorderTop(new SolidBorder(0.5f)));
+
+        } else if (page == lastPage) {
+            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f)));
+            if (change.equals("REVISION 06")) {
+                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
+                        .setBorderBottom(new SolidBorder(0.5f)));
+            } else {
+                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER)
+                        .setBorderBottom(new SolidBorder(0.5f)));
+            }
+            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f)));
+        } else {
+            table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER));
+            table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER));
+            table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER));
+            if (change.equals("REVISION 06")) {
+                table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER));
+            }
+            else {
+                table.addCell(new Cell().add("").setBorder(Border.NO_BORDER));
+            }
+            table.addCell(new Cell().add(change).setBorder(Border.NO_BORDER));
+        }
     }
 
     public void creatConcat(final Lep lep) throws IOException {
@@ -340,27 +390,74 @@ public class LepService
         // sort dict
         sortLepTable(lepTable);
 
+        /* TODO fazer addCell borderbottom e bordertop quando for page == 1 e page == n */
+
         document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
         float[] columnWidths = { 60.0f, 60.0f, 60.0f, 90.0f, 60.0f };
         Table table = new Table(columnWidths);
-        table.addCell(new Cell().add("Block"));
-        table.addCell(new Cell().add("Code"));
-        table.addCell(new Cell().add("Page"));
-        table.addCell(new Cell().add("    "));
-        table.addCell(new Cell().add("Change"));
+        table.addCell(new Cell().add("Block").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
+                .setBorderTop(new SolidBorder(0.5f)));
+        table.addCell(new Cell().add("Code").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
+                .setBorderTop(new SolidBorder(0.5f)));
+        table.addCell(new Cell().add("Page").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
+                .setBorderTop(new SolidBorder(0.5f)));
+        table.addCell(new Cell().add("    ").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
+                .setBorderTop(new SolidBorder(0.5f)));
+        table.addCell(new Cell().add("Change").setBorder(Border.NO_BORDER).setBorderBottom(new SolidBorder(0.5f))
+                .setBorderTop(new SolidBorder(0.5f)));
         if (lepTable.get("01 Cover") != null) {
-            table.addCell(new Cell().add("0-TITLE"));
-            table.addCell(new Cell().add("00"));
-            table.addCell(new Cell().add("cover").setBold());
-            table.addCell(new Cell().add("*"));
-            table.addCell(new Cell().add("REVISION 06"));
+            table.addCell(new Cell().add("0-TITLE").setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f))
+                    .setBorderTop(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add("00").setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f))
+                    .setBorderTop(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add("cover").setBold().setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f))
+                    .setBorderTop(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f))
+                    .setBorderTop(new SolidBorder(0.5f)));
+            table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER)
+                    .setBorderBottom(new SolidBorder(0.5f))
+                    .setBorderTop(new SolidBorder(0.5f)));
         }
         for (int i = 1; i <= 4; ++i) {
-            table.addCell(new Cell().add("0-LEP"));
-            table.addCell(new Cell().add(code));
-            table.addCell(new Cell().add(String.valueOf(i)));
-            table.addCell(new Cell().add("*"));
-            table.addCell(new Cell().add("REVISION 06"));
+            switch(i) {
+                case 1:
+                    table.addCell(new Cell().add("0-LEP").setBorder(Border.NO_BORDER)
+                            .setBorderTop(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
+                            .setBorderTop(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add(String.valueOf(i)).setBorder(Border.NO_BORDER)
+                            .setBorderTop(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
+                            .setBorderTop(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER)
+                            .setBorderTop(new SolidBorder(0.5f)));
+                    break;
+
+                case 4:
+                    table.addCell(new Cell().add("0-LEP").setBorder(Border.NO_BORDER)
+                            .setBorderBottom(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)
+                            .setBorderBottom(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add(String.valueOf(i)).setBorder(Border.NO_BORDER)
+                            .setBorderBottom(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
+                            .setBorderBottom(new SolidBorder(0.5f)));
+                    table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER)
+                            .setBorderBottom(new SolidBorder(0.5f)));
+                    break;
+
+                default:
+                    table.addCell(new Cell().add("0-LEP").setBorder(Border.NO_BORDER));
+                    table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER));
+                    table.addCell(new Cell().add(String.valueOf(i)).setBorder(Border.NO_BORDER));
+                    table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER));
+                    table.addCell(new Cell().add("REVISION 06").setBorder(Border.NO_BORDER));
+                    break;
+            }
         }
         for (int j = 0; j < lepTable.get("03 Table of Contents").size(); ++j) {
             String path = String.valueOf(lepTable.get("03 Table of Contents").get(j));
@@ -380,34 +477,13 @@ public class LepService
                 if (k % 2 == 0) {
                     final String block = x3[1];
                     final String code2 = x3[6];
-                    final String page = x3[3] + " " + x3[4];
                     final String change = x3[7];
-                    table.addCell(new Cell().add(block));
-                    table.addCell(new Cell().add(code2));
-                    table.addCell(new Cell().add(page));
-                    table.addCell(new Cell().add(""));
-                    if (change.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(change));
-                    }
-                }
-                else {
+                    addCell(block, code2, k, change, table, n2);
+                } else {
                     final String block = x3[1];
                     final String code2 = x3[4];
-                    final String page = x3[5] + " " + x3[6];
                     final String change = x3[2];
-                    table.addCell(new Cell().add(block));
-                    table.addCell(new Cell().add(code2));
-                    table.addCell(new Cell().add(page));
-                    table.addCell(new Cell().add(""));
-                    if (change.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(change));
-                    }
+                    addCell(block, code2, k, change, table, n2);
                 }
             }
             pdfReader.close();
@@ -431,67 +507,27 @@ public class LepService
                     if (x6.length == 9) {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7] + " " + x6[8];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
                     final String block2 = x6[1];
                     final String code3 = x6[6];
-                    final String page2 = x6[7] + " ";
                     final String change2 = x6[3] + " " + x6[4];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
                     final String block2 = x6[1];
                     final String code3 = x6[4];
-                    final String page2 = x6[5] + " ";
                     final String change2 = x6[2];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
             }
             pdfReader2.close();
@@ -516,67 +552,27 @@ public class LepService
                     if (x6.length == 9) {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7] + " " + x6[8];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
                     final String block2 = x6[1];
                     final String code3 = x6[6];
-                    final String page2 = x6[7] + " ";
                     final String change2 = x6[3] + " " + x6[4];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
                     final String block2 = x6[1];
                     final String code3 = x6[4];
-                    final String page2 = x6[5] + " ";
                     final String change2 = x6[2];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
             }
             pdfReader2.close();
@@ -600,67 +596,27 @@ public class LepService
                     if (x6.length == 9) {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7] + " " + x6[8];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
                     final String block2 = x6[1];
                     final String code3 = x6[6];
-                    final String page2 = x6[7] + " ";
                     final String change2 = x6[3] + " " + x6[4];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
                     final String block2 = x6[1];
                     final String code3 = x6[4];
-                    final String page2 = x6[5] + " ";
                     final String change2 = x6[2];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
             }
             pdfReader2.close();
@@ -688,65 +644,25 @@ public class LepService
                         if (x6.length == 9) {
                             final String block2 = x6[1];
                             final String code3 = x6[6];
-                            final String page2 = x6[7] + " ";
                             final String change2 = x6[3] + " " + x6[4];
-                            table.addCell(new Cell().add(block2));
-                            table.addCell(new Cell().add(code3));
-                            table.addCell(new Cell().add(page2 + l));
-                            if (change2.equals("REVISION 06")) {
-                                table.addCell(new Cell().add("*"));
-                            }
-                            else {
-                                table.addCell(new Cell().add(""));
-                            }
-                            table.addCell(new Cell().add(change2));
+                            addCell(block2, code3, l, change2, table, n3);
                         } else if (x6.length == 8) {
                             final String block2 = x6[1];
                             final String code3 = x6[5];
-                            final String page2 = x6[3] + " ";
                             final String change2 = x6[6];
-                            table.addCell(new Cell().add(block2));
-                            table.addCell(new Cell().add(code3));
-                            table.addCell(new Cell().add(page2 + l));
-                            if (change2.equals("REVISION 06")) {
-                                table.addCell(new Cell().add("*"));
-                            }
-                            else {
-                                table.addCell(new Cell().add(""));
-                            }
-                            table.addCell(new Cell().add(change2));
+                            addCell(block2, code3, l, change2, table, n3);
                         }
                     } else {
                         if (x6.length == 9) {
                             final String block2 = x6[1];
                             final String code3 = x6[6];
-                            final String page2 = x6[3] + " ";
                             final String change2 = x6[7] + " " + x6[8];
-                            table.addCell(new Cell().add(block2));
-                            table.addCell(new Cell().add(code3));
-                            table.addCell(new Cell().add(page2 + l));
-                            if (change2.equals("REVISION 06")) {
-                                table.addCell(new Cell().add("*"));
-                            }
-                            else {
-                                table.addCell(new Cell().add(""));
-                            }
-                            table.addCell(new Cell().add(change2));
+                            addCell(block2, code3, l, change2, table, n3);
                         } else if (x6.length == 8) {
                             final String block2 = x6[1];
                             final String code3 = x6[6];
-                            final String page2 = x6[3] + " ";
                             final String change2 = x6[7];
-                            table.addCell(new Cell().add(block2));
-                            table.addCell(new Cell().add(code3));
-                            table.addCell(new Cell().add(page2 + l));
-                            if (change2.equals("REVISION 06")) {
-                                table.addCell(new Cell().add("*"));
-                            }
-                            else {
-                                table.addCell(new Cell().add(""));
-                            }
-                            table.addCell(new Cell().add(change2));
+                            addCell(block2, code3, l, change2, table, n3);
                         }
                     }
 
@@ -772,67 +688,27 @@ public class LepService
                         if (x6.length == 9) {
                             final String block2 = x6[1];
                             final String code3 = x6[6];
-                            final String page2 = x6[3] + " ";
                             final String change2 = x6[7] + " " + x6[8];
-                            table.addCell(new Cell().add(block2));
-                            table.addCell(new Cell().add(code3));
-                            table.addCell(new Cell().add(page2 + l));
-                            if (change2.equals("REVISION 06")) {
-                                table.addCell(new Cell().add("*"));
-                            }
-                            else {
-                                table.addCell(new Cell().add(""));
-                            }
-                            table.addCell(new Cell().add(change2));
+                            addCell(block2, code3, l, change2, table, n3);
                         }
                         else if (x6.length == 8) {
                             final String block2 = x6[1];
                             final String code3 = x6[5];
-                            final String page2 = x6[6] + " ";
                             final String change2 = x6[3];
-                            table.addCell(new Cell().add(block2));
-                            table.addCell(new Cell().add(code3));
-                            table.addCell(new Cell().add(page2 + l));
-                            if (change2.equals("REVISION 06")) {
-                                table.addCell(new Cell().add("*"));
-                            }
-                            else {
-                                table.addCell(new Cell().add(""));
-                            }
-                            table.addCell(new Cell().add(change2));
+                            addCell(block2, code3, l, change2, table, n3);
                         }
                     }
                     else if (x6.length == 9) {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[7] + " ";
                         final String change2 = x6[3] + " " + x6[6];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                     else if (x6.length == 8) {
                         final String block2 = x6[1];
                         final String code3 = x6[5];
-                        final String page2 = x6[6] + " ";
                         final String change2 = x6[3];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                 }
             }
@@ -857,67 +733,27 @@ public class LepService
                     if (x6.length == 9) {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7] + " " + x6[8];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
                     final String block2 = x6[1];
                     final String code3 = x6[6];
-                    final String page2 = x6[7] + " ";
                     final String change2 = x6[3] + " " + x6[4];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
                     final String block2 = x6[1];
                     final String code3 = x6[4];
-                    final String page2 = x6[5] + " ";
                     final String change2 = x6[2];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
             }
             pdfReader2.close();
@@ -941,67 +777,27 @@ public class LepService
                     if (x6.length == 9) {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7] + " " + x6[8];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
                         final String block2 = x6[1];
                         final String code3 = x6[6];
-                        final String page2 = x6[3] + " ";
                         final String change2 = x6[7];
-                        table.addCell(new Cell().add(block2));
-                        table.addCell(new Cell().add(code3));
-                        table.addCell(new Cell().add(page2 + l));
-                        if (change2.equals("REVISION 06")) {
-                            table.addCell(new Cell().add("*"));
-                        }
-                        else {
-                            table.addCell(new Cell().add(""));
-                        }
-                        table.addCell(new Cell().add(change2));
+                        addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
                     final String block2 = x6[1];
                     final String code3 = x6[6];
-                    final String page2 = x6[7] + " ";
                     final String change2 = x6[3] + " " + x6[4];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
                     final String block2 = x6[1];
                     final String code3 = x6[4];
-                    final String page2 = x6[5] + " ";
                     final String change2 = x6[2];
-                    table.addCell(new Cell().add(block2));
-                    table.addCell(new Cell().add(code3));
-                    table.addCell(new Cell().add(page2 + l));
-                    if (change2.equals("REVISION 06")) {
-                        table.addCell(new Cell().add("*"));
-                    }
-                    else {
-                        table.addCell(new Cell().add(""));
-                    }
-                    table.addCell(new Cell().add(change2));
+                    addCell(block2, code3, l, change2, table, n3);
                 }
             }
             pdfReader2.close();
@@ -1054,10 +850,10 @@ public class LepService
                 VerticalAlignment.TOP, 0);
         document.add(table.setHorizontalAlignment(HorizontalAlignment.CENTER).setMarginBottom(50));
 
-
         pdfDocument.close();
         document.close();
     }
+
 
     public void concatDocs(final String code, final String manualName,
                             final String flgTag, final Integer mnlId) throws IOException {
