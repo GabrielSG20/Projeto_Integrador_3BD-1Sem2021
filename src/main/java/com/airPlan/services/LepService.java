@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.stream.Stream;
 import java.util.List;
 
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.kernel.utils.PdfMerger;
 import com.itextpdf.layout.border.Border;
@@ -131,7 +132,7 @@ public class LepService
 
     public void createPage1(final String code, final String manualName,
                             final String flgTag, final Integer mnlId,
-                            List filterRevisionDates, String mnlName) throws IOException {
+                            List<String> filterRevisionDates, String mnlName) throws IOException {
 
 
         List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
@@ -140,44 +141,14 @@ public class LepService
         final PdfWriter pdfWriter = new PdfWriter(destPath);
         final PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.addNewPage();
-        final Document document = new Document(pdfDocument);
+        final Document document = new Document(pdfDocument, PageSize.A4,false);
+        document.setTopMargin(40f);
         document.add(paragraph1.setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(18.0f));
         for (Object s2 : filterRevisionDates) {
             final Paragraph temp = new Paragraph(String.valueOf(s2));
             temp.setMultipliedLeading(0.5f);
             document.add(temp.setTextAlignment(TextAlignment.CENTER).setFontSize(12.0f));
         }
-        // INTERFACE
-
-        SolidLine line = new SolidLine(1f);
-        LineSeparator ls= new LineSeparator(line);
-        ls.setFixedPosition(550f,20f, 800f);
-
-
-        document.showTextAligned(new Paragraph(String
-                        .format("Page " + 1)).setFontSize(14),
-                550, 20, 1, TextAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 0);
-
-        document.add(ls);
-
-        document.showTextAligned(new Paragraph(String.format("List of Effective Pages")),
-                560, 830, 1, TextAlignment.RIGHT,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format(manualName)).setFontSize(8),
-                50, 80, 1, TextAlignment.LEFT,
-                VerticalAlignment.TOP, 300);
-
-        document.showTextAligned(new Paragraph(String.format("0-LEP")).setBold().setFontSize(16),
-                300, 60, 1, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
-                300, 35, 1, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
-
 
         // Create and select next page
         document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
@@ -186,34 +157,8 @@ public class LepService
                 300, 500, 2, TextAlignment.CENTER,
                 VerticalAlignment.MIDDLE, 0);
 
-        // begin interface
-        document.showTextAligned(new Paragraph(String
-                        .format("Page " + 2)).setFontSize(14),
-                100, 20, 2, TextAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 0);
 
-        document.add(ls);
-        document.showTextAligned(new Paragraph(String.format("List of Effective Pages")),
-                50, 830, 2, TextAlignment.LEFT,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format(manualName)).setFontSize(8),
-                560, 80, 2, TextAlignment.LEFT,
-                VerticalAlignment.BOTTOM, 300);
-
-        document.showTextAligned(new Paragraph(String.format("0-LEP")).setBold().setFontSize(16),
-                300, 60, 2, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
-                300, 35, 2, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
-        // end interface
-
-
-
-        HashMap<String, ArrayList> lepTable = new HashMap<>();
+        HashMap<String, ArrayList<String>> lepTable = new HashMap<>();
         ArrayList<String> coverList = new ArrayList<>();
         lepTable.put("01 Cover", coverList);
         ArrayList<String> tocList = new ArrayList<>();
@@ -549,7 +494,6 @@ public class LepService
             PdfDocument doc2 = new PdfDocument(pdfReader2);
             for (int n3 = doc2.getNumberOfPages(), l = 1; l <= n3; ++l) {
                 String text2 = PdfTextExtractor.getTextFromPage(doc2.getPage(l), new SimpleTextExtractionStrategy());
-                String text3 = text2;
                 String[] textParts2 = text2.split("\n");
                 ArrayList<String> textPartsf2 = new ArrayList<>();
                 for (final String x4 : textParts2) {
@@ -816,60 +760,71 @@ public class LepService
         }
 
 
-        // interface
-        document.showTextAligned(new Paragraph(String
-                        .format("Page " + 3 )).setFontSize(14),
-                550, 20, 3, TextAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 0);
-
-        document.add(ls);
-
-        document.showTextAligned(new Paragraph(String.format("List of Effective Pages")),
-                560, 830, 3, TextAlignment.RIGHT,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format(manualName)).setFontSize(8),
-                50, 80, 3, TextAlignment.LEFT,
-                VerticalAlignment.TOP, 300);
-
-        document.showTextAligned(new Paragraph(String.format("0-LEP")).setBold().setFontSize(16),
-                300, 60, 3, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
-                300, 35, 3, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
-        // begin interface
-        document.showTextAligned(new Paragraph(String
-                        .format("Page " + 4)).setFontSize(14),
-                100, 20, 4, TextAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 0);
-
-        ls.setFixedPosition(4, 550f, 20f, 800f);
-        document.add(ls);
-
-        document.showTextAligned(new Paragraph(String.format("List of Effective Pages")),
-                50, 830, 4, TextAlignment.LEFT,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format(manualName)).setFontSize(8),
-                560, 80, 4, TextAlignment.LEFT,
-                VerticalAlignment.BOTTOM, 300);
-
-        document.showTextAligned(new Paragraph(String.format("0-LEP")).setBold().setFontSize(16),
-                300, 60, 4, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
-        document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
-                300, 35, 4, TextAlignment.CENTER,
-                VerticalAlignment.TOP, 0);
-
         document.add(table.setHorizontalAlignment(HorizontalAlignment.CENTER).setMarginBottom(50));
 
+        createDetails(document, pdfDocument, manualName, code);
+
+        document.flush();
         pdfDocument.close();
+        pdfWriter.close();
         document.close();
     }
+
+    public void createDetails(Document document, PdfDocument pdfDocument, String manualName, String code) {
+        int n = pdfDocument.getNumberOfPages();
+        SolidLine line = new SolidLine(1f);
+        LineSeparator ls= new LineSeparator(line);
+
+        for(int i=1;i<=pdfDocument.getNumberOfPages();i++) {
+            ls.setFixedPosition(i, 550f, 20f, 800f);
+            document.add(ls);
+
+            if(i%2 == 0) {
+                document.showTextAligned(new Paragraph(String
+                                .format("Page " + i)).setFontSize(14),
+                        100, 20, i, TextAlignment.RIGHT,
+                        VerticalAlignment.BOTTOM, 0);
+
+                document.showTextAligned(new Paragraph(String.format("List of Effective Pages")),
+                        50, 830, i, TextAlignment.LEFT,
+                        VerticalAlignment.TOP, 0);
+
+                document.showTextAligned(new Paragraph(String.format(manualName)).setFontSize(8),
+                        560, 80, i, TextAlignment.LEFT,
+                        VerticalAlignment.BOTTOM, 300);
+
+                document.showTextAligned(new Paragraph(String.format("0-LEP")).setBold().setFontSize(16),
+                        300, 60, i, TextAlignment.CENTER,
+                        VerticalAlignment.TOP, 0);
+
+                document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
+                        300, 35, i, TextAlignment.CENTER,
+                        VerticalAlignment.TOP, 0);
+            } else {
+                document.showTextAligned(new Paragraph(String
+                                .format("Page " + i )).setFontSize(14),
+                        550, 20, i, TextAlignment.RIGHT,
+                        VerticalAlignment.BOTTOM, 0);
+
+                document.showTextAligned(new Paragraph(String.format("List of Effective Pages")),
+                        560, 830, i, TextAlignment.RIGHT,
+                        VerticalAlignment.TOP, 0);
+
+                document.showTextAligned(new Paragraph(String.format(manualName)).setFontSize(8),
+                        50, 80, i, TextAlignment.LEFT,
+                        VerticalAlignment.TOP, 300);
+
+                document.showTextAligned(new Paragraph(String.format("0-LEP")).setBold().setFontSize(16),
+                        300, 60, i, TextAlignment.CENTER,
+                        VerticalAlignment.TOP, 0);
+
+                document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
+                        300, 35, i, TextAlignment.CENTER,
+                        VerticalAlignment.TOP, 0);
+            }
+        }
+    }
+
 
 
     public void concatDocs(final String manualName,
@@ -877,7 +832,7 @@ public class LepService
 
         List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
 
-        HashMap<String, ArrayList> lepTable = new HashMap<>();
+        HashMap<String, ArrayList<String>> lepTable = new HashMap<>();
         ArrayList<String> coverList = new ArrayList<>();
         lepTable.put("01 Cover", coverList);
         ArrayList<String> lepList = new ArrayList<>();
@@ -950,12 +905,6 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else {
@@ -1004,13 +953,8 @@ public class LepService
                                 if (tempStr.contains("S03 Supplement")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
+
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                         }
@@ -1020,24 +964,12 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else if (tempStr.contains("03 Table of Contents")) {
                                 if (tempStr.contains("c" + y.getCdl_code())) {
                                     lepTable.get("03 Table of Contents").add(tempStr);
                                 }
-                                else {
-                                    continue;
-                                }
-                            }
-                            else {
-                                continue;
                             }
                         }
                         else if (tempStr.contains("02 List of Effective Pages")
@@ -1047,28 +979,15 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("02 List of Effective Pages").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else if (tempStr.contains("02 List of Effective Pages")) {
                                 if (tempStr.contains("c" + y.getCdl_code())) {
                                     lepTable.get("02 List of Effective Pages").add(tempStr);
                                 }
-                                else {
-                                    continue;
-                                }
-                            }
-                            else {
-                                continue;
                             }
                         }
                     }
-                    return;
                 });
                 if (filepath != null) {
                     filepath.close();
@@ -1108,7 +1027,7 @@ public class LepService
 
 
         for(String s1: blockNames) {
-            ArrayList arr = lepTable.get(s1);
+            ArrayList<String> arr = lepTable.get(s1);
 
             for(Object s: arr){
                 PdfDocument tempPdf = new PdfDocument(new PdfReader(String.valueOf(s)));
@@ -1126,7 +1045,7 @@ public class LepService
 
         List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
 
-        HashMap<String, ArrayList> lepTable = new HashMap<>();
+        HashMap<String, ArrayList<String>> lepTable = new HashMap<String, ArrayList<String>>();
         ArrayList<String> coverList = new ArrayList<>();
         lepTable.put("01 Cover", coverList);
         ArrayList<String> lepList = new ArrayList<>();
@@ -1357,7 +1276,7 @@ public class LepService
 
 
         for(String s1: blockNames) {
-            ArrayList arr = lepTable.get(s1);
+            ArrayList<String> arr = lepTable.get(s1);
 
             for(Object s: arr){
                 PdfDocument tempPdf = new PdfDocument(new PdfReader(String.valueOf(s)));
@@ -1370,10 +1289,10 @@ public class LepService
         pdfDoc.close();
     }
 
-    public void sortLepTable(HashMap <String, ArrayList> dict) {
+    public void sortLepTable(HashMap<String, ArrayList<String>> dict) {
 
         // sort dict
-        for(List arr: dict.values()) {
+        for(List<String> arr: dict.values()) {
             Collections.sort(arr);
         }
     }
