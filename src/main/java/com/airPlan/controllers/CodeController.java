@@ -87,7 +87,6 @@ public class CodeController {
                 e.printStackTrace();
             }
         }
-        model.addAttribute("msg", "Succesfully uploaded files " + fileNames.toString());
 
         if(manual.getMnl_name().isEmpty()) {
             redirAttrs.addFlashAttribute("error", "Incorrect data, check" +

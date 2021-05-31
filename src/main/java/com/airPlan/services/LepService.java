@@ -1,37 +1,35 @@
 package com.airPlan.services;
 
-import java.nio.file.Path;
-import java.util.Collections;
-import java.util.stream.Stream;
-import java.util.List;
-
+import com.airPlan.entities.CodeList;
+import com.airPlan.entities.Lep;
 import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
+import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
+import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrategy;
 import com.itextpdf.kernel.utils.PdfMerger;
+import com.itextpdf.layout.Document;
 import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.*;
-import com.itextpdf.layout.property.HorizontalAlignment;
-import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
-import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrategy;
-import com.itextpdf.kernel.pdf.PdfReader;
-import com.airPlan.entities.CodeList;
-import java.nio.file.Files;
-import java.util.HashMap;
-
 import com.itextpdf.layout.property.AreaBreakType;
-import com.itextpdf.layout.property.VerticalAlignment;
+import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.layout.Document;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-
-import java.nio.file.Paths;
-import java.io.IOException;
-import com.airPlan.entities.Lep;
-import java.util.ArrayList;
+import com.itextpdf.layout.property.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class LepService
@@ -40,6 +38,7 @@ public class LepService
     private ManualService manualService;
     @Autowired
     private CodeListService codeListService;
+    private String currentRevision = "";
 
 
     public boolean checkIntegrity(Lep lep) {
@@ -57,22 +56,32 @@ public class LepService
         return true;
     }
 
-    public void populateRevisionDates(final Lep lep) throws IOException {
+    public void createLep1(final Lep lep) throws IOException {
         List<String> filterRevisionDates = new ArrayList<>();
         final String[] rvParts = lep.getRevision_dates().split("-");
         for (int i = 0; i < rvParts.length; ++i) {
-            String rvFinal = "";
+            StringBuilder rvFinal = new StringBuilder();
             for (int j = 0; j < rvParts[i].length(); ++j) {
-                rvFinal += rvParts[i].charAt(j);
+                rvFinal.append(rvParts[i].charAt(j));
                 if (j == 7 || j == 8) {
-                    rvFinal += ".................";
+                    rvFinal.append(".................");
+                }
+                if(i == rvParts.length-1 && j <= 8) {
+                    if(Character.isDigit(rvParts[i].charAt(j))) {
+                        if(Character.isDigit(rvParts[i].charAt(j+1))) {
+                            currentRevision+= " ";
+                        } else {
+                            currentRevision+=" 0";
+                        }
+                    }
+                    currentRevision+=rvParts[i].charAt(j);
                 }
             }
-            filterRevisionDates.add(rvFinal);
+            filterRevisionDates.add(rvFinal.toString());
         }
+
         final Integer mnl_id = this.manualService.findManualByName(lep.getMnl_name());
-        this.createPage1(lep.getCdl_code(), lep.getMnl_name(), lep.getFlg_tag(), mnl_id,
-                filterRevisionDates, lep.getMnl_name());
+        this.createLep2(lep, mnl_id, filterRevisionDates);
     }
 
     public void addCell(String block, String code, Integer page,
@@ -85,7 +94,7 @@ public class LepService
                     .setBorderTop(new SolidBorder(0.5f)));
             table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderTop(new SolidBorder(0.5f)));
-            if (change.equals("REVISION 06")) {
+            if (change.equals(currentRevision)) {
                 table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
                         .setBorderTop(new SolidBorder(0.5f)));
             } else {
@@ -102,7 +111,7 @@ public class LepService
                     .setBorderBottom(new SolidBorder(0.5f)));
             table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)
                     .setBorderBottom(new SolidBorder(0.5f)));
-            if (change.equals("REVISION 06")) {
+            if (change.equals(currentRevision)) {
                 table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER)
                         .setBorderBottom(new SolidBorder(0.5f)));
             } else {
@@ -115,7 +124,7 @@ public class LepService
             table.addCell(new Cell().add(block).setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
             table.addCell(new Cell().add(code).setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
             table.addCell(new Cell().add(String.valueOf(page)).setBorder(Border.NO_BORDER)).setTextAlignment(TextAlignment.CENTER);
-            if (change.equals("REVISION 06")) {
+            if (change.equals(currentRevision)) {
                 table.addCell(new Cell().add("*").setBorder(Border.NO_BORDER));
             }
             else {
@@ -125,15 +134,18 @@ public class LepService
         }
     }
 
-    public void creatConcat(final Lep lep) throws IOException {
+    public void setConcat(final Lep lep) throws IOException {
         final Integer mnl_id = this.manualService.findManualByName(lep.getMnl_name());
         concatDocs(lep.getMnl_name(), lep.getFlg_tag(), mnl_id);
     }
 
-    public void createPage1(final String code, final String manualName,
-                            final String flgTag, final Integer mnlId,
-                            List<String> filterRevisionDates, String mnlName) throws IOException {
+    public void createLep2(Lep lep, final Integer mnlId,
+                            List<String> filterRevisionDates) throws IOException {
 
+        final String code, manualName, flgTag;
+        code = lep.getCdl_code();
+        manualName = lep.getMnl_name();
+        flgTag = lep.getFlg_tag();
 
         List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
         String destPath = String.valueOf(Paths.get("./manuals/" + manualName.toUpperCase() + "-00-02c" + code + ".pdf"));
@@ -176,7 +188,7 @@ public class LepService
         ArrayList<String> supplementList = new ArrayList<>();
         lepTable.put("S03 Supplement", supplementList);
         try {
-            Stream<Path> filepath = Files.walk(Paths.get("./manuals/" + mnlName + "/Master/"));
+            Stream<Path> filepath = Files.walk(Paths.get("./manuals/" + manualName + "/Master/"));
             try {
                 filepath.forEach(s -> {
                     String tempStr = s.toString();
@@ -229,12 +241,6 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else {
@@ -284,12 +290,6 @@ public class LepService
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                         }
@@ -299,31 +299,15 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else if (tempStr.contains("03 Table of Contents")) {
                                 if (tempStr.contains("c" + y.getCdl_code())) {
                                     lepTable.get("03 Table of Contents").add(tempStr);
                                 }
-                                else {
-                                    continue;
-                                }
                             }
-                            else {
-                                continue;
-                            }
-                        }
-                        else {
-                            continue;
                         }
                     }
-                    return;
                 });
                 if (filepath != null) {
                     filepath.close();
@@ -415,6 +399,7 @@ public class LepService
                     break;
             }
         }
+
         for (int j = 0; j < lepTable.get("03 Table of Contents").size(); ++j) {
             String path = String.valueOf(lepTable.get("03 Table of Contents").get(j));
             PdfReader pdfReader = new PdfReader(path);
@@ -430,17 +415,16 @@ public class LepService
                 }
                 String x2 = textPartsf.get(2) + textPartsf.get(3);
                 String[] x3 = x2.split(" ");
+                final String block, code2, change;
+                block = x3[1];
                 if (k % 2 == 0) {
-                    final String block = x3[1];
-                    final String code2 = x3[6];
-                    final String change = x3[7];
-                    addCell(block, code2, k, change, table, n2);
+                    code2 = x3[6];
+                    change = x3[7];
                 } else {
-                    final String block = x3[1];
-                    final String code2 = x3[4];
-                    final String change = x3[2];
-                    addCell(block, code2, k, change, table, n2);
+                    code2 = x3[4];
+                    change = x3[2];
                 }
+                addCell(block, code2, k, change, table, n2);
             }
             pdfReader.close();
             doc1.close();
@@ -459,30 +443,31 @@ public class LepService
                 }
                 String x5 = textPartsf2.get(0) + textPartsf2.get(1);
                 String[] x6 = x5.split(" ");
+                final String block2, code3, change2;
                 if (l % 2 == 0) {
                     if (x6.length == 9) {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7] + " " + x6[8];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7] + " " + x6[8];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[6];
-                    final String change2 = x6[3] + " " + x6[4];
+                    block2 = x6[1];
+                    code3 = x6[6];
+                    change2 = x6[3] + " " + x6[4];
                     addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[4];
-                    final String change2 = x6[2];
+                    block2 = x6[1];
+                    code3 = x6[4];
+                    change2 = x6[2];
                     addCell(block2, code3, l, change2, table, n3);
                 }
             }
@@ -503,30 +488,31 @@ public class LepService
                 }
                 String x5 = textPartsf2.get(0) + textPartsf2.get(1);
                 String[] x6 = x5.split(" ");
+                final String block2, code3, change2;
                 if (l % 2 == 0) {
                     if (x6.length == 9) {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7] + " " + x6[8];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7] + " " + x6[8];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[6];
-                    final String change2 = x6[3] + " " + x6[4];
+                    block2 = x6[1];
+                    code3 = x6[6];
+                    change2 = x6[3] + " " + x6[4];
                     addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[4];
-                    final String change2 = x6[2];
+                    block2 = x6[1];
+                    code3 = x6[4];
+                    change2 = x6[2];
                     addCell(block2, code3, l, change2, table, n3);
                 }
             }
@@ -547,30 +533,31 @@ public class LepService
                 }
                 final String x5 = textPartsf2.get(0) + textPartsf2.get(1);
                 final String[] x6 = x5.split(" ");
+                final String block2, code3, change2;
                 if (l % 2 == 0) {
                     if (x6.length == 9) {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7] + " " + x6[8];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7] + " " + x6[8];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[6];
-                    final String change2 = x6[3] + " " + x6[4];
+                    block2 = x6[1];
+                    code3 = x6[6];
+                    change2 = x6[3] + " " + x6[4];
                     addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[4];
-                    final String change2 = x6[2];
+                    block2 = x6[1];
+                    code3 = x6[4];
+                    change2 = x6[2];
                     addCell(block2, code3, l, change2, table, n3);
                 }
             }
@@ -684,30 +671,31 @@ public class LepService
                 }
                 final String x5 = textPartsf2.get(1) + textPartsf2.get(2);
                 final String[] x6 = x5.split(" ");
+                final String block2, code3, change2;
                 if (l % 2 == 0) {
                     if (x6.length == 9) {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7] + " " + x6[8];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7] + " " + x6[8];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[6];
-                    final String change2 = x6[3] + " " + x6[4];
+                    block2 = x6[1];
+                    code3 = x6[6];
+                    change2 = x6[3] + " " + x6[4];
                     addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[4];
-                    final String change2 = x6[2];
+                    block2 = x6[1];
+                    code3 = x6[4];
+                    change2 = x6[2];
                     addCell(block2, code3, l, change2, table, n3);
                 }
             }
@@ -728,30 +716,31 @@ public class LepService
                 }
                 final String x5 = textPartsf2.get(1) + textPartsf2.get(2);
                 final String[] x6 = x5.split(" ");
+                final String block2, code3, change2;
                 if (l % 2 == 0) {
                     if (x6.length == 9) {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7] + " " + x6[8];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7] + " " + x6[8];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                     else {
-                        final String block2 = x6[1];
-                        final String code3 = x6[6];
-                        final String change2 = x6[7];
+                        block2 = x6[1];
+                        code3 = x6[6];
+                        change2 = x6[7];
                         addCell(block2, code3, l, change2, table, n3);
                     }
                 }
                 else if (x6.length == 9) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[6];
-                    final String change2 = x6[3] + " " + x6[4];
+                    block2 = x6[1];
+                    code3 = x6[6];
+                    change2 = x6[3] + " " + x6[4];
                     addCell(block2, code3, l, change2, table, n3);
                 }
                 else if (x6.length == 8) {
-                    final String block2 = x6[1];
-                    final String code3 = x6[4];
-                    final String change2 = x6[2];
+                    block2 = x6[1];
+                    code3 = x6[4];
+                    change2 = x6[2];
                     addCell(block2, code3, l, change2, table, n3);
                 }
             }
@@ -760,7 +749,7 @@ public class LepService
         }
 
 
-        document.add(table.setHorizontalAlignment(HorizontalAlignment.CENTER).setMarginBottom(50));
+        document.add(table.setHorizontalAlignment(HorizontalAlignment.CENTER).setMarginBottom(30));
 
         createDetails(document, pdfDocument, manualName, code);
 
@@ -771,7 +760,6 @@ public class LepService
     }
 
     public void createDetails(Document document, PdfDocument pdfDocument, String manualName, String code) {
-        int n = pdfDocument.getNumberOfPages();
         SolidLine line = new SolidLine(1f);
         LineSeparator ls= new LineSeparator(line);
 
@@ -800,6 +788,12 @@ public class LepService
                 document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
                         300, 35, i, TextAlignment.CENTER,
                         VerticalAlignment.TOP, 0);
+
+                document.showTextAligned(new Paragraph(String
+                                .format(currentRevision)).setFontSize(14),
+                        550, 20, i, TextAlignment.RIGHT,
+                        VerticalAlignment.BOTTOM, 0);
+
             } else {
                 document.showTextAligned(new Paragraph(String
                                 .format("Page " + i )).setFontSize(14),
@@ -821,6 +815,11 @@ public class LepService
                 document.showTextAligned(new Paragraph(String.format("Code " + code)).setFontSize(14),
                         300, 35, i, TextAlignment.CENTER,
                         VerticalAlignment.TOP, 0);
+
+                document.showTextAligned(new Paragraph(String
+                                .format(currentRevision)).setFontSize(14),
+                        50, 20, i, TextAlignment.LEFT,
+                        VerticalAlignment.BOTTOM, 0);
             }
         }
     }
@@ -1045,7 +1044,7 @@ public class LepService
 
         List<CodeList> listCode1 = this.codeListService.filtroLep(mnlId, flgTag);
 
-        HashMap<String, ArrayList<String>> lepTable = new HashMap<String, ArrayList<String>>();
+        HashMap<String, ArrayList<String>> lepTable = new HashMap<>();
         ArrayList<String> coverList = new ArrayList<>();
         lepTable.put("01 Cover", coverList);
         ArrayList<String> lepList = new ArrayList<>();
@@ -1118,12 +1117,6 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else {
@@ -1173,12 +1166,6 @@ public class LepService
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                         }
@@ -1188,24 +1175,12 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else if (tempStr.contains("03 Table of Contents")) {
                                 if (tempStr.contains("c" + y.getCdl_code())) {
                                     lepTable.get("03 Table of Contents").add(tempStr);
                                 }
-                                else {
-                                    continue;
-                                }
-                            }
-                            else {
-                                continue;
                             }
                         }
                         else if (tempStr.contains("02 List of Effective Pages")
@@ -1215,28 +1190,15 @@ public class LepService
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("02 List of Effective Pages").add(tempStr);
                                     }
-                                    else {
-                                        continue;
-                                    }
-                                }
-                                else {
-                                    continue;
                                 }
                             }
                             else if (tempStr.contains("02 List of Effective Pages")) {
                                 if (tempStr.contains("c" + y.getCdl_code())) {
                                     lepTable.get("02 List of Effective Pages").add(tempStr);
                                 }
-                                else {
-                                    continue;
-                                }
-                            }
-                            else {
-                                continue;
                             }
                         }
                     }
-                    return;
                 });
                 if (filepath != null) {
                     filepath.close();

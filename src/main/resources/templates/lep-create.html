@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <title>LepCreate</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/style3.css">
+    <link rel="stylesheet" th:href="@{/styles/style3.css}">
 </head>
 <body>
 <header id = "header">
@@ -38,7 +38,7 @@
             <input type="text" th:field="*{mnl_name}" class="file" >
         </div>
         <div class="col-sm">
-            <label>Tag</label>
+            <label>Remark Applicability</label>
             <input type="text" th:field="*{flg_tag}" class="file">
         </div>
         <div class="col-sm">

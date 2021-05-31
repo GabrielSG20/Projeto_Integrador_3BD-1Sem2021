@@ -16,7 +16,6 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "codelist")
-
 public class CodeList implements Serializable {
 
     @Id
@@ -41,11 +40,12 @@ public class CodeList implements Serializable {
                     String cdl_sub_section, String cdl_block_name, Integer cdl_code) {
 
         this.mnl_id = mnl_id;
-        this.flg_secundary = flg_secundary;
-        this.cdl_section = cdl_section;
+        this.flg_secundary = flg_secundary.trim();
+        this.cdl_section = cdl_section.trim();
         this.cdl_block_number = cdl_block_number;
         this.cdl_sub_section = cdl_sub_section;
-        this.cdl_block_name = cdl_block_name;
+        this.cdl_block_name = cdl_block_name.trim();
         this.cdl_code = cdl_code;
     }
+
 }
