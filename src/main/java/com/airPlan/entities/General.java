@@ -36,13 +36,25 @@ public class General {
     public Integer addLista(General[] general, CodeList[] codeListModel) {
         int count = 3;
         for (int i = 0; i < 3; i++) {
-            if (general[i].getCdl_section().equals("")) {
+            if (general[i].getFlg_secundary().equals("")) {
                 --count;
                 continue;
             } else {
-                codeListModel[i] = new CodeList(i, general[i].getFlg_secundary(), general[i].getCdl_section(),
-                        Integer.parseInt(general[i].getCdl_block_number()), general[i].getCdl_sub_section(),
-                        general[i].getCdl_block_name(), Integer.parseInt(general[i].getCdl_code()));
+                codeListModel[i] = new CodeList(i, general[i].getFlg_secundary().equals("")? null : general[i].getFlg_secundary(),
+                        general[i].getCdl_section().equals("")? null : general[i].getCdl_section(),
+                        general[i].getCdl_block_number().equals("")? null : Integer.parseInt(general[i].getCdl_block_number()), general[i].getCdl_sub_section(),
+                        general[i].getCdl_block_name(), general[i].getCdl_code().equals("")? null : Integer.parseInt(general[i].getCdl_code()));
+            }
+        }
+        return count;
+    }
+
+    public Integer verification(int count, CodeList[] codeListModel) {
+        for (int i = 0; i < count; i++) {
+            if(codeListModel[i].getFlg_secundary() == null || codeListModel[i].getCdl_section() == null ||
+            codeListModel[i].getCdl_block_number() == null){
+                count = 0;
+                break;
             }
         }
         return count;
