@@ -40,18 +40,6 @@ public class CodeController {
         return "menu";
     }
 
-    @GetMapping("/login")
-    public String login() {
-
-        return "login";
-    }
-
-    @GetMapping("/create-user")
-    public String createUser() {
-
-        return "create-user";
-    }
-
     @RequestMapping("/code-create")
     public String showCodeCreatePage(Model model) {
         General general = new General();
