@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form de Registro</title>
+    <link rel="stylesheet" href="styles/style5.css">
+</head>
+<body>
+    <div id="main-container">
+    <h1> Register to access </h1>
+    <form id="register-form">
+        <div class = "half-box">
+            <label for="user">User id</label>
+            <input type="text" name="user" id="user" placeholder="Type your user id">
+        </div>
+        <div class = "half-box spacing">
+            <label for="role">Select a role</label>
+            <select name="role" id="role">
+                <option value="select">Select</option>
+                <option value="admin">General Administrator</option>
+                <option value="author">Manual author</option>
+                <option value="editor">Manual editor</option>
+                <option value="responsible">Manual responsible</option>
+              </select> 
+        </div>
+        <div class = "half-box spacing">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="Type your first name">
+        </div>
+        <div class = "half-box">
+            <label for="lastname">Last name</label>
+            <input type="text" name="lastname" id="lastname" placeholder="Type your last name">
+        </div>
+        <div class = "half-box spacing">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Type your password">
+        </div>
+        <div class = "half-box">
+            <label for="passconfirmation">Confirm your password</label>
+            <input type="password" name="passconfirmation" id="passconfirmation" placeholder="Confirm your password">
+        </div>
+        <div class = "full-box">
+            <input type="submit" id="btn-submit" value="Register">
+        </div>
+    </form>
+</div>
+<p class="error-validation template"></p>
+<script src="js.scripts.js"></script>
+</body>
+</html>

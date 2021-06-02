@@ -1,6 +1,7 @@
 package com.airPlan.services;
 
 import com.airPlan.entities.CodeList;
+import com.airPlan.entities.General;
 import com.airPlan.entities.Manual;
 import com.airPlan.repository.CodeListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,10 @@ public class CodeListService {
 
     public void save(CodeList codeList) {
         repo.save(codeList);
+    }
+
+    public List<CodeList> filtroLep(final Integer mnlId, final String flgTag) {
+        return this.repo.filtroLep(mnlId, flgTag);
     }
 
     public Page<CodeList> listAll(int pageNumber) {

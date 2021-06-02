@@ -13,7 +13,6 @@ public class Lep{
     private String flg_tag;
     private String cdl_code;
     private String revision_dates;
-    private String cdl_code_list;
 
 }
 
