@@ -20,4 +20,10 @@ public class User {
     private String emp_password;
 
     private Integer typ_id;
+
+    public User(String emp_name, String emp_password, Integer typ_id) {
+        this.emp_name = emp_name;
+        this.emp_password = emp_password;
+        this.typ_id = typ_id;
+    }
 }

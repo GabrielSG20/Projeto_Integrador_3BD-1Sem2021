@@ -10,7 +10,7 @@
 }
 
 body{
-    background-image: url('images/AC.jpg');
+    background: url('../images/AC.jpg');
     background-size: cover;
     background-position-y: -200px;
 }

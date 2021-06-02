@@ -20,7 +20,7 @@ input:focus, label:focus{
 
 body{
     padding-top: 5vh;
-    background-image: url('images/airplane.jpg');
+    background: url('../images/airplane.jpg');
     background-size: cover;
 }
 
