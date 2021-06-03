@@ -176,6 +176,27 @@ margin-top: 3%;
 
 /* Início do css da view Menu */
 
+
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgb(77, 75, 75);
+  color: #0367A5;
+  font-family: Roboto;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.fa-info-circle:hover .tooltiptext {
+  visibility: visible;
+}
+
 #mainMenu, #htmlMenu {
   background-color: #5498c2 !important;
 }
