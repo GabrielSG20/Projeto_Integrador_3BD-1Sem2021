@@ -23,6 +23,12 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("/menu")
+    public String menu() {
+
+        return "menu";
+    }
+
     @GetMapping("/create-user")
     public String createUser() {
 

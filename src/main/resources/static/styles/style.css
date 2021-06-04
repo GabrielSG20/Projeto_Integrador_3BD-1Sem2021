@@ -1,5 +1,4 @@
 body, html{
-body, html{
   background-color: #D0F2F3 !important;
   margin: 5%;
 
@@ -93,7 +92,7 @@ height: 70px;
 margin-top: 4%;
 }
 #titulo{
-margin-top: 8.0%;
+margin-top: 4.0%;
 margin-left: 0.5%;
 font-size: 25px;
 }
@@ -147,10 +146,13 @@ margin-top: 3%;
 #consulttable{
     margin-top: 3%;
 }
+#tableConsult{
+  display: grid;
+}
 
 .table-striped{
     margin-top: 5%;
-    display: grid;
+    
 }
 
 #table2{
@@ -173,6 +175,27 @@ margin-top: 3%;
 }
 
 /* Início do css da view Menu */
+
+
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgb(77, 75, 75);
+  color: #0367A5;
+  font-family: Roboto;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.fa-info-circle:hover .tooltiptext {
+  visibility: visible;
+}
 
 #mainMenu, #htmlMenu {
   background-color: #5498c2 !important;
@@ -251,7 +274,7 @@ margin: auto;
 width: 160px;
 Height: 40px;
 border-radius: 25px;
-margin-top: 2%;
+margin-top: 3.5%;
 border:0;
 }
 
@@ -281,6 +304,31 @@ height: 35px;
 border-radius: 10px;
 border: none;
 }
+.fileLepRevision{
+  background-color: #CFCFCF;
+  display: block;
+  Width: 625px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+}
+
+#back-lep{
+  background-color:#D89191;
+  color: white;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  margin: auto;
+  width: 160px;
+  Height: 40px;
+  border-radius: 25px;
+  margin-top: 2%;
+  margin-right: -0.5%;
+  border:0;
+  }
 
 #back{
 background-color:#D89191;
@@ -295,6 +343,42 @@ width: 160px;
 Height: 40px;
 border-radius: 25px;
 margin-top: 2%;
-margin-right: 1%;
+margin-right: -7%;
 border:0;
+}
+
+/* Início do css da views do PDF */
+
+#logoPdf {
+  width: 70px;
+  height: 70px;
+}
+
+.filePdf{
+  background-color: #CFCFCF;
+  display: block;
+  Width: 280px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+}
+
+.inline{
+ text-align: center;
+}
+
+#create-pdf{
+  background-color:#91BDD8;
+  color: white;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  margin: auto;
+  width: 160px;
+  Height: 40px;
+  border-radius: 25px;
+  margin-top: 4%;
+  border:0;
 }

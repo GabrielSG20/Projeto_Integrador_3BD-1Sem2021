@@ -34,12 +34,6 @@ public class CodeController {
 
     public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
-    @GetMapping("/menu")
-    public String menu() {
-
-        return "menu";
-    }
-
     @RequestMapping("/code-create")
     public String showCodeCreatePage(Model model) {
         General general = new General();

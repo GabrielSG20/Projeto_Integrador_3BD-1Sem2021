@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{styles/style5.css}">
 </head>
 <body>
-    <div id="main-container">
+<div id="main-container">
     <h1> Register to access </h1>
     <form id="register-form" th:action="@{/create-user}" th:object="${general}" method="post">
         <div class = "half-box spacing">
@@ -19,7 +19,7 @@
                 <option value=2>Manual author</option>
                 <option value=3>Manual editor</option>
                 <option value=4>Manual responsible</option>
-              </select> 
+            </select>
         </div>
         <div class = "half-box spacing">
             <label for="name">Name</label>
