@@ -34,12 +34,6 @@ public class CodeController {
 
     public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
-    @GetMapping("/menu")
-    public String menu() {
-
-        return "menu";
-    }
-
     @RequestMapping("/code-create")
     public String showCodeCreatePage(Model model) {
         General general = new General();
@@ -49,21 +43,35 @@ public class CodeController {
     }
 
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
-    public String saveCodeList(@ModelAttribute("general") General general, RedirectAttributes redirAttrs){
+    public String saveCodeList(@ModelAttribute("general") General general, RedirectAttributes redirAttrs, Model model){
+
         CodeList[] codelists = new CodeList[3];
 
         int n = general.addLista(general.getCodelist(), codelists);
 
+        int v = general.verification(n, codelists);
+
         Manual manual = new Manual(general.getMnl_name());
-        manualService.save(manual);
+        if(manual.getMnl_name().isEmpty() || v == 0) {
+            redirAttrs.addFlashAttribute("error", "Incorrect data, check" +
+                    " fields integrity, eg.: Primary Key (Manual Name) field is required.");
 
-        manual.setMnl_id(manualService.findManualByName(manual.getMnl_name()));
+            return "redirect:/code-create";
+        } else{
+            manualService.save(manual);
 
-        Flag flag = new Flag(general.getFlg_secundary_id(), general.getFlg_tag());
-        flagService.save(flag, manual.getMnl_id());
+            manual.setMnl_id(manualService.findManualByName(manual.getMnl_name()));
 
-        codeListService.saveCodeList(codelists, n, manual);
+            Flag flag = new Flag(general.getFlg_secundary_id(), general.getFlg_tag());
+            flagService.save(flag, manual.getMnl_id());
 
+            codeListService.saveCodeList(codelists, n, manual);
+
+            model.addAttribute("msg", "Succesfully uploaded files ");
+
+            redirAttrs.addFlashAttribute("success", "CodeList successfully created to database.");
+
+        }
 
         return "redirect:/code-create";
     }
@@ -128,11 +136,13 @@ public class CodeController {
 
     @RequestMapping("/code-consult")
     public String listCodelists(Model model) {
-        return listaPaginas(model, 1);
+        General general = new General();
+        model.addAttribute("general", general);
+        return listaPaginas(general, model, 1);
     }
 
     @GetMapping("/page/{pageNumber}")
-    public String listaPaginas(Model model, @PathVariable("pageNumber") int currentPage){
+    public String listaPaginas(@ModelAttribute("general") General general, Model model, @PathVariable("pageNumber") int currentPage){
         Page<CodeList> page = codeListService.listAll(currentPage);
         long totalItems = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -151,15 +161,17 @@ public class CodeController {
     }
 
     @PostMapping("/filtro")
-    public String filtrar(@RequestParam("flg_secundary") String flg_secundary, @RequestParam("mnl_name") String mnl_name,
-                          @RequestParam("cdl_block_number") String cdl_block_number, Model model){
+    public String filtrar(@ModelAttribute("general") General general, Model model, RedirectAttributes redirAttrs){
         int currentPage = 1;
-        if (mnl_name.equals("")) {
-            return listaPaginas(model, 1);
-        } else {
-            Manual manualModel = new Manual(manualService.findManualByName(mnl_name),mnl_name);
+        if (general.getMnl_name().equals("")) {
+            redirAttrs.addFlashAttribute("error", "Incorrect data, check" +
+                    " fields integrity, Primary Key (Manual Name) field is required.");
 
-            List<CodeList> codelists = codeListService.filtrar(String.valueOf(manualModel.getMnl_id()), flg_secundary, cdl_block_number);
+            return "redirect:/code-consult";
+        } else {
+            Manual manualModel = new Manual(manualService.findManualByName(general.getMnl_name()),general.getMnl_name());
+
+            List<CodeList> codelists = codeListService.filtrar(String.valueOf(manualModel.getMnl_id()), general.getFlg_secundary(), general.getCdl_block_number());
             long totalItems = codelists.size();
             int totalPages = 1;
 
@@ -175,14 +187,16 @@ public class CodeController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCodeList(@PathVariable(name = "id") Integer id) {
+    public String deleteCodeList(@PathVariable(name = "id") Integer id, RedirectAttributes redirAttrs) {
         codeListService.delete(id);
+        redirAttrs.addFlashAttribute("success", "Block successfully deleted.");
         return "redirect:/code-consult";
     }
 
     @GetMapping("/delete-manual/{id}")
-    public String deleteManual(@PathVariable(name = "id") Integer id) {
+    public String deleteManual(@PathVariable(name = "id") Integer id, RedirectAttributes redirAttrs) {
         manualService.delete(id);
+        redirAttrs.addFlashAttribute("success", "Codelist successfully deleted.");
         return "redirect:/code-consult";
     }
 }

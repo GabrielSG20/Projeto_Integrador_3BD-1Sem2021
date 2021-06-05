@@ -32,7 +32,7 @@
 <form th:action="@{/code-import}" enctype="multipart/form-data" th:object="${manual}" method="post">
     <div>
 
-        <label id="importLabel" class="fileLabel" value="Section Number">Primary key
+        <label id="importLabel" class="fileLabel" value="Section Number">Primary Key*
             <input id="primaryKey" class="file" th:field="*{mnl_name}" type="text"></input>
         </label>
 
@@ -45,7 +45,7 @@
     <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Create</button>
 </form>
 
-<a id="back" href="/menu" class="btn btn-secondary float-right">Back</a>
+<a id="back-code" href="/menu" class="btn btn-secondary float-right">Back</a>
 
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
