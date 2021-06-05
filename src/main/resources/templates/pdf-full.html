@@ -37,6 +37,8 @@
          <button onclick="getFile();" id="create-pdf" class="btn btn-secondary float-right">Create</button>
       </div>
       </form>
+      <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+      <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
       <hr>
       <div class="container">
          <table class="table table-striped">

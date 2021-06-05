@@ -34,7 +34,9 @@ public class PdfService {
     public static boolean checkIntegrity(Pdf pdf) {
         if(pdf.getMnl_name().length() == 0) {
             return false;
-        } else return pdf.getFlg_tag().length() != 0;
+        } else if(pdf.getFlg_tag().length() == 0) {
+            return false;
+        } return pdf.getRevision().length() != 0;
     }
 
 

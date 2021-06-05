@@ -1,100 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<<<<<<< HEAD
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-    <title>LepCreate</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/styles/style3.css}">
-</head>
-<body>
-<header id = "header">
-    <div id="logo">
-        <img id="imagem1" src ='images/lep.png'> </img>
-        <h1 id="titulo"> <strong> List of Effective Pages </strong> </h1>
-    </div>
-
-    <a id="button1" href="/lep-create" class="btn">
-        Create LEP
-    </a>
-
-    <a id="button2" href="" class="btn">
-        Consult LEP
-    </a>
-
-    <a id="button3" href="" class="btn">
-        Edit LEP
-    </a>
-
-    <a id="button4" href="/lep-delete" class="btn">
-        Delete LEP
-    </a>
-</header>
-<form id="myForm" th:action="@{/lep-create}" th:object="${lep}" method="post">
-    <div class="row g-4">
-        <div class="col-sm">
-            <label>Primary key</label>
-            <input type="text" th:field="*{mnl_name}" class="file" >
-        </div>
-        <div class="col-sm">
-            <label>Remark Applicability</label>
-            <input type="text" th:field="*{flg_tag}" class="file">
-        </div>
-        <div class="col-sm">
-            <label>Lep Code</label>
-            <input type="text" th:field="*{cdl_code}" class="file" >
-        </div>
-    </div>
-
-    <div class="row g-4" >
-        <div class="col-sm">
-            <label>Revision Dates</label>
-            <input type="text" th:field="*{revision_dates}" class="file" >
-        </div>
-        <div class="col-sm">
-            <button type="submit" class="btn btn-primary btn-lg" id="button5">Create</button>
-        </div>
-    </div>
-    </div>
-    <div>
-        <div style="display: block; border-bottom: 1px solid #8bdee0; margin-top: 20px;"></div>
-    </div>
-</form>
-<div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
-<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
-<table class="table table-bordered" id="table">
-    <thead>
-    <tr>
-        <span class="border-top" id="border"></span>
-        <td scope="row" class="descricao">Name</td>
-        <td scope="row" class="descricao">Modification date</td>
-        <td scope="col" class="descricao">Type</td>
-        <td scope="col" class="descricao">Size</td>
-    </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
-    <tfoot>
-
-    </tfoot>
-</table>
-<div>
-    <div style="display: block; border-bottom: 1px solid #8bdee0; margin-top: 20px;"></div>
-</div>
-<div>
-    <a id="btnBack" class="btn btn-secondary float-right" href="/menu" >Back</a>
-</div>
-</body>
-=======
    <head>
       <meta charset='utf-8'>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      </meta>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      </meta>
       <title>LepCreate</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <link rel="stylesheet" th:href="@{/styles/style.css}" >
@@ -121,7 +30,7 @@
             </label>
          </div>
          <div>
-            <label>Revision Dates <i class="fas fa-info-circle"><span class="tooltiptext">insira o texto de ajuda aqui!</span></i>
+            <label>Revision Dates <i class="fas fa-info-circle"><span class="tooltiptext">eg. of input: ORIGINAL0DEC 09, 2010-REVISION1DEC 29...</span></i>
                 <input type="text" th:field="*{revision_dates}" class="fileLepRevision" >
             </label>
             <button onclick="getFile();" id="consult-lep" class="btn btn-secondary float-right">Create</button>
@@ -139,5 +48,4 @@
          <a id="back-lep" class="btn btn-secondary float-right" href="/menu" >Back</a>
       </div>
    </body>
->>>>>>> origin/dev_sprint4
 </html>
