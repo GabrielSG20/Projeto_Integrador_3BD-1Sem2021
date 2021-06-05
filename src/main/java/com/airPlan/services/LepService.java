@@ -49,11 +49,7 @@ public class LepService
             return false;
         } else if(lep.getMnl_name().length() == 0) {
             return false;
-        } else if(lep.getFlg_tag().length() == 0) {
-            return false;
-        }
-
-        return true;
+        } else return lep.getFlg_tag().length() != 0;
     }
 
     public void createLep1(final Lep lep) throws IOException {
