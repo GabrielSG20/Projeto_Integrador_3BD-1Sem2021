@@ -24,8 +24,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/menu").hasRole("4")
-                //.antMatchers("/menu").hasAnyRole("2", "1")
+                .antMatchers("/code-create").hasAnyRole("4","3")
+                .antMatchers("/code-consult").hasAnyRole("4","2","3")
+                .antMatchers("/code-import").hasAnyRole("4","3")
+                .antMatchers("/code-edit").hasAnyRole("4","3")
+
+                .antMatchers("/lep-create").hasRole("3")
+
+                .antMatchers("/pdf-full").hasRole("3")
+                .antMatchers("/pdf-delta").hasRole("3")
+
+                .antMatchers("/create-user").hasRole("1")
+
+                .antMatchers("/menu").hasAnyRole("1","2","3","4")
                 .antMatchers("/").permitAll()
                 .and().formLogin();
     }

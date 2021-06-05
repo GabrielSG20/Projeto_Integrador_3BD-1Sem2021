@@ -38,10 +38,11 @@
             <input type="password" name="emp_confirm_password" id="passconfirmation" placeholder="Confirm your password">
         </div>
         <div class = "full-box">
+            <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
             <input type="submit" id="btn-submit" value="Register">
+            <a id="btn-voltar" href="/menu">Back</a>
         </div>
-        <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
-        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
     </form>
 </div>
 <p class="error-validation template"></p>

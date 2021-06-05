@@ -69,6 +69,6 @@ public class LoginController {
             return "redirect:/create-user";
         }
 
-        return "redirect:/login";
+        return "redirect:/create-user";
     }
 }
