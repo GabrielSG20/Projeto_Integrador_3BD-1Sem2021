@@ -30,18 +30,20 @@
 </header>
 <hr>
 <div>
-    <form action="/filtro" method="post">
+    <form th:action="@{/filtro}" th:object="${general}" method="post">
         <label>Primary Key*
-            <input id="primaryKey" class="file" type="text" name="mnl_name"></input>
+            <input id="primaryKey" class="file" type="text" th:field="*{mnl_name}">
         </label>
         <label>Secundary Key
-            <input id="secundaryKey" class="file" type="text" name="flg_secundary"></input>
+            <input id="secundaryKey" class="file" type="text" th:field="*{flg_secundary}">
         </label>
         <label>Block
-            <input id="blocknumber" class="file" type="text" name="cdl_block_number"></input>
+            <input id="blocknumber" class="file" type="text" th:field="*{cdl_block_number}">
         </label>
         <button onclick="getFile();" id="create-code" class="btn btn-secondary float-right">Consult</button>
         <a class="btn" href="/code-consult"><i class="fas fa-sync"></i></a>
+        <div class="alert alert-warning" role="alert" th:text="${error}" th:if="${error}"></div>
+        <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
     </form>
 </div>
 <hr>
@@ -99,7 +101,7 @@
         &nbsp;&nbsp;
     </span>
     </div>
-    <a id="back" href="/menu" class="btn btn-secondary float-right">Back</a>
+    <a id="back-code" href="/menu" class="btn btn-secondary float-right">Back</a>
 </div>
 
 <script src="script.js"></script>

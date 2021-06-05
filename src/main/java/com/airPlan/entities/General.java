@@ -31,6 +31,16 @@ public class General {
 
     private String mnl_name;
 
+    private String emp_name;
+
+    private String emp_password;
+
+    private String emp_confirm_password;
+
+    private Integer typ_id;
+
+    private String emp_last_name;
+
     private General[] codelist = new General[3];
 
     public Integer addLista(General[] general, CodeList[] codeListModel) {

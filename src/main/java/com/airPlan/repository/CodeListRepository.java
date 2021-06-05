@@ -16,11 +16,11 @@ public interface CodeListRepository extends JpaRepository<CodeList, Integer> {
     @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary ")
     List<CodeList> filtroSecundary(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary);
 
-    @Query(" select c from CodeList c where c.mnl_id = :manualId and c.cdl_block_number = :cdlBlock ")
-    List<CodeList> filtroBloco(@Param("manualId") Integer manualId, @Param("cdlBlock") Integer cdlBlock);
+    @Query(" select c from CodeList c where c.mnl_id = :manualId and c.cdl_block_number = :cdlBlockNumber ")
+    List<CodeList> filtroBloco(@Param("manualId") Integer manualId, @Param("cdlBlockNumber") Integer cdlBlockNumber);
 
-    @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary and c.cdl_block_number = :cdlBlock ")
-    List<CodeList> filtroAll(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary, @Param("cdlBlock") Integer cdlBlock);
+    @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary and c.cdl_block_number = :cdlBlockNumber ")
+    List<CodeList> filtroAll(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary, @Param("cdlBlockNumber") Integer cdlBlock);
     // for future use
     @Query(" select c from CodeList c where c.mnl_id = :manualId and c.flg_secundary = :flgSecundary")
     List<CodeList> filtroLep(@Param("manualId") Integer manualId, @Param("flgSecundary") String flgSecundary);
