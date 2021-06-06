@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="be23850a-395b-456c-a46d-dc2d31fa7f48" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/AirPlanApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/controllers/CodeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/controllers/LEPController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/controllers/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/controllers/PdfController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/CodeList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/Flag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/General.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/Lep.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/Manual.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/ManualFlag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/ManualFlagId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/Pdf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/entities/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/repository/CodeListRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/repository/FlagRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/repository/ManualFlagRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/repository/ManualRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/securityconfig/MyUserDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/securityconfig/MyUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/securityconfig/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/CodeListService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/FlagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/ImportCodeList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/LepService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/ManualFlagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/ManualService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/PdfService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/airPlan/services/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__create_codelist.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V2__fk_codelist.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V3__alter_constraint_mnl_id.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V4__alter_column_manual.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V5__create_table_login.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V6__insert_typ_desc.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V7__insert_user_admin.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/146.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/AC.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/airplane.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/assistant5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/codelist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/lep.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/pdf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/scripts/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/styles/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/styles/style2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/styles/style3.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/styles/style4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/styles/style5.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/code-consult.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/code-create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/code-edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/code-import.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/create-user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/lep-create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/pdf-delta.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/pdf-full.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/airPlan/AirPlanApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1tPqwlCYXDx1VoAVg2MsCMX9ija" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/airPlan" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Gabriel Soares\Desktop\Git-API\Projeto_Integrador_3BD-1Sem2021\src\main\resources\static\styles" />
+      <recent name="C:\Users\Gabriel Soares\Desktop\Git-API\Projeto_Integrador_3BD-1Sem2021\src\main\resources\templates" />
+      <recent name="C:\Users\Gabriel Soares\Desktop\Git-API\Projeto_Integrador_3BD-1Sem2021\src\main\resources\static" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="AirPlanApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.airPlan.AirPlanApplication" />
+      <module name="AirPlan" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.airPlan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.AirPlanApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be23850a-395b-456c-a46d-dc2d31fa7f48" name="Default Changelist" comment="" />
+      <created>1622681322243</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622681322243</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
