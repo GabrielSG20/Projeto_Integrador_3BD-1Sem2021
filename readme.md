@@ -36,7 +36,7 @@
 
 <h2>Plano Estratégico de Tecnologia da Informação </h2>
 
-<p align="justify"> Duarnte o Projeto Integrador e, de acordo com a disciplinade Fundamentos de Gestão de Tecnologia da Informação, foi desenvolvido o Plano Estratégico de Tecnologia da Unformação (PETI) baseado na metodologia IT Balanced Scorecard (IT BSC) e as sessões de design thinking desenvolvidas ao longo do projeto.<p>
+<p align="justify"> Durante o Projeto Integrador e, de acordo com a disciplinade Fundamentos de Gestão de Tecnologia da Informação, foi desenvolvido o Plano Estratégico de Tecnologia da Unformação (PETI) baseado na metodologia IT Balanced Scorecard (IT BSC) e as sessões de design thinking desenvolvidas ao longo do projeto.<p>
 <p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/airPLAN_PETI.pdf">Clique aqui</a> para visualizar o documeto.</p>
   
 
@@ -57,8 +57,7 @@
                             <td>Wireframes, Documentação, Compreendimento do Problema e Função "Create Codelist" </td>
                             <td>08/03/2021 a 28/03/2021</td>
                             <td><p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/sprint1.png">Sprint 1</a></p></td>
-                            <td><p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/airplane_front/README.md">Visualizar</a></p></td>
-                     </tr>
+                            <td><p>Finalizada</p></td>
                      <tr>
                             <td>Sprint 2</td>
                             <td>API Codelist completa</td>
@@ -114,6 +113,14 @@ Para o funcionamento da aplicação, serão necessários:
 - MySQL Connector/J 5.1.49
 - ECLIPSE JAVA 2018 09
 
+<h2>Instalação do Protótipo</h2>
+
+<p> Para a correta instalação da ferramenta, por gentileza, <a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/instalacao.md">Clique aqui</a>.</p>
+
+<h2>Funcionamento da Ferramenta</h2>
+
+<p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/backlog/documentacao/imagens/backlog/wireframes.md">Clique aqui</a> para acompanhar o tutorial de Funcionamento da Ferramenta.</p>
+ 
 
 <h2>Tecnologias Utilizadas</h2>
 
@@ -125,8 +132,5 @@ Para o funcionamento da aplicação, serão necessários:
 * [Trello](https://trello.com/pt-BR)
 * [StackEdit](https://stackedit.io/)
 
-              
-<h2>Funcionamento da Ferramenta</h2>
 
-<p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/backlog/documentacao/imagens/backlog/wireframes.md">Clique aqui</a> para acompanhar o tutorial de Funcionamento da Ferramenta.</p>
 
