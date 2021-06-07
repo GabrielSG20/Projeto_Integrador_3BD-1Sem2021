@@ -36,7 +36,7 @@
 
 <h2>Plano Estratégico de Tecnologia da Informação </h2>
 
-<p align="justify"> Durante o Projeto Integrador e, de acordo com a disciplinade Fundamentos de Gestão de Tecnologia da Informação, foi desenvolvido o Plano Estratégico de Tecnologia da Unformação (PETI) baseado na metodologia IT Balanced Scorecard (IT BSC) e as sessões de design thinking desenvolvidas ao longo do projeto.<p>
+<p align="justify"> Durante o Projeto Integrador e, como pré-requisito da disciplina Fundamentos de Gestão de Tecnologia da Informação, foi desenvolvido o Plano Estratégico de Tecnologia da Informação (PETI) baseado na metodologia IT Balanced Scorecard (IT BSC) e as sessões de design thinking desenvolvidas ao longo do projeto.<p>
 <p><a href="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/backlog/airPLAN_PETI.pdf">Clique aqui</a> para visualizar o documeto.</p>
   
 
