@@ -3,9 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      </meta>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      </meta>
       <link rel="stylesheet" th:href="@{/styles/style.css}">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <title>DeltaPDF</title>
@@ -25,15 +23,22 @@
         </a>
       </header>
       <hr>
+      <form id="myForm" th:action="@{/pdf-delta}" th:object="${pdf}" method="post">
       <div class="inline">
-         <label>Revision Number
-            <input id="revisionNumber"  class="filePdf" type="text"></input>
+         <label>Manual Name
+            <input id="revisionNumber" th:field="*{mnl_name}" class="filePdf" type="text"></input>
         </label>
          <label>Tag
-         <input id="tag"  class="filePdf" type="text"></input>
+         <input id="tag"  class="filePdf" th:field="*{flg_tag}" type="text"></input>
          </label>
+          <label>Revision
+              <input id="tag"  th:field="*{revision}" class="filePdf" type="text"></input>
+          </label>
          <button onclick="getFile();" id="create-pdf" class="btn btn-secondary float-right">Create</button>
       </div>
+      </form>
+      <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+      <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
       <hr>
       <div class="container">
          <table class="table table-striped">

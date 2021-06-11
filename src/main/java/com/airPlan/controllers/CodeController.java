@@ -1,6 +1,7 @@
 package com.airPlan.controllers;
 
 import com.airPlan.entities.*;
+import com.airPlan.securityconfig.MyUserDetailsService;
 import com.airPlan.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,8 @@ public class CodeController {
     private CodeListService codeListService;
     @Autowired
     private ImportCodeList importCodeList;
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
 
     public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
@@ -58,6 +61,10 @@ public class CodeController {
 
             return "redirect:/code-create";
         } else{
+            User actualUser = myUserDetailsService.findActualUser();
+
+            System.out.println(actualUser.getEmp_name() + " " + actualUser.getEmp_password());
+
             manualService.save(manual);
 
             manual.setMnl_id(manualService.findManualByName(manual.getMnl_name()));
@@ -95,7 +102,6 @@ public class CodeController {
                 e.printStackTrace();
             }
         }
-        model.addAttribute("msg", "Succesfully uploaded files " + fileNames.toString());
 
         if(manual.getMnl_name().isEmpty()) {
             redirAttrs.addFlashAttribute("error", "Incorrect data, check" +

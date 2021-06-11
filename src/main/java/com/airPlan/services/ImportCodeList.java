@@ -25,6 +25,14 @@ public class ImportCodeList {
     private CodeListService codeListService;
 
 
+    /*public void trimCodeList(CodeList codeList) {
+
+        codeList.setFlg_secundary(codeList.getFlg_secundary().trim());
+        codeList.setCdl_section(codeList.getCdl_section().trim());
+        codeList.setCdl_sub_section(codeList.getCdl_sub_section().trim());
+        codeList.setCdl_block_name(codeList.getCdl_block_name().trim());
+    }*/
+
     public void getCellData(String manualName, String fileName) {
         try {
             String excelPath = "./uploads/" + fileName;
@@ -38,7 +46,7 @@ public class ImportCodeList {
             ArrayList<String> tagNames = new ArrayList<>();
 
             /* Manual Name */
-            Manual manual = new Manual(manualName);
+            Manual manual = new Manual(manualName.trim());
             manualService.save(manual);
             manual.setMnl_id(manualService.findManualByName(manual.getMnl_name()));
 

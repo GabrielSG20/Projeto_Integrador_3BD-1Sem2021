@@ -3,9 +3,7 @@
    <head>
       <meta charset='utf-8'>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      </meta>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      </meta>
       <title>LepCreate</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <link rel="stylesheet" th:href="@{/styles/style.css}" >
@@ -32,7 +30,7 @@
             </label>
          </div>
          <div>
-            <label>Revision Dates <i class="fas fa-info-circle"><span class="tooltiptext">insira o texto de ajuda aqui!</span></i>
+            <label>Revision Dates <i class="fas fa-info-circle"><span class="tooltiptext">eg. of input: ORIGINAL0DEC 09, 2010-REVISION1DEC 29...</span></i>
                 <input type="text" th:field="*{revision_dates}" class="fileLepRevision" >
             </label>
             <button onclick="getFile();" id="consult-lep" class="btn btn-secondary float-right">Create</button>

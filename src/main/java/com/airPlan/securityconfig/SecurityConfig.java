@@ -24,17 +24,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/code-create").hasAnyRole("4","3")
-                .antMatchers("/code-consult").hasAnyRole("4","2","3")
-                .antMatchers("/code-import").hasAnyRole("4","3")
-                .antMatchers("/edit/**").hasAnyRole("4","3")
-                .antMatchers("/delete/**").hasAnyRole("4","3")
-                .antMatchers("/delete-manual/**").hasAnyRole("4","3")
+                .antMatchers("/code-create").hasAnyRole("4","3","1")
+                .antMatchers("/code-consult").hasAnyRole("4","2","3","1")
+                .antMatchers("/code-import").hasAnyRole("4","3","1")
+                .antMatchers("/edit/**").hasAnyRole("4","3","1")
+                .antMatchers("/delete/**").hasAnyRole("4","3","1")
+                .antMatchers("/delete-manual/**").hasAnyRole("4","3","1")
 
-                .antMatchers("/lep-create").hasRole("3")
+                .antMatchers("/lep-create").hasAnyRole("3","1")
 
-                .antMatchers("/pdf-full").hasRole("3")
-                .antMatchers("/pdf-delta").hasRole("3")
+                .antMatchers("/pdf-full").hasAnyRole("3","1")
+                .antMatchers("/pdf-delta").hasAnyRole("3","1")
 
                 .antMatchers("/create-user").hasRole("1")
 

@@ -23,6 +23,6 @@ public class Manual implements Serializable {
 
 
     public Manual(String mnl_name) {
-        this.mnl_name = mnl_name;
+        this.mnl_name = mnl_name.trim();
     }
 }

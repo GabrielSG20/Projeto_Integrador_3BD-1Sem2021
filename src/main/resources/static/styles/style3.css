@@ -73,13 +73,24 @@ header {
     #table{
         margin-top: 1%;
     }
+
     #btnBack{
-        margin-top: 15px;
-        margin-left: 91%;
-        width: 100px;
-        background-color: #b22222;
+        background-color:#D89191;
+        color: white;
         font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+        margin: auto;
+        width: 160px;
+        Height: 40px;
+        border-radius: 25px;
+        margin-top: 2%;
+        margin-right: 1%;
+        border:0;
     }
+
     #btnBack:hover{
         background-color: #FF6347;
     }

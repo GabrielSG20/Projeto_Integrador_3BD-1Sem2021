@@ -13,6 +13,8 @@ import java.util.Optional;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
+    private User actualUser;
+
     @Autowired
     UserRepository repo;
 
@@ -22,6 +24,12 @@ public class MyUserDetailsService implements UserDetailsService {
 
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
 
+        actualUser = user.get();
+
         return user.map(MyUserDetails::new).get();
+    }
+
+    public User findActualUser(){
+        return actualUser;
     }
 }

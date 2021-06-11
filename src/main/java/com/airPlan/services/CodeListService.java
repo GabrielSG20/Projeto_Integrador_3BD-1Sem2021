@@ -48,13 +48,9 @@ public class CodeListService {
 
     public CodeList get(Integer id) {return repo.findById(id).get();}
 
-    public void delete(Integer id) {
-        repo.deleteById(id);
-    }
+    public void delete(Integer id) {repo.deleteById(id);}
 
-    public void save(CodeList codeList) {
-        repo.save(codeList);
-    }
+    public void save(CodeList codeList) {repo.save(codeList);}
 
     public List<CodeList> filtroLep(final Integer mnlId, final String flgTag) {
         return this.repo.filtroLep(mnlId, flgTag);

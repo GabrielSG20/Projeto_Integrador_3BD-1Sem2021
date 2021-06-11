@@ -38,7 +38,7 @@ public class LEPController {
             return "redirect:/lep-create";
         }
 
-        lepService.populateRevisionDates(lep);
+        lepService.createLep1(lep);
         redirAttrs.addFlashAttribute("success", "LEP successfully created!");
 
         return "redirect:/lep-create";
