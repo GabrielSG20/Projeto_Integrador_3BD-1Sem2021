@@ -59,7 +59,9 @@
             <td th:text="${manual.mnl_name}"></td>
             <td>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="@{/delete-manual/{id}(id=${manual.mnl_id})}"><i class="fas fa-trash"></i></a>
+                <a th:data-confirm-delete="|Are you sure you want to delete the manual?|"
+                   onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                   th:href="@{/delete-manual/{id}(id=${manual.mnl_id})}"><i class="fas fa-trash"></i></a>
             </td>
         </tr>
     </table>
@@ -87,7 +89,10 @@
             <td>
                 <a th:href="@{/edit/{id}(id=${codelist.cdl_id})}"><i class="fas fa-edit"></i></a>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="@{/delete/{id}(id=${codelist.cdl_id})}"><i class="fas fa-trash"></i></a>
+                <a th:href="@{/delete/{id}(id=${codelist.cdl_id})}"
+                   th:data-confirm-delete="|Are you sure you want to delete the line?|"
+                   onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                    ><i class="fas fa-trash"></i></a>
             </td>
         </tr>
     </table>

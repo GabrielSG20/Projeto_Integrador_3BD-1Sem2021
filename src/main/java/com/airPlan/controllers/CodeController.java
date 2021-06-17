@@ -67,9 +67,7 @@ public class CodeController {
 
             codeListService.saveCodeList(codelists, n, manual);
 
-            model.addAttribute("msg", "Succesfully uploaded files ");
-
-            redirAttrs.addFlashAttribute("success", "CodeList successfully created to database.");
+            redirAttrs.addFlashAttribute("success", "CodeList successfully created.");
 
         }
 

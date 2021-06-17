@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,8 +16,12 @@ import java.io.IOException;
 @Controller
 public class LEPController {
 
-    @Autowired
-    private LepService lepService;
+
+    private final LepService lepService;
+
+    public LEPController(LepService lepService) {
+        this.lepService = lepService;
+    }
 
     @RequestMapping("/lep-create")
     public String showLepCreatePage(Model model) {
@@ -27,7 +32,7 @@ public class LEPController {
         return "lep-create";
     }
 
-    @RequestMapping(value = "/lep-create", method = RequestMethod.POST)
+    @PostMapping(value = "/lep-create")
     public String createLep(@ModelAttribute("lep") Lep lep,
                             RedirectAttributes redirAttrs) throws IOException {
 
