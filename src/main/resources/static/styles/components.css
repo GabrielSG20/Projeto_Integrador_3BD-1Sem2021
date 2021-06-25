@@ -105,7 +105,7 @@ background-color:rgba(196, 196, 196, 1);
 margin-top: 3%;
 }
 
-#codecreate {
+#pdfBody {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -114,38 +114,12 @@ margin-top: 3%;
   margin: 4%;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-.fa-plus-square{
-  font-size: 30px;
-  margin-top: 4%;
-  cursor: pointer;
-}
-.nline{
-  margin-top: 2%;
-  cursor: pointer;
-}
-#listcreate {
-    margin-top: 2%;
-}
 .fa-search, .fa-filter{
     margin-top: 3%;
     margin-right: 3%;
     font-size: 20px;
 }
-#consulttable{
-    margin-top: 3%;
-}
+
 #tableConsult{
   display: grid;
 }
@@ -167,12 +141,6 @@ margin-top: 3%;
 
 #importLabel{
   margin-right: 4%;
-}
-
-#firstDiv{
-  margin: auto;
-  width: 50%;
-  align-items: center;
 }
 
 #back-code {
