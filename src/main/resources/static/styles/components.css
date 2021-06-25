@@ -64,7 +64,7 @@ header {
 }
 
 
-#codeCreate, #codeConsult, #codeImport, #button4 {
+#codeCreate, #codeConsult, #codeImport, #pdfFull, #pdfDelta {
 background-color: #0367A5;
 font-family: Roboto;
 font-style: normal;
@@ -79,7 +79,7 @@ margin-bottom: 2%;
 border-radius: 10px;
 }
 
-#button1:hover, #button2:hover, #button3:hover, #button4:hover{
+#codeCreate:hover, #codeConsult:hover, #codeImport:hover, #pdfFull:hover, #pdfDelta:hover {
 background-color: #71a3c2;
 }
 #logo{
@@ -155,7 +155,7 @@ margin-top: 3%;
     
 }
 
-#table2{
+#secondTableConsult{
   display: grid;
   margin-top: -9.4% !important;
   margin-left: 30%;
