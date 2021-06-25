@@ -12,7 +12,7 @@
 
 <header id = "header">
     <div id="logo">
-        <img id="imagem1" src='images/146.png'> </img>
+        <img id="codeImage" src='images/146.png'> </img>
         <h1 id="titulo"> <strong> Codelist </strong> </h1>
     </div>
 
@@ -30,7 +30,7 @@
 </header>
 <form id="myForm" th:action="@{/code-create}" th:object="${general}" method="post">
     <hr>
-    <div class="container2">
+    <div>
         <div class="container" style = "background-color: rgba(0,0,0,.05);">
             <label>Primary Key*
                 <input id="primaryKey" class="file" th:field="*{mnl_name}" type="text"></input>
