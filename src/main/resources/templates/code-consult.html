@@ -73,6 +73,7 @@
             <th>Block Number</th>
             <th>Block Name</th>
             <th>Code</th>
+            <th>User Id</th>
             <th>Action</th>
         </tr>
         <tr th:each="codelist : ${codeList}">
@@ -84,6 +85,7 @@
             <td th:text="${codelist.cdl_block_number}"></td>
             <td th:text="${codelist.cdl_block_name}"></td>
             <td th:text="${codelist.cdl_code}"></td>
+            <td th:text="${codelist.emp_id}"></td>
             <td>
                 <a th:href="@{/edit/{id}(id=${codelist.cdl_id})}"><i class="fas fa-edit"></i></a>
                 &nbsp;&nbsp;&nbsp;

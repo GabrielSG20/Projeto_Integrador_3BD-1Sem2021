@@ -3,6 +3,7 @@ package com.airPlan.services;
 import com.airPlan.entities.CodeList;
 import com.airPlan.entities.Flag;
 import com.airPlan.entities.Manual;
+import com.airPlan.entities.User;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -33,7 +34,7 @@ public class ImportCodeList {
         codeList.setCdl_block_name(codeList.getCdl_block_name().trim());
     }*/
 
-    public void getCellData(String manualName, String fileName) {
+    public void getCellData(String manualName, String fileName, User user) {
         try {
             String excelPath = "./uploads/" + fileName;
             XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
@@ -81,7 +82,8 @@ public class ImportCodeList {
                                 formatter.formatCellValue(sheet.getRow(i).getCell(2)).equals("")
                                         ? null : formatter.formatCellValue(sheet.getRow(i).getCell(2)),
                                 formatter.formatCellValue(sheet.getRow(i).getCell(4)),
-                                Integer.parseInt(formatter.formatCellValue(sheet.getRow(i).getCell(5))));
+                                Integer.parseInt(formatter.formatCellValue(sheet.getRow(i).getCell(5))),
+                                user.getEmp_id());
 
                         codeListService.save(codeList);
                     }

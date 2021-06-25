@@ -33,6 +33,8 @@ public class CodeController {
     @Autowired
     private ImportCodeList importCodeList;
     @Autowired
+    private UserService userService;
+    @Autowired
     private MyUserDetailsService myUserDetailsService;
 
     public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
@@ -47,10 +49,11 @@ public class CodeController {
 
     @RequestMapping(value = "/code-create", method = RequestMethod.POST)
     public String saveCodeList(@ModelAttribute("general") General general, RedirectAttributes redirAttrs, Model model){
+        User actualUser = myUserDetailsService.findActualUser();
 
         CodeList[] codelists = new CodeList[3];
 
-        int n = general.addLista(general.getCodelist(), codelists);
+        int n = general.addLista(general.getCodelist(), codelists, actualUser);
 
         int v = general.verification(n, codelists);
 
@@ -61,9 +64,6 @@ public class CodeController {
 
             return "redirect:/code-create";
         } else{
-            User actualUser = myUserDetailsService.findActualUser();
-
-            System.out.println(actualUser.getEmp_name() + " " + actualUser.getEmp_password());
 
             manualService.save(manual);
 
@@ -72,7 +72,7 @@ public class CodeController {
             Flag flag = new Flag(general.getFlg_secundary_id(), general.getFlg_tag());
             flagService.save(flag, manual.getMnl_id());
 
-            codeListService.saveCodeList(codelists, n, manual);
+            codeListService.saveCodeList(codelists, n, manual, actualUser);
 
             model.addAttribute("msg", "Succesfully uploaded files ");
 
@@ -92,6 +92,8 @@ public class CodeController {
     @RequestMapping("/code-import")
     public String importCodeList(@ModelAttribute Manual manual, Model model, @RequestParam("files") MultipartFile[] files,
                                  RedirectAttributes redirAttrs) {
+        User actualUser = myUserDetailsService.findActualUser();
+
         StringBuilder fileNames = new StringBuilder();
         for (MultipartFile file : files) {
             Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
@@ -110,7 +112,7 @@ public class CodeController {
             return "redirect:/code-import";
         }
 
-        importCodeList.getCellData(manual.getMnl_name(), fileNames.toString());
+        importCodeList.getCellData(manual.getMnl_name(), fileNames.toString(), actualUser);
         redirAttrs.addFlashAttribute("success", "File '" + fileNames + "' successfully uploaded to database " +
                 "(copy created at .\\uploads).");
 

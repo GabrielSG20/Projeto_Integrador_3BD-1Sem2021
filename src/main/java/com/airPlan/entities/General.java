@@ -43,7 +43,7 @@ public class General {
 
     private General[] codelist = new General[3];
 
-    public Integer addLista(General[] general, CodeList[] codeListModel) {
+    public Integer addLista(General[] general, CodeList[] codeListModel, User user) {
         int count = 3;
         for (int i = 0; i < 3; i++) {
             if (general[i].getFlg_secundary().equals("")) {
@@ -53,7 +53,7 @@ public class General {
                 codeListModel[i] = new CodeList(i, general[i].getFlg_secundary().equals("")? null : general[i].getFlg_secundary(),
                         general[i].getCdl_section().equals("")? null : general[i].getCdl_section(),
                         general[i].getCdl_block_number().equals("")? null : Integer.parseInt(general[i].getCdl_block_number()), general[i].getCdl_sub_section(),
-                        general[i].getCdl_block_name(), general[i].getCdl_code().equals("")? null : Integer.parseInt(general[i].getCdl_code()));
+                        general[i].getCdl_block_name(), general[i].getCdl_code().equals("")? null : Integer.parseInt(general[i].getCdl_code()), user.getEmp_id());
             }
         }
         return count;

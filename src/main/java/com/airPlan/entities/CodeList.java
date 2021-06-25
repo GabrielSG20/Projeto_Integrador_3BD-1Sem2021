@@ -36,8 +36,10 @@ public class CodeList implements Serializable {
 
     private Integer cdl_code;
 
+    private Integer emp_id;
+
     public CodeList(Integer mnl_id, String flg_secundary, String cdl_section, Integer cdl_block_number,
-                    String cdl_sub_section, String cdl_block_name, Integer cdl_code) {
+                    String cdl_sub_section, String cdl_block_name, Integer cdl_code, Integer emp_id) {
 
         this.mnl_id = mnl_id;
         this.flg_secundary = flg_secundary.trim();
@@ -46,6 +48,7 @@ public class CodeList implements Serializable {
         this.cdl_sub_section = cdl_sub_section;
         this.cdl_block_name = cdl_block_name.trim();
         this.cdl_code = cdl_code;
+        this.emp_id = emp_id;
     }
 
 }

@@ -3,6 +3,7 @@ package com.airPlan.services;
 import com.airPlan.entities.CodeList;
 import com.airPlan.entities.General;
 import com.airPlan.entities.Manual;
+import com.airPlan.entities.User;
 import com.airPlan.repository.CodeListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,7 +21,7 @@ public class CodeListService {
     @Autowired
     private CodeListRepository repo;
 
-    public void saveCodeList(CodeList[] codeList, int n, Manual manual) {
+    public void saveCodeList(CodeList[] codeList, int n, Manual manual, User user) {
             for (int j = 0; j < n; j++){
                 codeList[j].setMnl_id(manual.getMnl_id());
                 if(codeList[j].getFlg_secundary().contains(",")) {
@@ -31,7 +32,7 @@ public class CodeListService {
                                 codeList[j].getCdl_section(), codeList[j].getCdl_block_number(),
                                 codeList[j].getCdl_sub_section().equals("")? null : codeList[j].getCdl_sub_section(),
                                 codeList[j].getCdl_block_name(),
-                                codeList[j].getCdl_code());
+                                codeList[j].getCdl_code(), user.getEmp_id());
                         repo.save(newCodeList);
                     }
                 } else {
@@ -39,7 +40,7 @@ public class CodeListService {
                             codeList[j].getCdl_section(), codeList[j].getCdl_block_number(),
                             codeList[j].getCdl_sub_section().equals("")? null : codeList[j].getCdl_sub_section(),
                             codeList[j].getCdl_block_name(),
-                            codeList[j].getCdl_code());
+                            codeList[j].getCdl_code(), user.getEmp_id());
 
                     repo.save(newCodeList);
                 }
