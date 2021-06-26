@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -62,15 +63,23 @@ public class CodeListService {
         return repo.findAll(pageable);
     }
 
-    public List<CodeList> filtrar(String manualId, String flgSecundary, String cdlBlockNumber){
-        if (flgSecundary.equals("") && cdlBlockNumber.equals("")) {
-            return repo.filtroManual(Integer.parseInt(manualId));
-        } else if(cdlBlockNumber.equals("")){
-            return repo.filtroSecundary(Integer.parseInt(manualId), flgSecundary);
+    public List<CodeList> filtrar(Integer manualId, String flgSecundary, String cdlBlockNumber, String cdlSection){
+        if (flgSecundary.equals("") && cdlBlockNumber.equals("") && cdlSection.equals("")) {
+            return repo.filtroManual(manualId);
+        } else if(cdlBlockNumber.equals("") && cdlSection.equals("")) {
+            return repo.filtroSecundary(manualId, flgSecundary);
+        } else if (flgSecundary.equals("") && cdlSection.equals("")){
+            return repo.filtroBloco(manualId, Integer.parseInt(cdlBlockNumber));
+        } else if (flgSecundary.equals("") && cdlBlockNumber.equals("")){
+            return repo.filtroSection(manualId, cdlSection);
         } else if (flgSecundary.equals("")){
-            return repo.filtroBloco(Integer.parseInt(manualId), Integer.parseInt(cdlBlockNumber));
+            return repo.filtroBlocoSection(manualId, Integer.parseInt(cdlBlockNumber), cdlSection);
+        } else if (cdlBlockNumber.equals("")){
+            return repo.filtroSecundarySection(manualId, flgSecundary, cdlSection);
+        } else if (cdlSection.equals("")){
+            return repo.filtroSecundaryBlock(manualId, flgSecundary, Integer.parseInt(cdlBlockNumber));
         } else {
-            return repo.filtroAll(Integer.parseInt(manualId), flgSecundary, Integer.parseInt(cdlBlockNumber));
+            return repo.filtroAll(manualId, flgSecundary, Integer.parseInt(cdlBlockNumber), cdlSection);
         }
     }
 }

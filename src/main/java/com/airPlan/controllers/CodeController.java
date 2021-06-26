@@ -180,7 +180,7 @@ public class CodeController {
         } else {
             Manual manualModel = new Manual(manualService.findManualByName(general.getMnl_name()),general.getMnl_name());
 
-            List<CodeList> codelists = codeListService.filtrar(String.valueOf(manualModel.getMnl_id()), general.getFlg_secundary(), general.getCdl_block_number());
+            List<CodeList> codelists = codeListService.filtrar(manualModel.getMnl_id(), general.getFlg_secundary(), general.getCdl_block_number(), general.getCdl_section());
             long totalItems = codelists.size();
             int totalPages = 1;
 
