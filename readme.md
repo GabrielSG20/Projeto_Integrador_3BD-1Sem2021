@@ -1,6 +1,6 @@
 ## Projeto Integrador 3° Semestre Banco de Dados
 
-<img src= "https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white">  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">  <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">  <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">  <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">  <img src="https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white">  <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white">  
+<img src= "https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white">  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">  <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">  <img src="https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white">  <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white">  
 
 <h1 align="center"> <img src="https://github.com/GabrielSG20/Projeto_Integrador_3BD-1Sem2021/blob/main/documentacao/imagens/logotipo/logotipo.jpg" width="100"></h1>
 
@@ -14,7 +14,7 @@
 <h2>A Equipe</h2>
 <table>
   <tr>
-     <td align="center"><a href="https://www.linkedin.com/in/gabriel-henrique-de-souza-ferraz-4873581b2/"><img style="border-radius: 50%;" src="https://media-exp3.licdn.com/dms/image/C4D35AQFTbC6XKA3MnA/profile-framedphoto-shrink_200_200/0/1594161109388?e=1623106800&v=beta&t=-S7rfM_NiwZO8DWu2gHCaE-XvO0UA0ov5ZTs0W23O5I" width="100px;" alt=""/><br/><sub><b>Gabriel Ferraz</b></sub><br/></a><sub><b>Developer</b></sub></td>
+     <td align="center"><a href="https://www.linkedin.com/in/gabriel-henrique-de-souza-ferraz-4873581b2/"><img style="border-radius: 50%;" src="https://media-exp3.licdn.com/dms/image/D4D35AQHYINb9BQRHsA/profile-framedphoto-shrink_800_800/0/1623959414281?e=1624755600&v=beta&t=X9WwcjbY_fYbskm_f0xP8i0bumF_ogfdTwZtY2W3lms" width="100px;" alt=""/><br/><sub><b>Gabriel Ferraz</b></sub><br/></a><sub><b>Developer</b></sub></td>
     <td align="center"><a href="https://www.linkedin.com/in/hugo-wagner-692b83150/detail/photo/"><img style="border-radius: 50%;" src="https://media-exp3.licdn.com/dms/image/C4E03AQEwTmjTm74BSA/profile-displayphoto-shrink_800_800/0/1540993874794?e=1628726400&v=beta&t=yvegdXys5YizzkQpsa47Pn2rbwPIPYnPacZHWtGI-eM" width="100px;" alt=""/><br/><sub><b>Hugo Wagner</b></sub><br/></a><sub><b>Developer</b></sub><br/></td>
     <td align="center"><a href="https://www.linkedin.com/in/jeferson-tadeu-das-neves-a98343190/"><img style="border-radius: 50%;" src="https://media-exp1.licdn.com/dms/image/C4E03AQEe5XGmEnIrxA/profile-displayphoto-shrink_800_800/0/1619522981804?e=1625097600&v=beta&t=mGNQ0Z7rCocH0ta1FcdG0YY6lvbASEVfecMWhUUbgmc" width="100px;" alt=""/><br/><sub><b>Jeferson das Neves</b></sub><br/></a><sub><b>Developer</b></sub><br/></td>
     </tr>
@@ -85,7 +85,7 @@
 
 <h2>Entregas</h2>
 
-<a href="https://1drv.ms/v/s!AikVauceXWW2gbJtf8HpXTKgzrX9-Q?e=0zUtKz">Vídeo Apresentação Sprint 1</a>
+<a href="https://www.youtube.com/watch?v=DKgOlpNNqrY&ab_channel=fatecsjc">Vídeo Apresentação da Solução.</a>
 
 <table>
               <thead>
@@ -127,7 +127,6 @@ Para o funcionamento da aplicação, serão necessários:
 * [Java](https://www.java.com/pt_BR/)
 * [SQL](https://www.oracle.com/tools/downloads/sqldev-downloads.html)
 * [Spring Boot](https://spring.io/)
-* [React Native](https://reactnative.dev/)
 * [Miro](https://mockflow.com/apps/wireframepro/)
 * [Trello](https://trello.com/pt-BR)
 * [StackEdit](https://stackedit.io/)
