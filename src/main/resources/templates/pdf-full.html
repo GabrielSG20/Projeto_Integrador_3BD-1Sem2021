@@ -4,21 +4,22 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" th:href="@{/styles/style.css}">
+      <link rel="stylesheet" th:href="@{/styles/components.css}">
+      <link rel="stylesheet" href="components.css">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <title>FullPDF</title>
    </head>
-   <body id="codecreate" class=".bg-info">
+   <body id="pdfBody" class=".bg-info">
       <header id="header">
          <div id="logo">
             <img id="logoPdf" src='images/pdf.png'> </img>
             <h1 id="titulo"> <strong> PDF Compiler - FULL</strong> </h1>
          </div>
         </div>
-        <a id="button1" href="/pdf-full" class="btn">
+        <a id="pdfFull" href="/pdf-full" class="btn">
            PDF FULL
         </a>
-        <a id="button2" href="/pdf-delta" class="btn">
+        <a id="pdfDelta" href="/pdf-delta" class="btn">
            PDF DELTA
         </a>
       </header>

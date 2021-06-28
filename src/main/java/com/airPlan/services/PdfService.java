@@ -75,53 +75,45 @@ public class PdfService {
             try {
                 filepath.forEach(s -> {
                     String tempStr = s.toString();
-                    System.out.println(tempStr);
                     for (CodeList y: listCode1) {
                         if (tempStr.contains(y.getCdl_block_name()) && tempStr.contains(".pdf")) {
                             if (y.getCdl_code() < 10) {
                                 if (tempStr.contains("01 Cover")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("01 Cover").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Table of Contents")) {
+                                else if (tempStr.contains("03 Table of Contents")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("02 Story")) {
+                                else if (tempStr.contains("02 Story")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("02 Story").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Chapter")) {
+                                else if (tempStr.contains("03 Chapter")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Chapter").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("04 Middle")) {
+                                else if (tempStr.contains("04 Middle")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("04 Middle").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("05 General Data")) {
+                                else if (tempStr.contains("05 General Data")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("05 General Data").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("AP01 Appendix")) {
+                                else if (tempStr.contains("AP01 Appendix")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("AP01 Appendix").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("S03 Supplement")) {
+                                else if (tempStr.contains("S03 Supplement")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
@@ -131,46 +123,39 @@ public class PdfService {
                                 if (tempStr.contains("Cover")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("01 Cover").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Table of Contents")) {
+                                else if (tempStr.contains("03 Table of Contents")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("02 Story")) {
+                                else if (tempStr.contains("02 Story")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("02 Story").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Chapter")) {
+                                else if (tempStr.contains("03 Chapter")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("03 Chapter").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("04 Middle")) {
+                                else if (tempStr.contains("04 Middle")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("04 Middle").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("05 General Data")) {
+                                else if (tempStr.contains("05 General Data")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("05 General Data").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("AP01 Appendix")) {
+                                else if (tempStr.contains("AP01 Appendix")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("AP01 Appendix").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("S03 Supplement")) {
+                                else if (tempStr.contains("S03 Supplement")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
 
@@ -228,7 +213,7 @@ public class PdfService {
         catch (IOException e) {
             throw new IOException("Directory Not Present!");
         }
-        sortLepTable(lepTable);
+        lepTable.forEach((key, value) -> Collections.sort(value));
 
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter("./manuals/"
                 + manualName+flgTag+"-"+pdf.getRevision().toUpperCase()+"-FULL.pdf"));
@@ -301,46 +286,39 @@ public class PdfService {
                                 if (tempStr.contains("01 Cover")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("01 Cover").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Table of Contents")) {
+                                else if (tempStr.contains("03 Table of Contents")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("02 Story")) {
+                                else if (tempStr.contains("02 Story")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("02 Story").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Chapter")) {
+                                else if (tempStr.contains("03 Chapter")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Chapter").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("04 Middle")) {
+                                else if (tempStr.contains("04 Middle")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("04 Middle").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("05 General Data")) {
+                                else if (tempStr.contains("05 General Data")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("05 General Data").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("AP01 Appendix")) {
+                                else if (tempStr.contains("AP01 Appendix")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("AP01 Appendix").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("S03 Supplement")) {
+                                else if (tempStr.contains("S03 Supplement")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
@@ -350,46 +328,39 @@ public class PdfService {
                                 if (tempStr.contains("Cover")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("01 Cover").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Table of Contents")) {
+                                else if (tempStr.contains("03 Table of Contents")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("02 Story")) {
+                                else if (tempStr.contains("02 Story")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("02 Story").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Chapter")) {
+                                else if (tempStr.contains("03 Chapter")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("03 Chapter").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("04 Middle")) {
+                                else if (tempStr.contains("04 Middle")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("04 Middle").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("05 General Data")) {
+                                else if (tempStr.contains("05 General Data")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("05 General Data").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("AP01 Appendix")) {
+                                else if (tempStr.contains("AP01 Appendix")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("AP01 Appendix").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("S03 Supplement")) {
+                                else if (tempStr.contains("S03 Supplement")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
@@ -446,7 +417,7 @@ public class PdfService {
         catch (IOException e) {
             throw new IOException("Directory Not Present!");
         }
-        sortLepTable(lepTable);
+        lepTable.forEach((key, value) -> Collections.sort(value));
 
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter("./manuals/"
                 + manualName+flgTag+"-"+pdf.getRevision().toUpperCase()+"-DELTA.pdf"));
@@ -478,11 +449,4 @@ public class PdfService {
         pdfDoc.close();
     }
 
-    public void sortLepTable(HashMap<String, ArrayList<String>> dict) {
-
-        // sort dict
-        for(List<String> arr: dict.values()) {
-            Collections.sort(arr);
-        }
-    }
 }

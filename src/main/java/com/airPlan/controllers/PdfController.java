@@ -27,7 +27,7 @@ public class PdfController {
         return "pdf-full";
     }
 
-    @RequestMapping(value = "/pdf-full", method = RequestMethod.POST)
+    @PostMapping(value = "/pdf-full")
     public String createFULL(@ModelAttribute("pdf") Pdf pdf, RedirectAttributes redirAttrs) throws IOException {
 
         if(!PdfService.checkIntegrity(pdf)) {
@@ -50,7 +50,7 @@ public class PdfController {
         return "pdf-delta";
     }
 
-    @RequestMapping(value = "/pdf-delta", method = RequestMethod.POST)
+    @PostMapping(value = "/pdf-delta")
     public String createDELTA(@ModelAttribute("pdf") Pdf pdf, RedirectAttributes redirAttrs) throws IOException {
 
         if(!PdfService.checkIntegrity(pdf)) {

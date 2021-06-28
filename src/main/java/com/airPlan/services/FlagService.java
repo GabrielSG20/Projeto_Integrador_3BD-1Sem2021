@@ -26,6 +26,8 @@ public class FlagService {
 
         for (int i = 0; i < flagParts.length; i++) {
             Flag newFlag = new Flag(flagParts[i], tagParts[i]);
+
+
             repo.save(newFlag);
 
             ManualFlag manualFlag = new ManualFlag(new ManualFlagId(mnl_id, newFlag.getFlg_secundary_id()));

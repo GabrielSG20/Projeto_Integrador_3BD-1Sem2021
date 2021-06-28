@@ -24,21 +24,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
 import java.util.stream.Stream;
 
 @Service
 public class LepService
 {
-    @Autowired
-    private ManualService manualService;
-    @Autowired
-    private CodeListService codeListService;
-    private String currentRevision = "";
+    private final ManualService manualService;
+    private final CodeListService codeListService;
+    private String currentRevision;
 
+    @Autowired
+    public LepService(ManualService manualService, CodeListService codeListService) {
+        this.manualService = manualService;
+        this.codeListService = codeListService;
+        this.currentRevision = "";
+    }
 
     public boolean checkIntegrity(Lep lep) {
 
@@ -189,46 +191,39 @@ public class LepService
                                 if (tempStr.contains("01 Cover")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("01 Cover").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Table of Contents")) {
+                                else if (tempStr.contains("03 Table of Contents")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("02 Story")) {
+                                else if (tempStr.contains("02 Story")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("02 Story").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Chapter")) {
+                                else if (tempStr.contains("03 Chapter")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("03 Chapter").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("04 Middle")) {
+                                else if (tempStr.contains("04 Middle")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("04 Middle").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("05 General Data")) {
+                                else if (tempStr.contains("05 General Data")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("05 General Data").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("AP01 Appendix")) {
+                                else if (tempStr.contains("AP01 Appendix")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("AP01 Appendix").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("S03 Supplement")) {
+                                else if (tempStr.contains("S03 Supplement")) {
                                     if (tempStr.contains("c0" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
@@ -238,46 +233,39 @@ public class LepService
                                 if (tempStr.contains("Cover")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("01 Cover").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Table of Contents")) {
+                                else if (tempStr.contains("03 Table of Contents")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("03 Table of Contents").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("02 Story")) {
+                                else if (tempStr.contains("02 Story")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("02 Story").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("03 Chapter")) {
+                                else if (tempStr.contains("03 Chapter")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("03 Chapter").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("04 Middle")) {
+                                else if (tempStr.contains("04 Middle")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("04 Middle").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("05 General Data")) {
+                                else if (tempStr.contains("05 General Data")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("05 General Data").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("AP01 Appendix")) {
+                                else if (tempStr.contains("AP01 Appendix")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("AP01 Appendix").add(tempStr);
-                                        continue;
                                     }
                                 }
-                                if (tempStr.contains("S03 Supplement")) {
+                                else if (tempStr.contains("S03 Supplement")) {
                                     if (tempStr.contains("c" + y.getCdl_code())) {
                                         lepTable.get("S03 Supplement").add(tempStr);
                                     }
@@ -321,7 +309,7 @@ public class LepService
         }
 
         // sort dict
-        sortLepTable(lepTable);
+        lepTable.forEach((key, value) -> Collections.sort(value));
 
         document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
         float[] columnWidths = { 60.0f, 60.0f, 60.0f, 90.0f, 60.0f };
@@ -813,15 +801,8 @@ public class LepService
                         VerticalAlignment.BOTTOM, 0);
             }
         }
-    }
 
-
-    public void sortLepTable(HashMap<String, ArrayList<String>> dict) {
-
-        // sort dict
-        for(List<String> arr: dict.values()) {
-            Collections.sort(arr);
-        }
+        this.currentRevision = "";
     }
 
 }
